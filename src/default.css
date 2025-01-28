@@ -1,0 +1,44 @@
+*, 
+*::before,
+*::after  {
+    box-sizing: border-box;
+}
+
+*   {
+    margin: 0;
+}
+
+:root   {
+    --bg-color60: #FCFCFC;
+    --font-30: hsl(231, 23%, 16%);
+    --nav-line10: hsla(188, 10%, 46%, 0.9);
+    --main-shadow: #C8963E;
+    --main-border: hsla(199, 42%, 13%, 0.9);
+}
+
+html    {
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+body    {
+    font-family: "Roboto", sans-serif;
+}
+
+h1, h2, h3, h4, h5  {
+    font-family: "Quicksand", sans-serif;
+}
+
+.link    {
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    color: black;
+}

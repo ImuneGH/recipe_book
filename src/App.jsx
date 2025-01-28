@@ -4,7 +4,7 @@ import './style.css'
 function App() {
   // komponent Header
   function Header() {
-    return <div className="header pokus"><p>Nadpis AHOJ</p></div>
+    return <div className="header pokus"><h1>Nadpis AHOJ</h1></div>
   }
   // hlavní aplikace, do které vkládám komponent header
   return (
