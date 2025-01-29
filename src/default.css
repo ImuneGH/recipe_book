@@ -9,11 +9,11 @@
 }
 
 :root   {
-    --bg-color60: #FCFCFC;
-    --font-30: hsl(231, 23%, 16%);
-    --nav-line10: hsla(188, 10%, 46%, 0.9);
-    --main-shadow: #C8963E;
-    --main-border: hsla(199, 42%, 13%, 0.9);
+    --primary-color: #d32f2f;
+    --secondary-color: #ffa726;
+    --bg-color: #fff3e0;
+    --text-color: #333333;
+    --accent-color: #ff7043;
 }
 
 html    {
@@ -31,6 +31,8 @@ input, button, textarea, select {
 
 body    {
     font-family: "Roboto", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 h1, h2, h3, h4, h5  {
@@ -40,5 +42,5 @@ h1, h2, h3, h4, h5  {
 .link    {
     text-decoration: none;
     font-family: "Roboto", sans-serif;
-    color: black;
+    color: var(--text-color);
 }
