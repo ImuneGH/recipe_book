@@ -1,4 +1,9 @@
-.pokus  {
+/* .pokus  {
     display: flex;
     justify-content: center;
+} */
+
+.logo   {
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
 }

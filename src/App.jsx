@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import './style.css'
+import Header from './components/Header'
+// import './components/Content'
+// import './components/Aside'
+// import './components/Footer'
 
 function App() {
-  // komponent Header
-  function Header() {
-    return <div className="header pokus"><h1><img src="./img/flavor_log_logo.png" alt="Logo webu Flavor Log" /></h1></div>
-  }
   // hlavní aplikace, do které vkládám komponent header
   return (
     <>
@@ -16,4 +16,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
