@@ -6,12 +6,13 @@ import Aside from './components/Aside'
 import Footer from './components/Footer'
 
 function App() {
-  // hlavní aplikace, do které vkládám komponent header
   return (
     <div className='app'>
       <Header />
-      <Aside />
-      <Content />
+      <div className="mainContent">
+        <Aside />
+        <Content />
+      </div>
       <Footer />
     </div>
   )
