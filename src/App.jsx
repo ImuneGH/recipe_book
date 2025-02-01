@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import './style.css'
 import Header from './components/Header'
-// import './components/Content'
-// import './components/Aside'
-// import './components/Footer'
+import Content from './components/Content'
+import Aside from './components/Aside'
+import Footer from './components/Footer'
 
 function App() {
   // hlavní aplikace, do které vkládám komponent header
   return (
-    <>
+    <div className='app'>
       <Header />
-      <div className="pokus"><h2>Ahoj</h2></div>
-      <div className="pokus"><p>Ahoj ahoj</p></div>
-    </>
+      <Aside />
+      <Content />
+      <Footer />
+    </div>
   )
 }
 
