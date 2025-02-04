@@ -3,10 +3,10 @@
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
-    gap: 1rem;
+    gap: 3rem;
 }
 
-.logo   {
-    border: 2px solid var(--text-color);
-    border-radius: 50%;
+.mainContent    {
+    display: flex;
+    width: 100%;
 }
