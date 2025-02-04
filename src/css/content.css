@@ -8,6 +8,11 @@
     margin-top: 3rem;
 }
 
+.searchBar  {
+    display: flex;
+    gap: 1rem;
+}
+
 .content input  {
     width: 20rem;
 }
