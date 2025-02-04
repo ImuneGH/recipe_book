@@ -1,0 +1,11 @@
+.footer {
+    align-self: flex-end;
+    height: 5vh;
+    display: flex;
+    align-items: end;
+}
+
+.footer p   {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}

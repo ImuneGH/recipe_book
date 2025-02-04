@@ -1,5 +1,11 @@
+.header {
+    height: 30vh;
+    min-height: 260px;
+}
+
 .logo   {
     display: block;
     border: 2px solid var(--text-color);
     border-radius: 50%;
+    margin-top: 2rem;
 }
