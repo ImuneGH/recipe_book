@@ -3,6 +3,7 @@ import './css/app.css'
 import Header from './components/Header'
 import Content from './components/Content'
 import Aside from './components/Aside'
+import AsideRight from './components/AsideRight'
 import Footer from './components/Footer'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <div className="mainContent">
         <Aside />
         <Content />
+        <AsideRight />
       </div>
       <Footer />
     </div>
