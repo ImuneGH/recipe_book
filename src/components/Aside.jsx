@@ -2,6 +2,7 @@ import '../css/aside.css'
 
 const Aside = () => {
     return <aside className="categories">
+                <h3>Kategorie: </h3>
                 <ul>
                     <li>Polévky</li>
                     <li>Těstoviny</li>
