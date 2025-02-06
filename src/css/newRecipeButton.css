@@ -1,0 +1,25 @@
+.header .container>button   {
+    min-height: 8rem;
+    min-width: 10rem;
+
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    font-size: 1.5rem;
+    border: 2px groove var(--secondary-color);
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.header .container>button:hover {
+    box-shadow: 1px 1px 3px var(--secondary-color);
+}
+
+.header .container>button:active {
+    border: 2px ridge var(--secondary-color);
+}
+
+.header .container>button:focus-visible {
+    outline: none;
+}
