@@ -1,5 +1,5 @@
 .header {
-    height: 30vh;
+    height: 35vh;
     min-height: 260px;
 }
 
@@ -7,5 +7,5 @@
     display: block;
     border: 2px solid var(--text-color);
     border-radius: 50%;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
