@@ -9,7 +9,7 @@
 
 .searchBar input  {
     min-width: 20rem;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--secondary-color);
     border-radius: 10px 0 0 10px;
     
     padding-left: .5rem;
@@ -26,20 +26,23 @@
 .searchBar button {
     cursor: pointer;
     color: var(--bg-color);
-    background-color: var(--accent-color);
-    border: 2px solid var(--accent-color);
+    background-color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
     border-radius: 0 10px 10px 0;
 
     padding-right: .5rem;
 }
 
 .searchBar button:hover   {
-    background-color: var(--secondary-color);
-    border: 2px solid var(--secondary-color);
+    background-color: var(--accent-color);
+    border: 2px solid var(--accent-color);
 }
 
-.searchBar button:active,
 .searchBar button:focus-visible  {
-    box-shadow: 0 0 0 1px var(--accent-color);
     outline: none;
+    box-shadow: 0 0 1px .5px var(--accent-color);
+}
+
+.searchBar button:active    {
+    outline: 1px solid var(--accent-color);
 }

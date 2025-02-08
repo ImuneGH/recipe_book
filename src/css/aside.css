@@ -11,8 +11,11 @@
 .categories ul {
     list-style-type: "🍲 ";
     margin-left: 2rem;
+    max-width: 8rem;
+    
     line-height: 2rem;
     font-size: 1.1rem;
     /* color: var(--accent-color); */
+
     cursor: pointer;
 }

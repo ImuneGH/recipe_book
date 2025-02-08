@@ -16,7 +16,10 @@ function App() {
         <AsideRight />
       </div>
       <Footer />
+      {console.log(window.innerWidth)}
+      {console.log(window.innerHeight)}
     </div>
+    
   )
 }
 

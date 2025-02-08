@@ -5,7 +5,7 @@
     background-color: var(--primary-color);
     color: var(--bg-color);
     font-size: 1.5rem;
-    border: 2px groove var(--secondary-color);
+    border: 3px groove var(--accent-color);
     border-radius: 10px;
 
     cursor: pointer;
@@ -13,11 +13,11 @@
 }
 
 .header .container>button:hover {
-    box-shadow: 1px 1px 3px var(--secondary-color);
+    box-shadow: 1px 1px 3px var(--accent-color);
 }
 
 .header .container>button:active {
-    border: 2px ridge var(--secondary-color);
+    border: 3px ridge var(--accent-color);
 }
 
 .header .container>button:focus-visible {
