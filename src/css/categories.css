@@ -1,5 +1,5 @@
 .categories {
-    flex: 1;
+    /* flex: 1; */
 }
 
 .categories h3  {
@@ -10,12 +10,11 @@
 
 .categories ul {
     display: flex;
-    
+
     list-style-type: "🍲 ";
     list-style-type: none;
     gap: 1rem;
-    margin-left: 2rem;
-    max-width: 8rem;
+    padding: 0;
     
     line-height: 2rem;
     font-size: 1.1rem;

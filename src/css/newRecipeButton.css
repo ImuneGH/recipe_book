@@ -1,7 +1,7 @@
 .mainButtonWrap>button   {
     flex: 1;
-    min-height: 8rem;
-    min-width: 10rem;
+    min-height: 6.25rem;
+    min-width: 9.375rem;
 
     background-color: var(--primary-color);
     color: var(--bg-color);
