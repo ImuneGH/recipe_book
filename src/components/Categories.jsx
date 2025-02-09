@@ -1,8 +1,7 @@
-import '../css/aside.css'
+import '../css/categories.css'
 
-const Aside = () => {
-    return <aside className="categories">
-                <h3>Kategorie: </h3>
+const Categories = () => {
+    return <nav className="categories">
                 <ul>
                     <li>Polévky</li>
                     <li>Těstoviny</li>
@@ -11,7 +10,7 @@ const Aside = () => {
                     <li>Bezmasé</li>
                     <li>Moučníky</li>
                 </ul>
-           </aside>
+           </nav>
 }
 
-export default Aside;
+export default Categories;

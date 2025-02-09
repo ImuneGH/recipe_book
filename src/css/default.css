@@ -11,6 +11,7 @@
 :root   {
     --primary-color: #d32f2f;
     --secondary-color: #ffa726;
+    --secondary-color-light: hsl(36, 100%, 65%);
     --bg-color: #fff3e0;
     --text-color: #333333;
     --accent-color: #ff7043;

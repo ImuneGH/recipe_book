@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './css/app.css'
 import Header from './components/Header'
 import Content from './components/Content'
-import Aside from './components/Aside'
 import AsideRight from './components/AsideRight'
 import Footer from './components/Footer'
 
@@ -11,13 +10,10 @@ function App() {
     <div className='app'>
       <Header />
       <div className="mainContent">
-        <Aside />
         <Content />
         <AsideRight />
       </div>
       <Footer />
-      {console.log(window.innerWidth)}
-      {console.log(window.innerHeight)}
     </div>
     
   )

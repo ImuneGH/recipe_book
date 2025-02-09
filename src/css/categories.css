@@ -9,7 +9,11 @@
 }
 
 .categories ul {
+    display: flex;
+    
     list-style-type: "🍲 ";
+    list-style-type: none;
+    gap: 1rem;
     margin-left: 2rem;
     max-width: 8rem;
     

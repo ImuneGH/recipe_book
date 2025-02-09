@@ -1,4 +1,5 @@
-.header .container>button   {
+.mainButtonWrap>button   {
+    flex: 1;
     min-height: 8rem;
     min-width: 10rem;
 
@@ -12,14 +13,14 @@
     transition: all .3s;
 }
 
-.header .container>button:hover {
+.mainButtonWrap>button:hover {
     box-shadow: 1px 1px 3px var(--accent-color);
 }
 
-.header .container>button:active {
+.mainButtonWrap>button:active {
     border: 3px ridge var(--accent-color);
 }
 
-.header .container>button:focus-visible {
+.mainButtonWrap>button:focus-visible {
     outline: none;
 }
