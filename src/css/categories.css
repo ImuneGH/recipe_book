@@ -27,7 +27,14 @@
     padding: 0 .5rem;
 }
 
-.active {
+.categories ul .active {
     background-color: var(--secondary-color-light);
-    border-radius: 15px;
+}
+
+.categories ul .active:first-of-type    {
+    border-radius: 15px 0 0 15px;
+}
+
+.categories ul .active:last-of-type    {
+    border-radius: 0 15px 15px 0;
 }

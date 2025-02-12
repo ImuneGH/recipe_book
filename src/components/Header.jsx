@@ -2,10 +2,11 @@ import '../css/header.css'
 import SearchBar from './SearchBar'
 import NewRecipeButton from './NewRecipeButton'
 import Categories from './Categories'
+import { motion } from "motion/react"
 
 const Header = () => {
     return <header className="header">
-              <div className="logoHolder"></div>
+              {active !== null && <motion.div layoutId='logo' className="logoHolder"></motion.div>}
               <div className="searchCatWrap">
                 <SearchBar />
                 <Categories />
