@@ -13,7 +13,7 @@
 
     list-style-type: "🍲 ";
     list-style-type: none;
-    gap: 1rem;
+    gap: .5rem;
     padding: 0;
     
     line-height: 2rem;
@@ -23,6 +23,11 @@
     cursor: pointer;
 }
 
+.categories ul li   {
+    padding: 0 .5rem;
+}
+
 .active {
-    font-size: 1.5rem;
+    background-color: var(--secondary-color-light);
+    border-radius: 15px;
 }
