@@ -3,13 +3,14 @@ import SearchBar from './SearchBar'
 import NewRecipeButton from './NewRecipeButton'
 import Categories from './Categories'
 import { motion } from "motion/react"
+import { useState } from 'react'
 
-const Header = () => {
+const Header = ({ activeCategories, setActiveCategories }) => {
     return <header className="header">
-              {active !== null && <motion.div layoutId='logo' className="logoHolder"></motion.div>}
+              {activeCategories !== null && <motion.div layoutId='logo' className="logoHolder"></motion.div>}
               <div className="searchCatWrap">
                 <SearchBar />
-                <Categories />
+                <Categories activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
               </div>
               <div className="mainButtonWrap">
                 <NewRecipeButton />
