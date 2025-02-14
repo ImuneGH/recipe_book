@@ -7,9 +7,17 @@
 }
 
 .header>.logoHolder   {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
     flex: 1;
     min-width: 10rem;
     height: 5rem;
+}
+
+.header>.logoHolder h1 {
+    width: 75%;
 }
 
 .logo   {

@@ -8,11 +8,11 @@ import { useState } from 'react'
 function App() {
   const [activeCategories, setActiveCategories] = useState([]);
   return (
-    <div className='app'>
+    <motion.div className='app' layout>
       <Header activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
       <Content activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
       <Footer />
-    </div>
+    </motion.div>
     
   )
 }
