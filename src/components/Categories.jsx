@@ -1,6 +1,6 @@
 import '../css/categories.css'
 
-const Categories = ({ activeCategories, setActiveCategories, activeContent, setActiveContent, handleActiveContent }) => {
+const Categories = ({ activeCategories, setActiveCategories }) => {
     const categories = ["Polévky", "Těstoviny", "Omáčky", "Maso", "Bezmasé", "Moučníky"];
     return <nav className="categories">
                 <ul>

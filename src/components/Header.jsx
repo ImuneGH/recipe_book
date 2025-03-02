@@ -4,7 +4,7 @@ import NewRecipeButton from './NewRecipeButton'
 import Categories from './Categories'
 import { motion } from "motion/react"
 
-const Header = ({ activeCategories, setActiveCategories, recipes, setRecipes, activeContent, setActiveContent, handleActiveContent }) => {
+const Header = ({ activeCategories, setActiveCategories, setRecipes, activeContent }) => {
     return <header className="header">
               <div className="logoHolder">
                 { activeContent && <motion.h1 layoutId='logo'>
@@ -12,8 +12,8 @@ const Header = ({ activeCategories, setActiveCategories, recipes, setRecipes, ac
                 </motion.h1>}
               </div>
               <div className="searchCatWrap">
-                <SearchBar activeContent={activeContent} recipes={recipes} setRecipes={setRecipes} activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
-                <Categories activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setActiveContent={setActiveContent} handleActiveContent={handleActiveContent} />
+                <SearchBar setRecipes={setRecipes} />
+                <Categories activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
               </div>
               <div className="mainButtonWrap">
                 <NewRecipeButton />

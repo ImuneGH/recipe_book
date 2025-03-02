@@ -22,8 +22,8 @@ function App() {
   }, [activeCategories]);
   return (
     <motion.div className='app' layout>
-      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} recipes={recipes} setRecipes={setRecipes} setActiveContent={setActiveContent} handleActiveContent={handleActiveContent} />
-      <Content activeCategories={activeCategories} setActiveCategories={setActiveCategories} recipes={recipes} setRecipes={setRecipes} setActiveContent={setActiveContent} activeContent={activeContent} handleActiveContent={handleActiveContent} />
+      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} />
+      <Content activeContent={activeContent} />
       <Footer />
     </motion.div>
     
