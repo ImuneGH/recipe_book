@@ -2,7 +2,7 @@ import { useState } from 'react'
 import '../css/searchBar.css'
 import './SearchBar.jsx'
 
-const SearchBar = ({ recipes, setRecipes, activeCategories, setActiveCategories }) => {
+const SearchBar = ({ recipes, setRecipes, activeCategories, setActiveCategories, activeContent }) => {
   const [inputValue, setInputValue] = useState("");
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
