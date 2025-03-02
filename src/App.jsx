@@ -6,11 +6,12 @@ import { motion } from "motion/react"
 import { useState } from 'react'
 
 function App() {
-  const [activeCategories, setActiveCategories] = useState([]);
+  const [activeContent, setActiveContent] = useState([]);
+  const [recipes, setRecipes] = useState([]);
   return (
     <motion.div className='app' layout>
-      <Header activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
-      <Content activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
+      <Header activeContent={activeContent} setActiveContent={setActiveContent} recipes={recipes} setRecipes={setRecipes} />
+      <Content activeContent={activeContent} setActiveContent={setActiveContent} recipes={recipes} setRecipes={setRecipes} />
       <Footer />
     </motion.div>
     

@@ -21,7 +21,7 @@ const db = new sqlite3.Database("./database.db", (err) => {
 });
 
 // GET requesty (z databáze přetvoří tabulku recipes v json)
-app.get("/recipesok", (req, res) => {
+app.get("/recipes", (req, res) => {
   db.all("SELECT * FROM recipes", [], (err, rows) => {
     if (err) {
       res.status(500).json({ error: err.message });
