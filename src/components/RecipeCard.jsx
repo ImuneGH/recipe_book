@@ -1,13 +1,13 @@
-
+import '../css/recipeCard.css'
 
 const RecipeCard = ({ recipes }) => {
     return <div className="recipeCard">
                 <img src="" alt="" />
                 <div className="recipeInfo">
-                    <p>Těstoviny</p>
-                    <p>⏳ 60 min</p>
+                    <p title='Kategorie'>Těstoviny</p>
+                    <p title='Doba přípravy'>⏳ 60 min</p>
                 </div>
-                <h3 className="recipeName">Špagety</h3>
+                <h2 className="recipeName">Špagety</h2>
            </div>;
 }
 
