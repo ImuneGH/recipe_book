@@ -1,13 +1,13 @@
 import '../css/recipeCard.css'
 
-const RecipeCard = ({ recipes }) => {
+const RecipeCard = ({ filteredRecipe }) => {
     return <div className="recipeCard">
                 <img src="" alt="" />
                 <div className="recipeInfo">
-                    <p title='Kategorie'>Těstoviny</p>
-                    <p title='Doba přípravy'>⏳ 60 min</p>
+                    <p title='Kategorie'>{filteredRecipe.category}</p>
+                    <p title='Doba přípravy'>⏳ {filteredRecipe.cookTime}</p>
                 </div>
-                <h2 className="recipeName">Špagety</h2>
+                <h2 className="recipeName">{filteredRecipe.recipeName}</h2>
            </div>;
 }
 

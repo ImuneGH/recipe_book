@@ -47,7 +47,7 @@ function App() {
   return (
     <motion.div className='app' layout>
       <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} />
-      <Content activeContent={activeContent} recipes={recipes} />
+      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} />
       <Footer />
     </motion.div>
   )
