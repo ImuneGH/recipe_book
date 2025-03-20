@@ -41,15 +41,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(recipes.length === 0) {
-      return ;
-    }
-    else {
-      console.log(recipes);
-    }
-  }, [recipes]);
-
-  useEffect(() => {
     handleActiveContent();
   }, [activeCategories, filteredSearchValue]);
 
