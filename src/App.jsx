@@ -21,7 +21,8 @@ function App() {
   }
 
   const searchHandle = () => {
-    const result = recipes.filter(recipe => recipe.recipeName.includes(searchValue));
+    const result = () => recipes.filter(recipe => recipe.recipeName.includes(searchValue));
+    activeCategories.length !== 0 ? setActiveCategories([]) : null;
     setFilteredSearchValue(result);
     console.log(filteredSearchValue);
   }
@@ -51,6 +52,12 @@ function App() {
   useEffect(() => {
     handleActiveContent();
   }, [activeCategories, filteredSearchValue]);
+
+  useEffect(() => {
+    if(activeCategories.length !== 0) {
+      setFilteredSearchValue([]);
+    }
+  }, [activeCategories])
 
   return (
     <motion.div className='app' layout>
