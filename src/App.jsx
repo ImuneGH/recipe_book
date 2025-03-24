@@ -9,6 +9,8 @@ function App() {
   const [activeCategories, setActiveCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [activeContent, setActiveContent] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [searchResult, setSearchResult] = useState("");
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
       .then(response => response.json())
@@ -18,8 +20,15 @@ function App() {
       .catch(error => console.error(`error when recieving data: ${error}`));
   }
 
-  const handleActiveContent = () => {
+  const searchQuery = () => {
     if(activeCategories.length !== 0) {
+      setActiveCategories([]);
+    }
+    setSearchResult(searchValue);
+  }
+
+  const handleActiveContent = () => {
+    if(activeCategories.length !== 0 || searchResult !== "") {
       setActiveContent(true);
     }
     else  {
@@ -32,22 +41,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(recipes.length === 0) {
-      return ;
-    }
-    else {
-      console.log(recipes);
-    }
-  }, [recipes]);
-
-  useEffect(() => {
     handleActiveContent();
-  }, [activeCategories]);
+    activeCategories.length !== 0 ? setSearchResult("") : null;
+  }, [activeCategories, searchQuery]);
 
   return (
     <motion.div className='app' layout>
-      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} />
-      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} />
+      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} />
+      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} />
       <Footer />
     </motion.div>
   )

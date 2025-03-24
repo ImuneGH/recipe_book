@@ -1,6 +1,6 @@
 import '../css/recipeCard.css'
 
-const RecipeCard = ({ filteredRecipe }) => {
+const RecipeCard = ({ filteredRecipe, foundRecipe }) => {
     return <div className="recipeCard">
                 <img src={filteredRecipe.img} alt="" />
                 <div className="recipeInfo">
