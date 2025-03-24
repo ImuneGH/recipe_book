@@ -11,6 +11,8 @@ function App() {
   const [activeContent, setActiveContent] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState("");
+  const [randomRecipe, setRandomRecipe] = useState("");
+
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
       .then(response => response.json())
@@ -20,15 +22,25 @@ function App() {
       .catch(error => console.error(`error when recieving data: ${error}`));
   }
 
+  const randomRecipeSearch = () => {
+    let randomNumber = Math.floor(Math.random() * recipes.length);
+    setRandomRecipe(recipes[randomNumber]);
+    searchResult !== "" && setSearchResult("");
+    activeCategories.length !== 0 && setActiveCategories([]);
+  }
+
   const searchQuery = () => {
     if(activeCategories.length !== 0) {
       setActiveCategories([]);
+    }
+    if(randomRecipe !== "") {
+      setRandomRecipe("");
     }
     setSearchResult(searchValue);
   }
 
   const handleActiveContent = () => {
-    if(activeCategories.length !== 0 || searchResult !== "") {
+    if(activeCategories.length !== 0 || searchResult !== "" || randomRecipe !== "") {
       setActiveContent(true);
     }
     else  {
@@ -42,13 +54,19 @@ function App() {
 
   useEffect(() => {
     handleActiveContent();
-    activeCategories.length !== 0 ? setSearchResult("") : null;
-  }, [activeCategories, searchQuery]);
+  }, [activeCategories, searchQuery, randomRecipeSearch]);
+
+  useEffect(() => {
+    if(activeCategories.length !== 0) {
+      searchResult !== "" && setSearchResult("");
+      randomRecipe !== "" && setRandomRecipe("");
+    }
+  }, [activeCategories])
 
   return (
     <motion.div className='app' layout>
-      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} />
-      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} />
+      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch}/>
+      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} />
       <Footer />
     </motion.div>
   )
