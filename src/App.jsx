@@ -2,8 +2,10 @@ import './css/app.css'
 import Header from './components/Header'
 import Content from './components/Content'
 import Footer from './components/Footer'
+import NewRecipeForm from './components/NewRecipeForm'
 import { motion } from "motion/react"
 import { useEffect, useState } from 'react'
+
 
 function App() {
   const [activeCategories, setActiveCategories] = useState([]);
@@ -65,6 +67,7 @@ function App() {
 
   return (
     <motion.div className='app' layout>
+      <NewRecipeForm />
       <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch}/>
       <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} />
       <Footer />
