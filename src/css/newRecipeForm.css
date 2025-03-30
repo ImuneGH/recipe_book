@@ -16,3 +16,40 @@
 .newRecipeForm h3   {
     color: var(--bg-color);
 }
+
+/* close cross */
+
+.close {
+    position: absolute;
+    right: 1.25rem;
+    top: 1.25rem;
+    width: 32px;
+    height: 32px;
+    opacity: .6;
+  }
+
+  .close:hover {
+    opacity: 1;
+  }
+
+  .close:active {
+    opacity: .8;
+  }
+
+  .close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: var(--bg-color);
+  }
+
+  .close:before {
+    transform: rotate(45deg);
+  }
+
+  .close:after {
+    transform: rotate(-45deg);
+  }
+  

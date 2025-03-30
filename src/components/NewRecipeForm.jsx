@@ -2,6 +2,7 @@ import "../css/newRecipeForm.css"
 
 const NewRecipeForm = () => {
     return <form className="newRecipeForm">
+        <a href="#" class="close"></a>
         <h3>Název receptu:</h3>
         <input className="recipeName" type="text" />
         <h3>Ingredience:</h3>
