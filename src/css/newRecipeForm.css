@@ -1,11 +1,12 @@
 .newRecipeForm  {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
 
     position: fixed;
-    height: 80%;
-    width: 50%;
+    height: 80vh;
+    width: 50vw;
     padding: 3rem;
     margin-top: 10vh;
 
@@ -15,6 +16,51 @@
 
 .newRecipeForm h3   {
     color: var(--bg-color);
+    text-align: center;
+}
+
+.newRecipeForm input,
+.newRecipeForm textarea    {
+    width: clamp(10rem, 80%, 30rem);
+}
+
+.newRecipeForm textarea {
+    min-height: 5rem;
+}
+
+.newRecipeForm select    {
+    display: block;
+    padding: 0.188rem;
+}
+
+#cookTime   {
+    max-width: 3.2rem;
+}
+
+#img    {
+    color: var(--bg-color);
+}
+
+.newRecipeForm .submit  {
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    cursor: pointer;
+
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.newRecipeForm .submit:hover    {
+    background-color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.newRecipeForm .submit:active    {
+    outline: 1px solid var(--accent-color);
 }
 
 /* close cross */
@@ -23,8 +69,8 @@
     position: absolute;
     right: 1.25rem;
     top: 1.25rem;
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     opacity: .6;
   }
 
@@ -38,10 +84,10 @@
 
   .close:before, .close:after {
     position: absolute;
-    left: 15px;
+    left: 0.938rem;
     content: ' ';
-    height: 33px;
-    width: 2px;
+    height: 2.063rem;
+    width: 0.125rem;
     background-color: var(--bg-color);
   }
 
