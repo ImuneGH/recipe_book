@@ -1,8 +1,8 @@
 import "../css/newRecipeForm.css"
 
-const NewRecipeForm = () => {
+const NewRecipeForm = ({ setNewRecipeFormActive }) => {
     return <form className="newRecipeForm">
-        <a href="#" className="close"></a>
+        <a href="#" onClick={() => setNewRecipeFormActive(false)} className="close"></a>
         <h3><label htmlFor="recipeName">Název receptu:</label></h3>
         <input placeholder="např.: Špagety Carbonara" id="recipeName" type="text" />
         <h3><label htmlFor="ingredients">Ingredience:</label></h3>

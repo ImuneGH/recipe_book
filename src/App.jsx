@@ -14,6 +14,7 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState("");
   const [randomRecipe, setRandomRecipe] = useState("");
+  const [newRecipeFormActive, setNewRecipeFormActive] = useState(false);
 
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
@@ -22,6 +23,10 @@ function App() {
           setRecipes(data);
       })
       .catch(error => console.error(`error when recieving data: ${error}`));
+  }
+
+  const handleActiveForm = () => {
+    newRecipeFormActive ? setNewRecipeFormActive(false) : setNewRecipeFormActive(true);
   }
 
   const randomRecipeSearch = () => {
@@ -67,8 +72,8 @@ function App() {
 
   return (
     <motion.div className='app' layout>
-      <NewRecipeForm />
-      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch}/>
+      {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} />}
+      <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} handleActiveForm={handleActiveForm}/>
       <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} />
       <Footer />
     </motion.div>

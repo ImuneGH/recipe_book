@@ -72,6 +72,8 @@
     width: 2rem;
     height: 2rem;
     opacity: .6;
+
+    cursor: pointer;
   }
 
   .close:hover {
