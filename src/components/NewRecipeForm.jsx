@@ -4,7 +4,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive }) => {
     return <form className="newRecipeForm">
         <a href="#" onClick={() => setNewRecipeFormActive(false)} className="close"></a>
         <h3><label htmlFor="recipeName">Název receptu:</label></h3>
-        <input placeholder="např.: Špagety Carbonara" id="recipeName" type="text" />
+        <input placeholder="např.: Špagety Carbonara" id="recipeName" type="text" autoFocus />
         <h3><label htmlFor="ingredients">Ingredience:</label></h3>
         <input placeholder="Mrkev, Celer, Pažitka..." id="ingredients" type="text" />
         <h3><label htmlFor="instructions">Postup:</label></h3>

@@ -29,6 +29,12 @@ function App() {
     newRecipeFormActive ? setNewRecipeFormActive(false) : setNewRecipeFormActive(true);
   }
 
+  const closeActiveForm = (e) => {
+    if(e.key === "Escape") {
+       setNewRecipeFormActive(false);
+    }
+  }
+
   const randomRecipeSearch = () => {
     let randomNumber = Math.floor(Math.random() * recipes.length);
     setRandomRecipe(recipes[randomNumber]);
@@ -54,6 +60,14 @@ function App() {
       setActiveContent(false);
     }
   }
+
+  useEffect(() => {
+    document.addEventListener("keydown", closeActiveForm);
+
+    return () => {
+      document.removeEventListener("keydown", closeActiveForm);   // cleanup function
+    }
+  }, [])
 
   useEffect(() => {
     fetchRecipes();
