@@ -33,16 +33,16 @@ app.get("/recipes", (req, res) => {
 
 // POST requesty (vložení dat do tabulky recipes)
 app.post("/recipes", (req, res) => {
-  const { recipe_name, ingredients, instructions } = req.body;
+  const { recipeName, ingredients, instructions } = req.body;
   if (!nazev || !popis) {
     return res.status(400).json({ error: "Vyplňte všechna pole!" });
   }
 
-  db.run("INSERT INTO recipes (recipe_name, ingredients, instructions) VALUES (?, ?, ?)", [recipe_name, ingredients, instructions], function (err) {
+  db.run("INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [recipeName, ingredients, instructions, category, cookTime, author, imgPath], function (err) {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ id: this.lastID, recipe_name, ingredients, instructions });
+    res.json({ id: this.lastID, recipeName, ingredients, instructions });
   });
 });
 
