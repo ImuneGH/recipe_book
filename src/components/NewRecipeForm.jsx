@@ -16,14 +16,12 @@ const NewRecipeForm = ({ setNewRecipeFormActive }) => {
     const handleChange = (e) => {
         setFormData({...formData, 
             [e.target.name]: e.target.value});
-            // console.log(formData);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const actualDate = new Date().toISOString().slice(0, 19).replace("T", " ");
         setFormData({...formData, createdAt: actualDate});
-        console.log("Recept uložen:", formData);
 
         fetch("http://localhost:5000/recipes", {
             method: "POST",
@@ -32,13 +30,19 @@ const NewRecipeForm = ({ setNewRecipeFormActive }) => {
             },
             body: JSON.stringify(formData)
           })
-            .then(response => response.json())
+            .then(async response => {
+              if(!response.ok) {
+                const errorMessage = await response.json();
+                throw new Error(`Server vrátil chybu: ${errorMessage.error}`);
+              }
+              return response.json();
+            })
             .then(data => {
               console.log("Recept uložen:", data);
               // případně vynulování formuláře nebo přesměrování
             })
             .catch(error => {
-              console.error("Chyba při odesílání:", error);
+              console.error("Chyba při odesílání:", error.message);
             });
     }
 
