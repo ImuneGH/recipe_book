@@ -16,11 +16,14 @@ const NewRecipeForm = ({ setNewRecipeFormActive }) => {
     const handleChange = (e) => {
         setFormData({...formData, 
             [e.target.name]: e.target.value});
-            console.log(formData);
+            // console.log(formData);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const actualDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+        setFormData({...formData, createdAt: actualDate});
+        console.log("Recept uložen:", formData);
 
         fetch("http://localhost:5000/recipes", {
             method: "POST",
