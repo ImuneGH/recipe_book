@@ -33,16 +33,21 @@ app.get("/recipes", (req, res) => {
 
 // POST requesty (vložení dat do tabulky recipes)
 app.post("/recipes", (req, res) => {
-  const { recipeName, ingredients, instructions } = req.body;
-  if (!nazev || !popis) {
-    return res.status(400).json({ error: "Vyplňte všechna pole!" });
+  const { createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath } = req.body;
+  if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
+    return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }
 
-  db.run("INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [recipeName, ingredients, instructions, category, cookTime, author, imgPath], function (err) {
+  const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath) 
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+
+  db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath], function (err) {
     if (err) {
-      return res.status(500).json({ error: err.message });
+      console.error("Chyba při ukládání dat do DB");
+      res.status(500).json({ error: err.message });
     }
-    res.json({ id: this.lastID, recipeName, ingredients, instructions });
+    console.log("Recept uložen: " + this.lastID);
+    res.status(201).json({ message: "Recept úspěšně uložen 🥳", id: this.lastID });
   });
 });
 
