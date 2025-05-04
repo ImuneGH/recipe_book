@@ -12,6 +12,10 @@
     border: 1px solid black;
 }
 
+.errorWindow:focus {
+    outline: none;
+}
+
 .errorWindow h4 {
     flex: 1;
 
@@ -28,6 +32,7 @@
     justify-content: center;
     gap: .8rem;
     flex: 20;
+    padding: 0 .6rem;
 
     background-color: hsl(0, 100%, 95%);
 }

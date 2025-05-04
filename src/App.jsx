@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import NewRecipeForm from './components/NewRecipeForm'
 import FormError from './components/FormError'
 import { motion } from "motion/react"
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
   const [newRecipeFormActive, setNewRecipeFormActive] = useState(false);
   const [errorActive, setErrorActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const errorRef = useRef(null);
 
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
@@ -71,14 +72,24 @@ function App() {
   }
 
   useEffect(() => {
+    if(errorActive && errorRef.current) {
+      errorRef.current.focus();
+    }
+    
     document.addEventListener("keydown", closeErrorMessage);
+
+    return () => {
+      document.removeEventListener("keydown", closeErrorMessage);
+    }
+  }, [errorActive]);
+
+  useEffect(() => {
     document.addEventListener("keydown", closeActiveForm);
 
     return () => {
       document.removeEventListener("keydown", closeActiveForm);   // cleanup function
-      document.removeEventListener("keydown", closeErrorMessage);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     fetchRecipes();
@@ -97,7 +108,7 @@ function App() {
 
   return (
     <motion.div className='app' layout>
-      {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} />}
+      {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
       {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} />}
       <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} handleActiveForm={handleActiveForm}/>
       <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} />
