@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Content from './components/Content'
 import Footer from './components/Footer'
 import NewRecipeForm from './components/NewRecipeForm'
+import FormError from './components/FormError'
 import { motion } from "motion/react"
 import { useEffect, useState } from 'react'
 
@@ -15,6 +16,8 @@ function App() {
   const [searchResult, setSearchResult] = useState("");
   const [randomRecipe, setRandomRecipe] = useState("");
   const [newRecipeFormActive, setNewRecipeFormActive] = useState(false);
+  const [errorActive, setErrorActive] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
@@ -86,7 +89,8 @@ function App() {
 
   return (
     <motion.div className='app' layout>
-      {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} />}
+      <FormError errorMessage={errorMessage} />
+      {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} errorActive={errorActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} />}
       <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} handleActiveForm={handleActiveForm}/>
       <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} />
       <Footer />
