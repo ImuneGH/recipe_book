@@ -1,13 +1,13 @@
 import "../css/formError.css"
 
-const Error = ({ errorMessage }) => {
+const FormError = ({ errorMessage, setErrorActive }) => {
     return <div className="errorWindow">
              <h4>error</h4>
              <div className="errorMessage">
-                <p>errorMessage</p>
-                <button>Rozumím</button>
+                <p>{errorMessage}</p>
+                <button onClick={() => setErrorActive(false)}>Rozumím</button>
              </div>
            </div>;
 }
 
-export default Error;
+export default FormError;

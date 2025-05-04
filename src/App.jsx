@@ -38,6 +38,12 @@ function App() {
     }
   }
 
+  const closeErrorMessage = (e) => {
+    if(e.key === "Enter") {
+      setErrorActive(false);
+    }
+  }
+
   const randomRecipeSearch = () => {
     let randomNumber = Math.floor(Math.random() * recipes.length);
     setRandomRecipe(recipes[randomNumber]);
@@ -65,10 +71,12 @@ function App() {
   }
 
   useEffect(() => {
+    document.addEventListener("keydown", closeErrorMessage);
     document.addEventListener("keydown", closeActiveForm);
 
     return () => {
       document.removeEventListener("keydown", closeActiveForm);   // cleanup function
+      document.removeEventListener("keydown", closeErrorMessage);
     }
   }, [])
 
@@ -89,8 +97,8 @@ function App() {
 
   return (
     <motion.div className='app' layout>
-      <FormError errorMessage={errorMessage} />
-      {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} errorActive={errorActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} />}
+      {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} />}
+      {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} />}
       <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} handleActiveForm={handleActiveForm}/>
       <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} />
       <Footer />

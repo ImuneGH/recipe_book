@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../css/newRecipeForm.css"
 
-const NewRecipeForm = ({ setNewRecipeFormActive, errorActive, setErrorActive, setErrorMessage }) => {
+const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage }) => {
   const [formData, setFormData] = useState({
       createdAt: "",
       recipeName: "",
@@ -21,7 +21,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, errorActive, setErrorActive, se
   const requirementsCheck = () => {
     if(!formData.recipeName || !formData.ingredients || !formData.instructions || !formData.category || !formData.cookTime) {
       setErrorActive(true);
-      console.log(errorActive);
+      setErrorMessage("Vyplňte prosím všechna povinná pole");
     }
     else {
       setErrorActive(false);
