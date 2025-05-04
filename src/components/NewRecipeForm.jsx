@@ -22,9 +22,11 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     if(!formData.recipeName || !formData.ingredients || !formData.instructions || !formData.category || !formData.cookTime) {
       setErrorActive(true);
       setErrorMessage("Vyplňte prosím všechna povinná pole");
+      return false;
     }
     else {
       setErrorActive(false);
+      return true;
     }
   }
 
@@ -34,6 +36,10 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       setFormData({...formData, createdAt: actualDate});
 
       requirementsCheck();
+
+      if(!requirementsCheck()) {
+        return;
+      }
 
       fetch("http://localhost:5000/recipes", {
           method: "POST",
