@@ -55,3 +55,7 @@
 .errorMessage button:active {
     outline: 1px groove red;
 }
+
+.emptyInput {
+    border: 1px solid red;
+}
