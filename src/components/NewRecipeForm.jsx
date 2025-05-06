@@ -13,12 +13,30 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       imgPath: ""
   });
 
+  const [requiredFormData, setRequiredFormData] = useState({
+    recipeName: false,
+    ingredients: false,
+    instructions: false,
+    category: false,
+    cookTime: false
+  });
+
   const handleChange = (e) => {
       setFormData({...formData, 
           [e.target.name]: e.target.value});
   }
 
   const requirementsCheck = () => {
+    const newEmptyInputs = {
+      recipeName: !formData.recipeName,
+      ingredients: !formData.ingredients,
+      instructions: !formData.instructions,
+      category: !formData.category,
+      cookTime: !formData.cookTime
+    };
+
+    setRequiredFormData(newEmptyInputs);
+
     if(!formData.recipeName || !formData.ingredients || !formData.instructions || !formData.category || !formData.cookTime) {
       setErrorActive(true);
       setErrorMessage("Vyplňte prosím všechna povinná pole");
@@ -27,15 +45,6 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     else {
       setErrorActive(false);
       return true;
-    }
-  }
-
-  const redBorder = (field) => {
-    if(errorActive && formData[field] === "") {
-      return "emptyInput";
-    }
-    else {
-      return "";
     }
   }
 
@@ -76,13 +85,13 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
   return <form className="newRecipeForm">
       <a href="#" onClick={() => setNewRecipeFormActive(false)} className="close"></a>
       <h3><label htmlFor="recipeName"><span className="redColor">*</span>Název receptu:</label></h3>
-      <input className={redBorder("recipeName")} placeholder="např.: Špagety Carbonara" id="recipeName" type="text" name="recipeName" autoFocus value={formData.recipeName} onChange={handleChange} />
+      <input className={requiredFormData.recipeName ? "emptyInput" : ""} placeholder="např.: Špagety Carbonara" id="recipeName" type="text" name="recipeName" autoFocus value={formData.recipeName} onChange={handleChange} />
       <h3><label htmlFor="ingredients"><span className="redColor">*</span>Ingredience:</label></h3>
-      <input className={redBorder("ingredients")} placeholder="Mrkev, Celer, Pažitka..." id="ingredients" type="text" name="ingredients" value={formData.ingredients} onChange={handleChange} />
+      <input className={requiredFormData.ingredients ? "emptyInput" : ""} placeholder="Mrkev, Celer, Pažitka..." id="ingredients" type="text" name="ingredients" value={formData.ingredients} onChange={handleChange} />
       <h3><label htmlFor="instructions"><span className="redColor">*</span>Postup:</label></h3>
-      <textarea className={redBorder("instructions")} placeholder="např.: Uvařit špagety, smíchat se žloutkem..." id="instructions" type="text" name="instructions" value={formData.instructions} onChange={handleChange} />
+      <textarea className={requiredFormData.instructions ? "emptyInput" : ""} placeholder="např.: Uvařit špagety, smíchat se žloutkem..." id="instructions" type="text" name="instructions" value={formData.instructions} onChange={handleChange} />
       <h3><label htmlFor="category"><span className="redColor">*</span>Kategorie:</label></h3>
-      <select className={redBorder("category")} id="category" name="category" value={formData.category} onChange={handleChange}>
+      <select className={requiredFormData.category ? "emptyInput" : ""} id="category" name="category" value={formData.category} onChange={handleChange}>
           <option value="Zvol kategorii">--Zvol kategorii--</option>
           <option value="Polévky">Polévky</option>
           <option value="Těstoviny">Těstoviny</option>
@@ -92,7 +101,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
           <option value="Moučníky">Moučníky</option>
       </select>
       <h3><label htmlFor="cookTime"><span className="redColor">*</span>Délka vaření (min):</label></h3>
-      <input className={redBorder("cookTime")} placeholder="60" id="cookTime" type="number" name="cookTime" value={formData.cookTime} onChange={handleChange} />
+      <input className={requiredFormData.cookTime ? "emptyInput" : ""} placeholder="60" id="cookTime" type="number" name="cookTime" value={formData.cookTime} onChange={handleChange} />
       <h3><label htmlFor="author">Autor:</label></h3>
       <input placeholder="Jméno autora, či přezdívka" id="author" type="text" name="author" value={formData.author} onChange={handleChange} />
       <h3><label htmlFor="img">Fotka jídla:</label></h3>
