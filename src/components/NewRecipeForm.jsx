@@ -24,6 +24,10 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
   const handleChange = (e) => {
       setFormData({...formData, 
           [e.target.name]: e.target.value});
+
+      if(e.target.value !== "") {
+        setRequiredFormData({...requiredFormData, [e.target.name]: false});
+      }
   }
 
   const requirementsCheck = () => {

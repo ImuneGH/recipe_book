@@ -57,5 +57,10 @@
 }
 
 .emptyInput {
-    border: 1px solid red;
+    border: 2px solid red;
+}
+
+.emptyInput:focus-visible {
+    border: 3px solid red;
+    outline: none;
 }
