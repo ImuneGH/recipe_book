@@ -10,6 +10,11 @@
     box-shadow: 2px 2px 3px hsla(0, 0%, 0%, 0.5);
 
     cursor: pointer;
+    transition: all .3s;
+}
+
+.recipeCard:hover {
+    transform: scale(1.1);
 }
 
 .recipeCard img {
