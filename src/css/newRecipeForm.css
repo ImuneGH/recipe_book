@@ -12,6 +12,7 @@
 
     background-color: var(--text-color);
     border-radius: 10px;
+    overflow-y: scroll;
 }
 
 .newRecipeForm h3   {
