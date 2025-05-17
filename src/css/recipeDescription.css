@@ -68,6 +68,10 @@
     gap: 1rem;
 }
 
+.metaData h2 {
+    font-size: 2.25rem;
+}
+
 .recipeMetaData {
     display: flex;
     list-style-type: none;
