@@ -17,10 +17,21 @@ const RecipeDescription = () => {
         </div>
 
         <div className="rightContent">
-            <div className="recipeMetaData">
-                
+            <div className="metaData">
+                <h2>Název receptu</h2>
+                <ul className="recipeMetaData">
+                    <li className="category">kategorie</li>
+                    <li className="cookTime">doba vaření</li>
+                    <li className="author">autor</li>
+                </ul>
             </div>
-            <div className="recipeDescription"></div>
+            <div className="recipeInstructions">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt placeat obcaecati ab, doloremque animi temporibus non, hic delectus   adipisci ducimus ipsum fuga possimus iure autem magnam voluptatibus vitae exercitationem nesciunt.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aliquid laudantium adipisci illum quasi omnis fugit dolores dolorem, iste quas impedit neque nostrum iusto nihil. In obcaecati expedita animi magni.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cum voluptatem aliquid veritatis voluptas ratione porro velit impedit laboriosam? Sequi optio dolores repellendus laudantium labore maiores id unde itaque aliquid.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla maiores quasi, suscipit consequuntur expedita voluptatum ipsa nisi odio hic corporis dignissimos illum, velit eligendi reiciendis, ab veniam eius fuga recusandae?
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum maxime quidem consequuntur officiis tenetur vel necessitatibus nostrum distinctio exercitationem repellat ad magni at ducimus, odit, deserunt culpa inventore quia est!</p>
+            </div>
         </div>
     </div>;
 }
