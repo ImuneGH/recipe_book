@@ -4,7 +4,7 @@ const RecipeDescription = () => {
     return <div className="recipeDescription">
         <div className="leftContent">
             <div className="foodPhoto">
-                <img src="#" alt="fotka jídla" />
+                <img src="/img/livance.JPEG" alt="fotka jídla" />
             </div>
             <div className="ingredients">
                 <h3>Ingredience:</h3>
@@ -16,7 +16,12 @@ const RecipeDescription = () => {
             </div>
         </div>
 
-        <div className="rightContent"></div>
+        <div className="rightContent">
+            <div className="recipeMetaData">
+                
+            </div>
+            <div className="recipeDescription"></div>
+        </div>
     </div>;
 }
 
