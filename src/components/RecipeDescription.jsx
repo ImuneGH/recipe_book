@@ -17,6 +17,10 @@ const RecipeDescription = () => {
         </div>
 
         <div className="rightContent">
+            <div className="actionButtons">
+                <button className="edit">📝 edit</button>
+                <button className="delete">🗑 delete</button>
+            </div>
             <div className="metaData">
                 <h2>Název receptu</h2>
                 <ul className="recipeMetaData">
@@ -26,6 +30,7 @@ const RecipeDescription = () => {
                 </ul>
             </div>
             <div className="recipeInstructions">
+                <h3>Postup:</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt placeat obcaecati ab, doloremque animi temporibus non, hic delectus   adipisci ducimus ipsum fuga possimus iure autem magnam voluptatibus vitae exercitationem nesciunt.
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aliquid laudantium adipisci illum quasi omnis fugit dolores dolorem, iste quas impedit neque nostrum iusto nihil. In obcaecati expedita animi magni.
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cum voluptatem aliquid veritatis voluptas ratione porro velit impedit laboriosam? Sequi optio dolores repellendus laudantium labore maiores id unde itaque aliquid.
