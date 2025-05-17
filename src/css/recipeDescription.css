@@ -8,7 +8,7 @@
 /* ľeft side of content */
 
 .leftContent {
-    flex: 4;
+    flex: 7;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -38,7 +38,7 @@
 /* right side of content */
 
 .rightContent {
-    flex: 6;
+    flex: 13;
     display: flex;
     flex-direction: column;
     gap: 3rem;
