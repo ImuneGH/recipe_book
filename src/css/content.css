@@ -1,5 +1,4 @@
 .content    {
-    flex: 4;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -9,7 +8,7 @@
     width: 100%;
     height: 65vh;
     margin-top: 2rem;
-    padding: 0 4rem;
+    padding: 0 5rem;
 }
 
 .content>h1 {
