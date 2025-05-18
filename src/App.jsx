@@ -99,6 +99,7 @@ function App() {
   useEffect(() => {
     handleActiveContent();
     if(activeCategories.length !== 0 || searchResult !== "" || randomRecipe !== "") {
+      console.log(searchValue);
       setRecipeDetailActive(false);
     };
   }, [activeCategories, searchQuery, randomRecipeSearch, recipeDetailActive]);
@@ -110,17 +111,12 @@ function App() {
     }
   }, [activeCategories])
 
-  // useEffect(() => {
-  //       setActiveCategories([]);
-  //       setActiveContent(true);
-  // }, [recipeDetailActive])
-
   return (
     <motion.div className='app' layout>
       {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
       {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
       <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} handleActiveForm={handleActiveForm}/>
-      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} setActiveCategories={setActiveCategories} setActiveContent={setActiveContent} setRecipeDetailActive={setRecipeDetailActive} recipeDetailActive={recipeDetailActive} />
+      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} setActiveCategories={setActiveCategories} setActiveContent={setActiveContent} setRecipeDetailActive={setRecipeDetailActive} recipeDetailActive={recipeDetailActive} setSearchResult={setSearchResult} setRandomRecipe={setRandomRecipe} />
       <Footer />
     </motion.div>
   )

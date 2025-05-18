@@ -3,7 +3,7 @@ import RecipeDescription from '../components/RecipeDescription'
 import { motion } from "motion/react"
 import RecipeCard from './RecipeCard'
 
-const Content = ({ activeContent, recipes, activeCategories, searchResult, randomRecipe, setActiveCategories, setActiveContent, setRecipeDetailActive, recipeDetailActive }) => {
+const Content = ({ activeContent, recipes, activeCategories, searchResult, randomRecipe, setActiveCategories, setActiveContent, setRecipeDetailActive, recipeDetailActive, setSearchResult, setRandomRecipe }) => {
   const filteredCategory = activeCategories.length && recipes.filter(recipe => activeCategories.includes(recipe.category));
   const filteredSearch = searchResult !== "" && recipes.filter(recipe => recipe.recipeName.includes(searchResult));
   const recipesDisplayed = filteredCategory.length ? filteredCategory : filteredSearch.length ? filteredSearch : randomRecipe ? [randomRecipe] : [];
@@ -14,7 +14,7 @@ const Content = ({ activeContent, recipes, activeCategories, searchResult, rando
                 <img className='logo' src="/img/flavor_log_logo.png" alt="Logo webu Flavor Log" />
               </motion.h1>}
               { recipeDetailActive && <RecipeDescription />}
-              {recipesDisplayed ? recipesDisplayed.map(recipeDisplayed => <RecipeCard key={recipeDisplayed.ID} recipeDisplayed={recipeDisplayed} setActiveCategories={setActiveCategories} setActiveContent={setActiveContent} setRecipeDetailActive={setRecipeDetailActive} />) : null}
+              {recipesDisplayed ? recipesDisplayed.map(recipeDisplayed => <RecipeCard key={recipeDisplayed.ID} recipeDisplayed={recipeDisplayed} setActiveCategories={setActiveCategories} setActiveContent={setActiveContent} setRecipeDetailActive={setRecipeDetailActive} setSearchResult={setSearchResult} setRandomRecipe={setRandomRecipe} />) : null}
               {isEmpty && <p>Obsah je prázdný</p>}
           </main>
 }

@@ -1,10 +1,12 @@
 import '../css/recipeCard.css'
 
-const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, setRecipeDetailActive }) => {
+const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, setRecipeDetailActive, setSearchResult, setRandomRecipe }) => {
 
     const showRecipeDetail = () => {
         setActiveCategories([]);
         setActiveContent(true);
+        setSearchResult("");
+        setRandomRecipe("");
         setRecipeDetailActive(true);
     }
 
