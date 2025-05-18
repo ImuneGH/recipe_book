@@ -1,12 +1,16 @@
 import '../css/recipeCard.css'
 
-const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, setRecipeDetailActive, setSearchResult, setRandomRecipe }) => {
+const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, setRecipeDetailActive, setSearchResult, setRandomRecipe, setClickedRecipeCard, clickedRecipeCard, recipes }) => {
 
-    const showRecipeDetail = () => {
+    const showRecipeDetail = (e) => {
+        // resets
         setActiveCategories([]);
         setActiveContent(true);
         setSearchResult("");
         setRandomRecipe("");
+        // sets
+        const recipeToDisplayName = e.target.parentElement.children[2].textContent;
+        setClickedRecipeCard(recipes.filter(recipeToDisplay => recipeToDisplay.recipeName.includes(recipeToDisplayName)));
         setRecipeDetailActive(true);
     }
 

@@ -1,6 +1,6 @@
 import "../css/recipeDescription.css"
 
-const RecipeDescription = () => {
+const RecipeDescription = ({clickedRecipeCard}) => {
     return <div className="recipeDescription">
         <div className="leftContent">
             <div className="foodPhoto">
@@ -22,20 +22,16 @@ const RecipeDescription = () => {
                 <button className="delete">🗑 delete</button>
             </div>
             <div className="metaData">
-                <h2>Název receptu</h2>
+                <h2>{clickedRecipeCard[0].recipeName}</h2>
                 <ul className="recipeMetaData">
-                    <li className="category">kategorie</li>
-                    <li className="cookTime">doba vaření</li>
-                    <li className="author">autor</li>
+                    <li className="category">{clickedRecipeCard[0].category}</li>
+                    <li className="cookTime">{clickedRecipeCard[0].cookTime}</li>
+                    <li className="author">{clickedRecipeCard[0].author}</li>
                 </ul>
             </div>
             <div className="recipeInstructions">
                 <h3>Postup:</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt placeat obcaecati ab, doloremque animi temporibus non, hic delectus   adipisci ducimus ipsum fuga possimus iure autem magnam voluptatibus vitae exercitationem nesciunt.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aliquid laudantium adipisci illum quasi omnis fugit dolores dolorem, iste quas impedit neque nostrum iusto nihil. In obcaecati expedita animi magni.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cum voluptatem aliquid veritatis voluptas ratione porro velit impedit laboriosam? Sequi optio dolores repellendus laudantium labore maiores id unde itaque aliquid.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla maiores quasi, suscipit consequuntur expedita voluptatum ipsa nisi odio hic corporis dignissimos illum, velit eligendi reiciendis, ab veniam eius fuga recusandae?
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum maxime quidem consequuntur officiis tenetur vel necessitatibus nostrum distinctio exercitationem repellat ad magni at ducimus, odit, deserunt culpa inventore quia est!</p>
+                <p>{clickedRecipeCard[0].instructions}</p>
             </div>
         </div>
     </div>;

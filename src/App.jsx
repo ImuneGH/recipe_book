@@ -99,7 +99,6 @@ function App() {
   useEffect(() => {
     handleActiveContent();
     if(activeCategories.length !== 0 || searchResult !== "" || randomRecipe !== "") {
-      console.log(searchValue);
       setRecipeDetailActive(false);
     };
   }, [activeCategories, searchQuery, randomRecipeSearch, recipeDetailActive]);
