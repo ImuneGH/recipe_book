@@ -18,6 +18,7 @@ function App() {
   const [newRecipeFormActive, setNewRecipeFormActive] = useState(false);
   const [errorActive, setErrorActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [recipeDetailActive, setRecipeDetailActive] = useState(false);
   const errorRef = useRef(null);
 
   const fetchRecipes = () => {
@@ -63,7 +64,7 @@ function App() {
   }
 
   const handleActiveContent = () => {
-    if(activeCategories.length !== 0 || searchResult !== "" || randomRecipe !== "") {
+    if(activeCategories.length !== 0 || searchResult !== "" || randomRecipe !== "" || recipeDetailActive ) {
       setActiveContent(true);
     }
     else  {
@@ -97,7 +98,10 @@ function App() {
 
   useEffect(() => {
     handleActiveContent();
-  }, [activeCategories, searchQuery, randomRecipeSearch]);
+    if(activeCategories.length !== 0 || searchResult !== "" || randomRecipe !== "") {
+      setRecipeDetailActive(false);
+    };
+  }, [activeCategories, searchQuery, randomRecipeSearch, recipeDetailActive]);
 
   useEffect(() => {
     if(activeCategories.length !== 0) {
@@ -106,12 +110,17 @@ function App() {
     }
   }, [activeCategories])
 
+  // useEffect(() => {
+  //       setActiveCategories([]);
+  //       setActiveContent(true);
+  // }, [recipeDetailActive])
+
   return (
     <motion.div className='app' layout>
       {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
       {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
       <Header activeContent={activeContent} activeCategories={activeCategories} setActiveCategories={setActiveCategories} setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} handleActiveForm={handleActiveForm}/>
-      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} />
+      <Content activeContent={activeContent} recipes={recipes} activeCategories={activeCategories} searchResult={searchResult} randomRecipe={randomRecipe} setActiveCategories={setActiveCategories} setActiveContent={setActiveContent} setRecipeDetailActive={setRecipeDetailActive} recipeDetailActive={recipeDetailActive} />
       <Footer />
     </motion.div>
   )

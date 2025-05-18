@@ -1,7 +1,14 @@
 import '../css/recipeCard.css'
 
-const RecipeCard = ({ recipeDisplayed }) => {
-    return <div className="recipeCard">
+const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, setRecipeDetailActive }) => {
+
+    const showRecipeDetail = () => {
+        setActiveCategories([]);
+        setActiveContent(true);
+        setRecipeDetailActive(true);
+    }
+
+    return <div onClick={showRecipeDetail} className="recipeCard">
                 <img src={recipeDisplayed.img} alt="" />
                 <div className="recipeInfo">
                     <p title='Kategorie'>{recipeDisplayed.category}</p>
