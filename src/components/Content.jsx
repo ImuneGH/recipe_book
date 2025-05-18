@@ -15,7 +15,6 @@ const Content = ({ activeContent, recipes, activeCategories, searchResult, rando
   useEffect(() => {
     if(clickedRecipeCard.length > 0) {
       setFormatedIngredients(clickedRecipeCard[0].ingredients.split(", "));
-      console.log(formatedIngredients);
     }
 
   }, [clickedRecipeCard]);
