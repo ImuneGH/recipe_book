@@ -5,17 +5,26 @@ import RecipeCard from './RecipeCard'
 import { useEffect, useState } from 'react'
 
 const Content = ({ activeContent, recipes, activeCategories, searchResult, randomRecipe, setActiveCategories, setActiveContent, setRecipeDetailActive, recipeDetailActive, setSearchResult, setRandomRecipe }) => {
-  const [clickedRecipeCard, setClickedRecipeCard] = useState(""); 
+  const [clickedRecipeCard, setClickedRecipeCard] = useState([]);
+  const [formatedIngredients, setFormatedIngredients] = useState([]);
   const filteredCategory = activeCategories.length && recipes.filter(recipe => activeCategories.includes(recipe.category));
   const filteredSearch = searchResult !== "" && recipes.filter(recipe => recipe.recipeName.includes(searchResult));
   const recipesDisplayed = filteredCategory.length ? filteredCategory : filteredSearch.length ? filteredSearch : randomRecipe ? [randomRecipe] : [];
   const isEmpty = recipesDisplayed.length === 0 && activeContent && !recipeDetailActive;
 
+  useEffect(() => {
+    if(clickedRecipeCard.length > 0) {
+      setFormatedIngredients(clickedRecipeCard[0].ingredients.split(", "));
+      console.log(formatedIngredients);
+    }
+
+  }, [clickedRecipeCard]);
+
   return <main className="content">
               {!activeContent && <motion.h1 layoutId='logo'>
                 <img className='logo' src="/img/flavor_log_logo.png" alt="Logo webu Flavor Log" />
               </motion.h1>}
-              {recipeDetailActive && <RecipeDescription clickedRecipeCard={clickedRecipeCard} />}
+              {recipeDetailActive && <RecipeDescription clickedRecipeCard={clickedRecipeCard} formatedIngredients={formatedIngredients} />}
               {recipesDisplayed ? recipesDisplayed.map(recipeDisplayed => <RecipeCard key={recipeDisplayed.ID} recipeDisplayed={recipeDisplayed} setActiveCategories={setActiveCategories} setActiveContent={setActiveContent} setRecipeDetailActive={setRecipeDetailActive} setSearchResult={setSearchResult} setRandomRecipe={setRandomRecipe} setClickedRecipeCard={setClickedRecipeCard} clickedRecipeCard={clickedRecipeCard} recipes={recipes} />) : null}
               {isEmpty && <p>Obsah je prázdný</p>}
           </main>

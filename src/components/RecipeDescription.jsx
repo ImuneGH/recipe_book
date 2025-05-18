@@ -1,6 +1,6 @@
 import "../css/recipeDescription.css"
 
-const RecipeDescription = ({clickedRecipeCard}) => {
+const RecipeDescription = ({ clickedRecipeCard, formatedIngredients }) => {
     return <div className="recipeDescription">
         <div className="leftContent">
             <div className="foodPhoto">
@@ -9,9 +9,7 @@ const RecipeDescription = ({clickedRecipeCard}) => {
             <div className="ingredients">
                 <h3>Ingredience:</h3>
                 <ul className="ingredientsList">
-                    <li className="ingredientItem">Item 1</li>
-                    <li className="ingredientItem">Item 2</li>
-                    <li className="ingredientItem">Item 3</li>
+                    {formatedIngredients.map(formatedIngredient => <li key={formatedIngredient} className="ingredientItem">{formatedIngredient}</li>)}
                 </ul>
             </div>
         </div>
