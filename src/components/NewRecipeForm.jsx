@@ -13,6 +13,11 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       imgPath: ""
   });
 
+  const formatImgPath = () => {
+   const formattedImgPath = formData.imgPath.split("\\").pop();
+   return formattedImgPath;
+  }
+
   const [requiredFormData, setRequiredFormData] = useState({
     recipeName: false,
     ingredients: false,
@@ -27,7 +32,8 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
 
       if(e.target.value !== "") {
         setRequiredFormData({...requiredFormData, [e.target.name]: false});
-      }
+      };
+      formatImgPath();
   }
 
   const requirementsCheck = () => {
