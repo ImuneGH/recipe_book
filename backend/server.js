@@ -1,6 +1,7 @@
 // něco jako importy
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
+const multer = require("multer");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -10,6 +11,15 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors()); // propojení backend, frontend
 app.use(express.json()); // Pro práci s JSON daty
+
+const imgStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    
+  }
+})
 
 // Připojení k databázi
 const db = new sqlite3.Database("./database.db", (err) => {

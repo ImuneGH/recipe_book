@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../css/newRecipeForm.css"
 
 const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, errorActive }) => {
@@ -14,11 +14,6 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       image: null
   });
 
-  const formatImgPath = () => {
-   const formattedImgPath = formData.imgPath.split("\\").pop();
-   return formattedImgPath;
-  }
-
   const [requiredFormData, setRequiredFormData] = useState({
     recipeName: false,
     ingredients: false,
@@ -29,8 +24,8 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
 
   const handleChange = (e) => {
     if(e.target.name === "imgPath") {
-      setFormData({...formData, image: e.target.files[0], imgPath: e.target.value});
-      console.log(formData);
+      const file = e.target.files[0];
+      setFormData({...formData, image: file, imgPath: file.name});
     }
     else {
       setFormData({...formData, 
@@ -40,7 +35,6 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     if(e.target.value !== "") {
       setRequiredFormData({...requiredFormData, [e.target.name]: false});
     };
-    formatImgPath();
   }
 
   const requirementsCheck = () => {
@@ -77,6 +71,8 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     setFormData({...formData, createdAt: actualDate});
 
     requirementsCheck();
+
+    console.log(formData);
 
     if(!requirementsCheck()) {
       return;
@@ -125,7 +121,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       <h3><label htmlFor="author">Autor:</label></h3>
       <input placeholder="Jméno autora, či přezdívka" id="author" type="text" name="author" value={formData.author} onChange={handleChange} />
       <h3><label htmlFor="img">Fotka jídla:</label></h3>
-      <input id="img" type="file" accept="image/jpeg, image/png" name="imgPath" value={formData.imgPath} onChange={handleChange} />
+      <input id="img" type="file" accept="image/jpeg, image/png" name="imgPath" onChange={handleChange} />
       <button onClick={handleSubmit} className="submit">Přidej recept</button>
       <small className="smallDescription">* takto označené položky jsou povinné</small>
   </form>
