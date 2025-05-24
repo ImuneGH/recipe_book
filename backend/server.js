@@ -3,6 +3,7 @@ const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const multer = require("multer");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -13,13 +14,26 @@ app.use(cors()); // propojení backend, frontend
 app.use(express.json()); // Pro práci s JSON daty (kdyby náhodou)
 app.use(express.urlencoded({ extended: true }));
 
-const imgStorage = multer.diskStorage({
+const dateFormat = () => { 
+  const formattedDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+  return formattedDate;
+}
+
+const Storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, "./uploads/");
   },
+  filename: (req, file, cb) => {
+    const nameFromFE = req.body.imgPath;
+    if(nameFromFE) {
+      cb(null, nameFromFE);
+    } else {
+      cb(null, Date.now() + path.extname(file.originalname));
+    };
+  }
 });
 
-const upload = multer({ imgStorage });
+const upload = multer({ Storage });
 
 // Připojení k databázi
 const db = new sqlite3.Database("./database.db", (err) => {
