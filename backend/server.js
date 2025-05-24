@@ -16,10 +16,9 @@ const imgStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
   },
-  filename: (req, file, cb) => {
-    
-  }
-})
+});
+
+const upload = multer({storage});
 
 // Připojení k databázi
 const db = new sqlite3.Database("./database.db", (err) => {
@@ -42,8 +41,10 @@ app.get("/recipes", (req, res) => {
 });
 
 // POST requesty (vložení dat do tabulky recipes)
-app.post("/recipes", (req, res) => {
+app.post("/recipes", upload.single("image"), (req, res) => {
   const { createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath } = req.body;
+  const file = req.file;
+  
   if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }

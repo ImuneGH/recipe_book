@@ -31,7 +31,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     if(e.target.name === "imgPath") {
       const file = e.target.files[0];
       const actualDate = dateFormat().replace(" ", "");
-      const formattedImgPath = `${actualDate}_${file.name}`;
+      const formattedImgPath = `/uploads/${actualDate}_${file.name}`;
       setFormData({...formData, image: file, imgPath: formattedImgPath});
     }
     else {
