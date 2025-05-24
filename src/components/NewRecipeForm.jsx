@@ -10,7 +10,8 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       category: "",
       cookTime: "",
       author: "",
-      imgPath: ""
+      imgPath: "",
+      image: null
   });
 
   const formatImgPath = () => {
@@ -27,13 +28,19 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
   });
 
   const handleChange = (e) => {
+    if(e.target.name === "imgPath") {
+      setFormData({...formData, image: e.target.files[0], imgPath: e.target.value});
+      console.log(formData);
+    }
+    else {
       setFormData({...formData, 
-          [e.target.name]: e.target.value});
+        [e.target.name]: e.target.value});
+    };
 
-      if(e.target.value !== "") {
-        setRequiredFormData({...requiredFormData, [e.target.name]: false});
-      };
-      formatImgPath();
+    if(e.target.value !== "") {
+      setRequiredFormData({...requiredFormData, [e.target.name]: false});
+    };
+    formatImgPath();
   }
 
   const requirementsCheck = () => {
