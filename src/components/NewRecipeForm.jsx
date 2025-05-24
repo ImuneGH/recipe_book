@@ -22,10 +22,17 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     cookTime: false
   });
 
+  const dateFormat = () => { 
+    const formattedDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+    return formattedDate;
+  }
+
   const handleChange = (e) => {
     if(e.target.name === "imgPath") {
       const file = e.target.files[0];
-      setFormData({...formData, image: file, imgPath: file.name});
+      const actualDate = dateFormat().replace(" ", "");
+      const formattedImgPath = `${actualDate}_${file.name}`;
+      setFormData({...formData, image: file, imgPath: formattedImgPath});
     }
     else {
       setFormData({...formData, 
@@ -67,7 +74,8 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       dataToSend.append(key, formData[key]);
     }
 
-    const actualDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+    const actualDate = dateFormat();
+    console.log(actualDate);
     setFormData({...formData, createdAt: actualDate});
 
     requirementsCheck();
