@@ -75,12 +75,9 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     }
 
     const actualDate = dateFormat();
-    console.log(actualDate);
     setFormData({...formData, createdAt: actualDate});
 
     requirementsCheck();
-
-    console.log(formData);
 
     if(!requirementsCheck()) {
       return;
