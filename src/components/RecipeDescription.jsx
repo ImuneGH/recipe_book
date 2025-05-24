@@ -4,7 +4,7 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients }) => {
     return <div className="recipeDescription">
         <div className="leftContent">
             <div className="foodPhoto">
-                <img src="/img/livance.JPEG" alt="fotka jídla" />
+                <img src={"backend/uploads/" + clickedRecipeCard[0].imgPath} alt="fotka jídla" />
             </div>
             <div className="ingredients">
                 <h3>Ingredience:</h3>
