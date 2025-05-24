@@ -14,12 +14,7 @@ app.use(cors()); // propojení backend, frontend
 app.use(express.json()); // Pro práci s JSON daty (kdyby náhodou)
 app.use(express.urlencoded({ extended: true }));
 
-const dateFormat = () => { 
-  const formattedDate = new Date().toISOString().slice(0, 19).replace("T", " ");
-  return formattedDate;
-}
-
-const Storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./uploads/");
   },
@@ -33,7 +28,7 @@ const Storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ Storage });
+const upload = multer({ storage });
 
 // Připojení k databázi
 const db = new sqlite3.Database("./database.db", (err) => {
