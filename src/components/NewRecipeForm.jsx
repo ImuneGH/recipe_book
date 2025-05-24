@@ -84,10 +84,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
 
     fetch("http://localhost:5000/recipes", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
+        body: dataToSend
       })
         .then(async response => {
           if(!response.ok) {
