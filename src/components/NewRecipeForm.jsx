@@ -59,37 +59,43 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
   }
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      const actualDate = new Date().toISOString().slice(0, 19).replace("T", " ");
-      setFormData({...formData, createdAt: actualDate});
+    e.preventDefault();
 
-      requirementsCheck();
+    const dataToSend = new FormData();
+    for(const key in formData) {
+      dataToSend.append(key, formData[key]);
+    }
 
-      if(!requirementsCheck()) {
-        return;
-      }
+    const actualDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+    setFormData({...formData, createdAt: actualDate});
 
-      fetch("http://localhost:5000/recipes", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(formData)
+    requirementsCheck();
+
+    if(!requirementsCheck()) {
+      return;
+    }
+
+    fetch("http://localhost:5000/recipes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+        .then(async response => {
+          if(!response.ok) {
+            const errorMessage = await response.json();
+            throw new Error(`Server vrátil chybu: ${errorMessage.error}`);
+          }
+          return response.json();
         })
-          .then(async response => {
-            if(!response.ok) {
-              const errorMessage = await response.json();
-              throw new Error(`Server vrátil chybu: ${errorMessage.error}`);
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log("Recept uložen:", data);
-            // případně vynulování formuláře nebo přesměrování
-          })
-          .catch(error => {
-            console.error("Chyba při odesílání:", error.message);
-          });
+        .then(data => {
+          console.log("Recept uložen:", data);
+          // případně vynulování formuláře nebo přesměrování
+        })
+        .catch(error => {
+          console.error("Chyba při odesílání:", error.message);
+        });
   }
 
   return <form className="newRecipeForm">
