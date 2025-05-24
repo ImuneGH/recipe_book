@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors()); // propojení backend, frontend
-app.use(express.json()); // Pro práci s JSON daty
+app.use(express.json()); // Pro práci s JSON daty (kdyby náhodou)
+app.use(express.urlencoded({ extended: true }));
 
 const imgStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,7 +19,7 @@ const imgStorage = multer.diskStorage({
   },
 });
 
-const upload = multer({storage});
+const upload = multer({ imgStorage });
 
 // Připojení k databázi
 const db = new sqlite3.Database("./database.db", (err) => {
@@ -42,9 +43,12 @@ app.get("/recipes", (req, res) => {
 
 // POST requesty (vložení dat do tabulky recipes)
 app.post("/recipes", upload.single("image"), (req, res) => {
-  const { createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath } = req.body;
-  const file = req.file;
   
+  console.log("REQ BODY:", req.body);
+  console.log("REQ FILE:", req.file);
+  const { createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath } = req.body;
+  const image = req.file;
+
   if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }

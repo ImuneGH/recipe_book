@@ -3,7 +3,6 @@ import "../css/newRecipeForm.css"
 
 const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, errorActive }) => {
   const [formData, setFormData] = useState({
-      createdAt: "",
       recipeName: "",
       ingredients: "",
       instructions: "",
@@ -69,19 +68,21 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const dataToSend = new FormData();
-    for(const key in formData) {
-      dataToSend.append(key, formData[key]);
-    }
-
-    const actualDate = dateFormat();
-    setFormData({...formData, createdAt: actualDate});
-
     requirementsCheck();
 
     if(!requirementsCheck()) {
       return;
     }
+
+    const dataToSend = new FormData();
+    const actualDate = dateFormat();
+    dataToSend.append("createdAt", actualDate);
+
+    for(const key in formData) {
+      dataToSend.append(key, formData[key]);
+    }
+
+    console.log(formData);
 
     fetch("http://localhost:5000/recipes", {
         method: "POST",
