@@ -14,17 +14,29 @@ app.use(cors()); // propojení backend, frontend
 app.use(express.json()); // Pro práci s JSON daty (kdyby náhodou)
 app.use(express.urlencoded({ extended: true }));
 
+const fileValidation = (file) => {
+  const MAX_LENGTH = 100;
+  const fileCheck = /^[a-zA-Z0-9_-]+\.(jpg|jpeg|png)$/i;
+  return file <= MAX_LENGTH && fileCheck.test(file);
+}
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./uploads/");
   },
   filename: (req, file, cb) => {
     const nameFromFE = req.body.imgPath;
-    if(nameFromFE) {
-      cb(null, nameFromFE);
+    let finalName = null;
+    if(fileValidation(nameFromFE)) {
+      finalName = nameFromFE;
+      req.finalName = finalName;
+      cb(null, finalName);
     } else {
-      cb(null, Date.now() + path.extname(file.originalname));
+      finalName = Date.now() + path.extname(file.originalname);
+      req.finalName = finalName;
+      cb(null, finalName);
     };
+
   }
 });
 
@@ -55,8 +67,16 @@ app.post("/recipes", upload.single("image"), (req, res) => {
   
   console.log("REQ BODY:", req.body);
   console.log("REQ FILE:", req.file);
-  const { createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath } = req.body;
+  const { createdAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
+  let { imgPath } = req.body;
   const image = req.file;
+
+  imgPath = req.finalName;
+  console.log(imgPath);
+  // if (!fileValidation(imgPath)) {
+  //   imgPath = Date.now() + path.extname(file.originalname);
+  //   console.log("Název byl upraven backendem na:", imgPath);
+  // }
 
   if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
