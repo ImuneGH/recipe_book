@@ -30,7 +30,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     if(e.target.name === "imgPath") {
       const file = e.target.files[0];
       const actualDate = dateFormat().replace(/[ :]/g, "");
-      const formattedImgPath = `${actualDate}_${file.name}`;
+      const formattedImgPath = `${actualDate}_${file.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`;
       setFormData({...formData, image: file, imgPath: formattedImgPath});
     }
     else {

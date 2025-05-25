@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 const fileValidation = (file) => {
   const MAX_LENGTH = 100;
   const fileCheck = /^[a-zA-Z0-9_-]+\.(jpg|jpeg|png)$/i;
-  return file <= MAX_LENGTH && fileCheck.test(file);
+  return file.length <= MAX_LENGTH && fileCheck.test(file);
 }
 
 const storage = multer.diskStorage({
@@ -72,11 +72,6 @@ app.post("/recipes", upload.single("image"), (req, res) => {
   const image = req.file;
 
   imgPath = req.finalName;
-  console.log(imgPath);
-  // if (!fileValidation(imgPath)) {
-  //   imgPath = Date.now() + path.extname(file.originalname);
-  //   console.log("Název byl upraven backendem na:", imgPath);
-  // }
 
   if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
