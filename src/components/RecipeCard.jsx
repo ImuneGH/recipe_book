@@ -15,7 +15,7 @@ const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, se
     }
 
     return <div onClick={showRecipeDetail} className="recipeCard">
-                <img src={recipeDisplayed.img} alt="" />
+                <img src={"backend/uploads/" + recipeDisplayed.imgPath} alt="" />
                 <div className="recipeInfo">
                     <p title='Kategorie'>{recipeDisplayed.category}</p>
                     <p title='Doba přípravy'>⏳ {recipeDisplayed.cookTime}</p>
