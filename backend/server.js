@@ -1,10 +1,12 @@
 // něco jako importy
-const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
-const multer = require("multer");
-const cors = require("cors");
-const path = require("path");
-require("dotenv").config();
+import express from "express";
+import sqlite3 from "sqlite3";
+import multer from "multer";
+import cors from "cors";
+import path from "path";
+import sharp from "sharp";
+import fs from "fs";
+import dotenv from "dotenv";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
