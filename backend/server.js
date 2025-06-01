@@ -28,8 +28,11 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const nameFromFE = req.body.imgPath;
+    const anotherName = file.originalname;
+    console.log(nameFromFE);
+    console.log(anotherName);
     let finalName = null;
-    if(fileValidation(nameFromFE)) {
+    if(nameFromFE && fileValidation(nameFromFE)) {
       finalName = nameFromFE;
       req.finalName = finalName;
       cb(null, finalName);
@@ -65,7 +68,7 @@ app.get("/recipes", (req, res) => {
 });
 
 // POST requesty (vložení dat do tabulky recipes)
-app.post("/recipes", upload.single("image"), (req, res) => {
+app.post("/recipes", upload.single("image"), async (req, res) => {
   
   console.log("REQ BODY:", req.body);
   console.log("REQ FILE:", req.file);
@@ -74,6 +77,10 @@ app.post("/recipes", upload.single("image"), (req, res) => {
   const image = req.file;
 
   imgPath = req.finalName;
+  const originalImgPath = path.join("uploads", imgPath);
+  const resizedImage = "resized_" + imgPath;
+  const resizedImgPath = path.join("uploads", resizedImage);
+  // console.log(resizedImgPath);
 
   if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
@@ -82,7 +89,14 @@ app.post("/recipes", upload.single("image"), (req, res) => {
   const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath) 
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
 
-  db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath], function (err) {
+  try {
+    const buffer = await fs.promises.readFile(originalImgPath);
+    await sharp(buffer).clone().resize(200).toFile(resizedImgPath);
+    const finalImgPath = resizedImgPath;
+    // res.status(200).json({ message: "Obrázek zmenšen a uložen" });
+    await fs.promises.unlink(originalImgPath);
+
+    db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, finalImgPath], function (err) {
     if (err) {
       console.error("Chyba při ukládání dat do DB");
       res.status(500).json({ error: err.message });
@@ -90,6 +104,11 @@ app.post("/recipes", upload.single("image"), (req, res) => {
     console.log("Recept uložen: " + this.lastID);
     res.status(201).json({ message: "Recept úspěšně uložen 🥳", id: this.lastID });
   });
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Chyba při zpracování obrázku" });
+  };
 });
 
 // Spuštění serveru
