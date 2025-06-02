@@ -69,15 +69,7 @@ app.get("/recipes", (req, res) => {
 app.post("/recipes", upload.single("image"), async (req, res) => {
   console.log("REQ BODY:", req.body);
   console.log("REQ FILE:", req.file);
-  const {
-    createdAt,
-    recipeName,
-    ingredients,
-    instructions,
-    category,
-    cookTime,
-    author,
-  } = req.body;
+  const { createdAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
   let { imgPath } = req.body;
   const image = req.file;
 
@@ -86,14 +78,7 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
   const resizedImage = "resized_" + imgPath;
   const resizedImgPath = path.join("uploads", resizedImage);
 
-  if (
-    !createdAt ||
-    !recipeName ||
-    !ingredients ||
-    !instructions ||
-    !category ||
-    !cookTime
-  ) {
+  if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }
 
@@ -108,25 +93,17 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
 
     db.run(
       SQL,
-      [
-        createdAt,
-        recipeName,
-        ingredients,
-        instructions,
-        category,
-        cookTime,
-        author,
-        finalImgPath,
-      ],
+      [createdAt, recipeName, ingredients, instructions, category, cookTime, author, finalImgPath],
       function (err) {
         if (err) {
           console.error("Chyba při ukládání dat do DB");
           res.status(500).json({ error: err.message });
         }
         console.log("Recept uložen: " + this.lastID);
-        res
-          .status(201)
-          .json({ message: "Recept úspěšně uložen 🥳", id: this.lastID });
+        res.status(201).json({
+          message: "Recept úspěšně uložen 🥳",
+          id: this.lastID,
+        });
       }
     );
   } catch (err) {
