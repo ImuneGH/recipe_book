@@ -1,4 +1,3 @@
-// něco jako importy
 import express from "express";
 import sqlite3 from "sqlite3";
 import multer from "multer";
@@ -20,7 +19,7 @@ const fileValidation = (file) => {
   const MAX_LENGTH = 100;
   const fileCheck = /^[a-zA-Z0-9_-]+\.(jpg|jpeg|png)$/i;
   return file.length <= MAX_LENGTH && fileCheck.test(file);
-}
+};
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -32,7 +31,7 @@ const storage = multer.diskStorage({
     console.log(nameFromFE);
     console.log(anotherName);
     let finalName = null;
-    if(nameFromFE && fileValidation(nameFromFE)) {
+    if (nameFromFE && fileValidation(nameFromFE)) {
       finalName = nameFromFE;
       req.finalName = finalName;
       cb(null, finalName);
@@ -40,9 +39,8 @@ const storage = multer.diskStorage({
       finalName = Date.now() + path.extname(file.originalname);
       req.finalName = finalName;
       cb(null, finalName);
-    };
-
-  }
+    }
+  },
 });
 
 const upload = multer({ storage });
@@ -69,10 +67,17 @@ app.get("/recipes", (req, res) => {
 
 // POST requesty (vložení dat do tabulky recipes)
 app.post("/recipes", upload.single("image"), async (req, res) => {
-  
   console.log("REQ BODY:", req.body);
   console.log("REQ FILE:", req.file);
-  const { createdAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
+  const {
+    createdAt,
+    recipeName,
+    ingredients,
+    instructions,
+    category,
+    cookTime,
+    author,
+  } = req.body;
   let { imgPath } = req.body;
   const image = req.file;
 
@@ -80,35 +85,54 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
   const originalImgPath = path.join("uploads", imgPath);
   const resizedImage = "resized_" + imgPath;
   const resizedImgPath = path.join("uploads", resizedImage);
-  // console.log(resizedImgPath);
 
-  if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
+  if (
+    !createdAt ||
+    !recipeName ||
+    !ingredients ||
+    !instructions ||
+    !category ||
+    !cookTime
+  ) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }
 
   const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath) 
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
   try {
     const buffer = await fs.promises.readFile(originalImgPath);
     await sharp(buffer).clone().resize(200).toFile(resizedImgPath);
     const finalImgPath = resizedImgPath;
-    // res.status(200).json({ message: "Obrázek zmenšen a uložen" });
     await fs.promises.unlink(originalImgPath);
 
-    db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, finalImgPath], function (err) {
-    if (err) {
-      console.error("Chyba při ukládání dat do DB");
-      res.status(500).json({ error: err.message });
-    }
-    console.log("Recept uložen: " + this.lastID);
-    res.status(201).json({ message: "Recept úspěšně uložen 🥳", id: this.lastID });
-  });
-  }
-  catch (err) {
+    db.run(
+      SQL,
+      [
+        createdAt,
+        recipeName,
+        ingredients,
+        instructions,
+        category,
+        cookTime,
+        author,
+        finalImgPath,
+      ],
+      function (err) {
+        if (err) {
+          console.error("Chyba při ukládání dat do DB");
+          res.status(500).json({ error: err.message });
+        }
+        console.log("Recept uložen: " + this.lastID);
+        res
+          .status(201)
+          .json({ message: "Recept úspěšně uložen 🥳", id: this.lastID });
+      }
+    );
+  } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Chyba při zpracování obrázku" });
-  };
+  }
 });
 
 // Spuštění serveru
