@@ -33,7 +33,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       if (fileType !== "jpeg" && fileType !== "png") {
         setErrorActive(true);
         setErrorMessage("Pouze formáty jpeg, jpg nebo png");
-        // e.target.value = null;
+        e.target.value = null;
         return;
       }
       const actualDate = dateFormat().replace(/[ :]/g, "");

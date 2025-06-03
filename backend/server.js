@@ -28,16 +28,18 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const nameFromFE = req.body.imgPath;
     let finalName = null;
-    // if(file.mimetype)
-    console.log(file.mimetype);
-    if (nameFromFE && fileValidation(nameFromFE)) {
-      finalName = nameFromFE;
-      req.finalName = finalName;
-      cb(null, finalName);
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+      if (nameFromFE && fileValidation(nameFromFE)) {
+        finalName = nameFromFE;
+        req.finalName = finalName;
+        cb(null, finalName);
+      } else {
+        finalName = Date.now() + path.extname(file.originalname);
+        req.finalName = finalName;
+        cb(null, finalName);
+      }
     } else {
-      finalName = Date.now() + path.extname(file.originalname);
-      req.finalName = finalName;
-      cb(null, finalName);
+      cb(new Error("Nepovolený typ souboru!"), false);
     }
   },
 });
@@ -98,6 +100,13 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Chyba při zpracování obrázku" });
   }
+});
+
+// error handler
+
+app.use((err, req, res, next) => {
+  console.error("Zachyceno globálním error handlerem:", err.message);
+  res.status(400).json({ error: err.message });
 });
 
 // Spuštění serveru
