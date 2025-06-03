@@ -85,8 +85,6 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       dataToSend.append(key, formData[key]);
     }
 
-    console.log(formData);
-
     fetch("http://localhost:5000/recipes", {
       method: "POST",
       body: dataToSend,
