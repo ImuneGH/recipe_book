@@ -28,6 +28,8 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const nameFromFE = req.body.imgPath;
     let finalName = null;
+    // if(file.mimetype)
+    console.log(file.mimetype);
     if (nameFromFE && fileValidation(nameFromFE)) {
       finalName = nameFromFE;
       req.finalName = finalName;
@@ -66,7 +68,7 @@ app.get("/recipes", (req, res) => {
 app.post("/recipes", upload.single("image"), async (req, res) => {
   const { createdAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
   const originalImgPath = path.join("uploads", req.finalName);
-  const resizedImage = "resized_" + imgPath;
+  const resizedImage = "resized_" + req.finalName;
   const resizedImgPath = path.join("uploads", resizedImage);
 
   if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
