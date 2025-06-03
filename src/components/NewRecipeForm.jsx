@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../css/newRecipeForm.css";
 
 const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, errorActive }) => {
@@ -29,13 +29,19 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
   const handleChange = (e) => {
     if (e.target.name === "imgPath") {
       const file = e.target.files[0];
+      const fileType = file.type.split("/").pop();
+      if (fileType !== "jpeg" && fileType !== "png") {
+        setErrorActive(true);
+        setErrorMessage("Pouze formáty jpeg, jpg nebo png");
+        e.target.value = null;
+        return;
+      }
       const actualDate = dateFormat().replace(/[ :]/g, "");
       const formattedImgPath = `${actualDate}_${file.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`;
       setFormData({ ...formData, image: file, imgPath: formattedImgPath });
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
-
     if (e.target.value !== "") {
       setRequiredFormData({ ...requiredFormData, [e.target.name]: false });
     }
