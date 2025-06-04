@@ -4,6 +4,7 @@ import Content from "./components/Content";
 import Footer from "./components/Footer";
 import NewRecipeForm from "./components/NewRecipeForm";
 import FormError from "./components/FormError";
+import ConfirmWindow from "./components/ConfirmWindow";
 import { motion } from "motion/react";
 import { useEffect, useState, useRef } from "react";
 
@@ -17,8 +18,10 @@ function App() {
   const [newRecipeFormActive, setNewRecipeFormActive] = useState(false);
   const [errorActive, setErrorActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [confirmActive, setConfirmActive] = useState(true);
+  const [confirmMessage, setConfirmMessage] = useState("");
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
-  const errorRef = useRef(null);
+  const popUpRef = useRef(null);
 
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
@@ -71,8 +74,8 @@ function App() {
   };
 
   useEffect(() => {
-    if (errorActive && errorRef.current) {
-      errorRef.current.focus();
+    if (errorActive && popUpRef.current) {
+      popUpRef.current.focus();
     }
 
     document.addEventListener("keydown", closeErrorMessage);
@@ -110,7 +113,8 @@ function App() {
 
   return (
     <motion.div className="app" layout>
-      {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
+      {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} popUpRef={popUpRef} />}
+      {confirmActive && <ConfirmWindow popUpRef={popUpRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} />}
       {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
       <Header
         activeContent={activeContent}

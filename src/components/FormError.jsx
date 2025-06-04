@@ -1,8 +1,8 @@
 import "../css/formError.css";
 
-const FormError = ({ errorMessage, setErrorActive, errorRef }) => {
+const FormError = ({ errorMessage, setErrorActive, popUpRef }) => {
   return (
-    <div ref={errorRef} tabIndex={-1} className="errorWindow">
+    <div ref={popUpRef} tabIndex={-1} className="errorWindow">
       <h4>error</h4>
       <div className="errorMessage">
         <p>{errorMessage}</p>
