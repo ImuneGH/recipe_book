@@ -18,7 +18,7 @@ function App() {
   const [newRecipeFormActive, setNewRecipeFormActive] = useState(false);
   const [errorActive, setErrorActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [confirmActive, setConfirmActive] = useState(true);
+  const [confirmActive, setConfirmActive] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
   const popUpRef = useRef(null);
@@ -40,6 +40,11 @@ function App() {
     if (e.key === "Escape") {
       setNewRecipeFormActive(false);
     }
+  };
+
+  const deleteRecipe = () => {
+    console.log(confirmActive);
+    setConfirmActive(false);
   };
 
   const closeErrorMessage = (e) => {
@@ -114,7 +119,7 @@ function App() {
   return (
     <motion.div className="app" layout>
       {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} popUpRef={popUpRef} />}
-      {confirmActive && <ConfirmWindow popUpRef={popUpRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} />}
+      {confirmActive && <ConfirmWindow popUpRef={popUpRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} deleteRecipe={deleteRecipe} />}
       {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
       <Header
         activeContent={activeContent}
@@ -138,6 +143,7 @@ function App() {
         recipeDetailActive={recipeDetailActive}
         setSearchResult={setSearchResult}
         setRandomRecipe={setRandomRecipe}
+        setConfirmActive={setConfirmActive}
       />
       <Footer />
     </motion.div>

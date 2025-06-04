@@ -1,6 +1,6 @@
 import "../css/recipeDescription.css";
 
-const RecipeDescription = ({ clickedRecipeCard, formatedIngredients }) => {
+const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive }) => {
   return (
     <div className="recipeDescription">
       <div className="leftContent">
@@ -22,7 +22,9 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients }) => {
       <div className="rightContent">
         <div className="actionButtons">
           <button className="edit">📝 edit</button>
-          <button className="delete">🗑 delete</button>
+          <button onClick={() => setConfirmActive(true)} className="delete">
+            🗑 delete
+          </button>
         </div>
         <div className="metaData">
           <h2>{clickedRecipeCard[0].recipeName}</h2>
