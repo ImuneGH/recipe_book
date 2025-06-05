@@ -1,66 +1,57 @@
 .errorWindow {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    position: absolute;
-    left: calc(50vw - 104px);
-    top: 30vh;
-    z-index: 10;
-    min-width: 13rem;
-    min-height: 7rem;
+  position: absolute;
+  left: calc(50vw - 104px);
+  top: 30vh;
+  z-index: 10;
+  min-width: 13rem;
+  min-height: 7rem;
 
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .errorWindow:focus {
-    outline: none;
+  outline: none;
 }
 
 .errorWindow h4 {
-    flex: 1;
+  flex: 1;
 
-    padding: .2rem;
+  padding: 0.2rem;
 
-    border: 1px solid hsl(0, 100%, 50%);
-    background-color: hsl(0, 100%, 85%);
+  border: 1px solid hsl(0, 100%, 50%);
+  background-color: hsl(0, 100%, 85%);
 }
 
 .errorWindow .errorMessage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .8rem;
-    flex: 20;
-    padding: 0 .6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex: 20;
+  padding: 0 0.6rem;
 
-    background-color: hsl(0, 100%, 95%);
+  background-color: hsl(0, 100%, 95%);
 }
 
 .errorMessage button {
-    padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.6rem;
 
-    border: none;
-    border-radius: 5px;
-    background-color: hsl(0, 100%, 75%);
-    cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: hsl(0, 100%, 75%);
+  cursor: pointer;
 
-    transition: all ease-in-out .1s;
+  transition: all ease-in-out 0.1s;
 }
 
 .errorMessage button:hover {
-    box-shadow: 1px 1px 2px red;
+  box-shadow: 1px 1px 2px red;
 }
 
 .errorMessage button:active {
-    outline: 1px groove red;
-}
-
-.emptyInput {
-    border: 2px solid red;
-}
-
-.emptyInput:focus-visible {
-    border: 3px solid red;
-    outline: none;
+  outline: 1px groove red;
 }

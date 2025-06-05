@@ -1,31 +1,33 @@
-.errorWindow {
+.confirmWindow {
   display: flex;
   flex-direction: column;
 
   position: absolute;
   left: calc(50vw - 104px);
-  top: 30vh;
+  top: 35vh;
   z-index: 10;
   min-width: 13rem;
   min-height: 7rem;
 
-  border: 1px solid black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--accent-color);
 }
 
-.errorWindow:focus {
+.confirmWindow:focus {
   outline: none;
 }
 
-.errorWindow h4 {
+.confirmWindow h4 {
   flex: 1;
 
   padding: 0.2rem;
 
-  border: 1px solid hsl(0, 100%, 50%);
-  background-color: hsl(0, 100%, 85%);
+  border: 1px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  background-color: var(--secondary-color-light);
 }
 
-.errorWindow .errorMessage {
+.confirmWindow .confirmMessage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,33 +36,38 @@
   flex: 20;
   padding: 0 0.6rem;
 
-  background-color: hsl(0, 100%, 95%);
+  background-color: var(--bg-color);
 }
 
-.errorMessage button {
+.confirmMessage .buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.buttons button {
   padding: 0.4rem 0.6rem;
 
   border: none;
   border-radius: 5px;
-  background-color: hsl(0, 100%, 75%);
   cursor: pointer;
 
-  transition: all ease-in-out 0.1s;
+  background-color: var(--secondary-color-light);
+  /* transition: all ease-in-out 0.1s; */
 }
 
-.errorMessage button:hover {
-  box-shadow: 1px 1px 2px red;
+.buttons button:last-of-type {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
 }
 
-.errorMessage button:active {
-  outline: 1px groove red;
+.buttons button:hover {
+  box-shadow: 1px 1px 2px var(--accent-color);
 }
 
-.emptyInput {
-  border: 2px solid red;
+.buttons button:active {
+  outline: 1px groove var(--accent-color);
 }
 
-.emptyInput:focus-visible {
-  border: 3px solid red;
-  outline: none;
+.buttons button:focus-visible {
+  outline: 2px solid var(--accent-color);
 }

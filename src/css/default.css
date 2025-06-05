@@ -1,47 +1,54 @@
-*, 
+*,
 *::before,
-*::after  {
-    box-sizing: border-box;
+*::after {
+  box-sizing: border-box;
 }
 
-*   {
-    margin: 0;
+* {
+  margin: 0;
 }
 
-:root   {
-    --primary-color: #d32f2f;
-    --secondary-color: #ffa726;
-    --secondary-color-light: hsl(36, 100%, 65%);
-    --bg-color: #fff3e0;
-    --text-color: #333333;
-    --accent-color: #ff7043;
+:root {
+  --primary-color: #d32f2f;
+  --secondary-color: #ffa726;
+  --secondary-color-light: #ffb84d;
+  --bg-color: #fff3e0;
+  --text-color: #333333;
+  --accent-color: #ff7043;
 }
 
-html    {
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
-input, button, textarea, select {
-    font: inherit;
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
-body    {
-    font-family: "Roboto", sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-h1, h2, h3, h4, h5  {
-    font-family: "Quicksand", sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Quicksand", sans-serif;
 }
 
-.link    {
-    text-decoration: none;
-    font-family: "Roboto", sans-serif;
-    color: var(--text-color);
+.link {
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  color: var(--text-color);
 }

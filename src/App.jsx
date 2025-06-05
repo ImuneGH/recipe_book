@@ -19,9 +19,10 @@ function App() {
   const [errorActive, setErrorActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmActive, setConfirmActive] = useState(false);
-  const [confirmMessage, setConfirmMessage] = useState("");
+  const [confirmMessage, setConfirmMessage] = useState("potvrzovací zpráva");
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
-  const popUpRef = useRef(null);
+  const errorRef = useRef(null);
+  const confirmRef = useRef(null);
 
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
@@ -43,13 +44,23 @@ function App() {
   };
 
   const deleteRecipe = () => {
-    console.log(confirmActive);
+    console.log("SMAZANO!");
     setConfirmActive(false);
   };
 
   const closeErrorMessage = (e) => {
     if (e.key === "Enter") {
       setErrorActive(false);
+    }
+  };
+
+  const cancelConfirmWindow = (e) => {
+    if (e.key === "Escape") {
+      setConfirmActive(false);
+    }
+    if (e.key === "Enter") {
+      setConfirmActive(false);
+      deleteRecipe();
     }
   };
 
@@ -79,16 +90,19 @@ function App() {
   };
 
   useEffect(() => {
-    if (errorActive && popUpRef.current) {
-      popUpRef.current.focus();
+    if (errorActive && errorRef.current) {
+      errorRef.current.focus();
+      document.addEventListener("keydown", closeErrorMessage);
     }
-
-    document.addEventListener("keydown", closeErrorMessage);
-
+    if (confirmActive && confirmRef.current) {
+      confirmRef.current.focus();
+      document.addEventListener("keydown", cancelConfirmWindow);
+    }
     return () => {
       document.removeEventListener("keydown", closeErrorMessage);
+      document.removeEventListener("keydown", cancelConfirmWindow);
     };
-  }, [errorActive]);
+  }, [errorActive, confirmActive]);
 
   useEffect(() => {
     document.addEventListener("keydown", closeActiveForm);
@@ -118,8 +132,8 @@ function App() {
 
   return (
     <motion.div className="app" layout>
-      {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} popUpRef={popUpRef} />}
-      {confirmActive && <ConfirmWindow popUpRef={popUpRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} deleteRecipe={deleteRecipe} />}
+      {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
+      {confirmActive && <ConfirmWindow confirmRef={confirmRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} deleteRecipe={deleteRecipe} />}
       {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
       <Header
         activeContent={activeContent}
