@@ -98,7 +98,6 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       })
       .then((data) => {
         console.log("Recept uložen:", data);
-        // případně vynulování formuláře nebo přesměrování
       })
       .catch((error) => {
         console.error("Chyba při odesílání:", error.message);

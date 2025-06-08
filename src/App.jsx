@@ -29,6 +29,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setRecipes(data);
+        console.log(recipes);
       })
       .catch((error) => console.error(`error when recieving data: ${error}`));
   };
@@ -46,6 +47,18 @@ function App() {
   const deleteRecipe = () => {
     console.log("SMAZANO!");
     setConfirmActive(false);
+    fetch("http://localHost:5000/recipes", {
+      method: "DELETE",
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const errorMessage = await response.json();
+          throw new Error("Chyba při mazání receptu: " + errorMessage);
+        }
+      })
+      .then((data) => {
+        console.log("Recept smazán, " + data);
+      });
   };
 
   const closeErrorMessage = (e) => {
