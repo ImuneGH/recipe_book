@@ -4,7 +4,8 @@ import multer from "multer";
 import cors from "cors";
 import path, { resolve } from "path";
 import sharp from "sharp";
-import { unlink, fs } from "fs/promises";
+import fs from "fs";
+import { unlink } from "fs/promises";
 import dotenv from "dotenv";
 import { error } from "console";
 
@@ -78,7 +79,7 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }
 
-  const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath) 
+  const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
   try {
@@ -105,8 +106,8 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
 
 // DELETE requesty (smaže záznam receptu z tabulky recipes)
 
-app.delete("/recipes", async (req, res) => {
-  const recipeID = req.params.id;
+app.delete("/recipes/:id", async (req, res) => {
+  const recipeID = parseInt(req.params.id, 10);
 
   try {
     const imgPath = await new Promise((resolve, reject) => {
@@ -123,8 +124,7 @@ app.delete("/recipes", async (req, res) => {
     });
 
     if (imgPath) {
-      const fullImgPath = path.join("uploads", row.imgPath);
-      await unlink(fullImgPath);
+      await unlink(imgPath);
     }
 
     await new Promise((resolve, reject) => {
@@ -151,6 +151,7 @@ app.use((err, req, res, next) => {
 });
 
 // Spuštění serveru
+
 app.listen(PORT, () => {
   console.log(`🚀 Server běží na http://localhost:${PORT}`);
 });
