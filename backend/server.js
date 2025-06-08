@@ -2,10 +2,11 @@ import express from "express";
 import sqlite3 from "sqlite3";
 import multer from "multer";
 import cors from "cors";
-import path from "path";
+import path, { resolve } from "path";
 import sharp from "sharp";
-import fs from "fs";
+import { unlink, fs } from "fs/promises";
 import dotenv from "dotenv";
+import { error } from "console";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -104,7 +105,43 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
 
 // DELETE requesty (smaže záznam receptu z tabulky recipes)
 
-app.delete("/recipes");
+app.delete("/recipes", async (req, res) => {
+  const recipeID = req.params.id;
+
+  try {
+    const imgPath = await new Promise((resolve, reject) => {
+      db.get("SELECT imgPath FROM recipes where ID = ?", [recipeID], (err, row) => {
+        if (err) {
+          console.error("Chyba při hledání receptu: ", err.message);
+          return reject(newError("Chyba čtení z DB", err));
+        }
+        if (!row) {
+          return reject(newError("Recept nenalezen", err));
+        }
+        resolve(row.imgPath);
+      });
+    });
+
+    if (imgPath) {
+      const fullImgPath = path.join("uploads", row.imgPath);
+      await unlink(fullImgPath);
+    }
+
+    await new Promise((resolve, reject) => {
+      db.run("DELETE FROM recipes WHERE id = ?", [recipeID], (err) => {
+        if (err) {
+          console.error("Chyba při mazání z DB: ", err.message);
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+    res.status(200).json({ message: "Recept úspěšně smazán." });
+  } catch (err) {
+    console.error("Chyba při mazání receptu", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // error handler
 
