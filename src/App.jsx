@@ -23,6 +23,7 @@ function App() {
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
   const errorRef = useRef(null);
   const confirmRef = useRef(null);
+  const [actualRecipeID, setActualRecipeID] = useState(null);
 
   const fetchRecipes = () => {
     fetch("http://localHost:5000/recipes")
@@ -48,7 +49,7 @@ function App() {
     console.log("SMAZANO!");
     setConfirmActive(false);
     try {
-      const response = await fetch("http://localHost:5000/recipes", {
+      const response = await fetch("http://localHost:5000/recipes/" + actualRecipeID, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -56,8 +57,9 @@ function App() {
         throw new Error("Chyba při mazání receptu: " + errorMessage);
       }
       console.log("Recept smazán.");
+      console.log(actualRecipeID);
     } catch (err) {
-      console.log("Chyba při odesílání: ", err.message);
+      console.error("Chyba při odesílání: ", err.message);
     }
   };
 
@@ -171,6 +173,7 @@ function App() {
         setSearchResult={setSearchResult}
         setRandomRecipe={setRandomRecipe}
         setConfirmActive={setConfirmActive}
+        setActualRecipeID={setActualRecipeID}
       />
       <Footer />
     </motion.div>

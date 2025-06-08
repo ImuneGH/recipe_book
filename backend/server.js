@@ -102,6 +102,10 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
   }
 });
 
+// DELETE requesty (smaže záznam receptu z tabulky recipes)
+
+app.delete("/recipes");
+
 // error handler
 
 app.use((err, req, res, next) => {

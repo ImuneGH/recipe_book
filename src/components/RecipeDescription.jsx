@@ -1,6 +1,7 @@
 import "../css/recipeDescription.css";
 
-const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive }) => {
+const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID }) => {
+  setActualRecipeID(clickedRecipeCard[0].ID);
   return (
     <div className="recipeDescription">
       <div className="leftContent">

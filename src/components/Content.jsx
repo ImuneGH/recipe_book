@@ -17,6 +17,7 @@ const Content = ({
   setSearchResult,
   setRandomRecipe,
   setConfirmActive,
+  setActualRecipeID,
 }) => {
   const [clickedRecipeCard, setClickedRecipeCard] = useState([]);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
@@ -38,7 +39,9 @@ const Content = ({
           <img className="logo" src="/img/flavor_log_logo.png" alt="Logo webu Flavor Log" />
         </motion.h1>
       )}
-      {recipeDetailActive && <RecipeDescription clickedRecipeCard={clickedRecipeCard} formatedIngredients={formatedIngredients} setConfirmActive={setConfirmActive} />}
+      {recipeDetailActive && (
+        <RecipeDescription clickedRecipeCard={clickedRecipeCard} formatedIngredients={formatedIngredients} setConfirmActive={setConfirmActive} setActualRecipeID={setActualRecipeID} />
+      )}
       {recipesDisplayed
         ? recipesDisplayed.map((recipeDisplayed) => (
             <RecipeCard
