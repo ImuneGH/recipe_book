@@ -27,8 +27,11 @@ function App() {
 
   const fetchRecipes = async () => {
     try {
-      const response = await fetch("http://localHost:5000/recipes");
+      const response = await fetch("http://localhost:5000/recipes");
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error("Chyba serveru" + response.status);
+      }
       setRecipes(data);
     } catch (err) {
       console.error("Chyba při získávání dat", err.message);
@@ -48,7 +51,7 @@ function App() {
   const deleteRecipe = async () => {
     setConfirmActive(false);
     try {
-      const response = await fetch("http://localHost:5000/recipes/" + actualRecipeID, {
+      const response = await fetch("http://localhost:5000/recipes/" + actualRecipeID, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -172,6 +175,7 @@ function App() {
         setRandomRecipe={setRandomRecipe}
         setConfirmActive={setConfirmActive}
         setActualRecipeID={setActualRecipeID}
+        setConfirmMessage={setConfirmMessage}
       />
       <Footer />
     </motion.div>

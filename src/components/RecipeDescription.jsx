@@ -1,6 +1,8 @@
 import "../css/recipeDescription.css";
 
-const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID }) => {
+const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID, setConfirmMessage }) => {
+  const recipeName = clickedRecipeCard[0].recipeName;
+
   return (
     <div className="recipeDescription">
       <div className="leftContent">
@@ -26,6 +28,7 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
             onClick={() => {
               setConfirmActive(true);
               setActualRecipeID(clickedRecipeCard[0].ID);
+              setConfirmMessage(`Určitě chcete smazat recept ${recipeName}?`);
             }}
             className="delete"
           >

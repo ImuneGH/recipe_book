@@ -92,8 +92,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       });
       const responseFromBE = await response.json();
       if (!response.ok) {
-        const errorMessage = await response.json();
-        throw new Error(`Server vrátil chybu: ${errorMessage.error}`);
+        throw new Error(`Server vrátil chybu: ${responseFromBE.error}`);
       }
       console.log("Recept uložen:", responseFromBE);
     } catch (err) {

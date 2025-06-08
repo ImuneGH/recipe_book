@@ -18,6 +18,7 @@ const Content = ({
   setRandomRecipe,
   setConfirmActive,
   setActualRecipeID,
+  setConfirmMessage,
 }) => {
   const [clickedRecipeCard, setClickedRecipeCard] = useState([]);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
@@ -40,7 +41,13 @@ const Content = ({
         </motion.h1>
       )}
       {recipeDetailActive && (
-        <RecipeDescription clickedRecipeCard={clickedRecipeCard} formatedIngredients={formatedIngredients} setConfirmActive={setConfirmActive} setActualRecipeID={setActualRecipeID} />
+        <RecipeDescription
+          clickedRecipeCard={clickedRecipeCard}
+          formatedIngredients={formatedIngredients}
+          setConfirmActive={setConfirmActive}
+          setActualRecipeID={setActualRecipeID}
+          setConfirmMessage={setConfirmMessage}
+        />
       )}
       {recipesDisplayed
         ? recipesDisplayed.map((recipeDisplayed) => (
