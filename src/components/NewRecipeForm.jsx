@@ -68,7 +68,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     requirementsCheck();
@@ -85,23 +85,20 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       dataToSend.append(key, formData[key]);
     }
 
-    fetch("http://localhost:5000/recipes", {
-      method: "POST",
-      body: dataToSend,
-    })
-      .then(async (response) => {
-        if (!response.ok) {
-          const errorMessage = await response.json();
-          throw new Error(`Server vrátil chybu: ${errorMessage.error}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Recept uložen:", data);
-      })
-      .catch((error) => {
-        console.error("Chyba při odesílání:", error.message);
+    try {
+      const response = await fetch("http://localhost:5000/recipes", {
+        method: "POST",
+        body: dataToSend,
       });
+      const responseFromBE = await response.json();
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        throw new Error(`Server vrátil chybu: ${errorMessage.error}`);
+      }
+      console.log("Recept uložen:", responseFromBE);
+    } catch (err) {
+      console.error("Chyba při odesílání:", err.message);
+    }
   };
 
   return (
