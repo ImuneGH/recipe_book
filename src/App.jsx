@@ -44,21 +44,21 @@ function App() {
     }
   };
 
-  const deleteRecipe = () => {
+  const deleteRecipe = async () => {
     console.log("SMAZANO!");
     setConfirmActive(false);
-    fetch("http://localHost:5000/recipes", {
-      method: "DELETE",
-    })
-      .then(async (response) => {
-        if (!response.ok) {
-          const errorMessage = await response.json();
-          throw new Error("Chyba při mazání receptu: " + errorMessage);
-        }
-      })
-      .then((data) => {
-        console.log("Recept smazán, " + data);
+    try {
+      const response = await fetch("http://localHost:5000/recipes", {
+        method: "DELETE",
       });
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        throw new Error("Chyba při mazání receptu: " + errorMessage);
+      }
+      console.log("Recept smazán.");
+    } catch (err) {
+      console.log("Chyba při odesílání: ", err.message);
+    }
   };
 
   const closeErrorMessage = (e) => {
