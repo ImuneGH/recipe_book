@@ -1,7 +1,6 @@
 import "../css/recipeDescription.css";
 
 const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID }) => {
-  setActualRecipeID(clickedRecipeCard[0].ID);
   return (
     <div className="recipeDescription">
       <div className="leftContent">
@@ -23,7 +22,13 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
       <div className="rightContent">
         <div className="actionButtons">
           <button className="edit">📝 edit</button>
-          <button onClick={() => setConfirmActive(true)} className="delete">
+          <button
+            onClick={() => {
+              setConfirmActive(true);
+              setActualRecipeID(clickedRecipeCard[0].ID);
+            }}
+            className="delete"
+          >
             🗑 delete
           </button>
         </div>

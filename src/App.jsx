@@ -46,7 +46,7 @@ function App() {
   };
 
   const deleteRecipe = async () => {
-    console.log("SMAZANO!");
+    console.log(actualRecipeID);
     setConfirmActive(false);
     try {
       const response = await fetch("http://localHost:5000/recipes/" + actualRecipeID, {
@@ -57,7 +57,6 @@ function App() {
         throw new Error("Chyba při mazání receptu: " + errorMessage);
       }
       console.log("Recept smazán.");
-      console.log(actualRecipeID);
     } catch (err) {
       console.error("Chyba při odesílání: ", err.message);
     }
