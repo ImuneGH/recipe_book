@@ -21,18 +21,18 @@ function App() {
   const [confirmActive, setConfirmActive] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("potvrzovací zpráva");
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
+  const [actualRecipeID, setActualRecipeID] = useState(null);
   const errorRef = useRef(null);
   const confirmRef = useRef(null);
-  const [actualRecipeID, setActualRecipeID] = useState(null);
 
-  const fetchRecipes = () => {
-    fetch("http://localHost:5000/recipes")
-      .then((response) => response.json())
-      .then((data) => {
-        setRecipes(data);
-        console.log(recipes);
-      })
-      .catch((error) => console.error(`error when recieving data: ${error}`));
+  const fetchRecipes = async () => {
+    try {
+      const response = await fetch("http://localHost:5000/recipes");
+      const data = await response.json();
+      setRecipes(data);
+    } catch (err) {
+      console.error("Chyba při získávání dat", err.message);
+    }
   };
 
   const handleActiveForm = () => {
@@ -46,7 +46,6 @@ function App() {
   };
 
   const deleteRecipe = async () => {
-    console.log(actualRecipeID);
     setConfirmActive(false);
     try {
       const response = await fetch("http://localHost:5000/recipes/" + actualRecipeID, {
