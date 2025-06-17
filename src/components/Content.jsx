@@ -19,6 +19,7 @@ const Content = ({
   setConfirmActive,
   setActualRecipeID,
   setConfirmMessage,
+  editRecipe,
 }) => {
   const [clickedRecipeCard, setClickedRecipeCard] = useState([]);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
@@ -47,6 +48,7 @@ const Content = ({
           setConfirmActive={setConfirmActive}
           setActualRecipeID={setActualRecipeID}
           setConfirmMessage={setConfirmMessage}
+          editRecipe={editRecipe}
         />
       )}
       {recipesDisplayed

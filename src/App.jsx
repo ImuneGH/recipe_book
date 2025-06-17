@@ -19,7 +19,7 @@ function App() {
   const [errorActive, setErrorActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmActive, setConfirmActive] = useState(false);
-  const [confirmMessage, setConfirmMessage] = useState("potvrzovací zpráva");
+  const [confirmMessage, setConfirmMessage] = useState("");
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
   const [actualRecipeID, setActualRecipeID] = useState(null);
   const errorRef = useRef(null);
@@ -62,6 +62,10 @@ function App() {
     } catch (err) {
       console.error("Chyba při odesílání: ", err.message);
     }
+  };
+
+  const editRecipe = () => {
+    setNewRecipeFormActive(true);
   };
 
   const closeErrorMessage = (e) => {
@@ -176,6 +180,7 @@ function App() {
         setConfirmActive={setConfirmActive}
         setActualRecipeID={setActualRecipeID}
         setConfirmMessage={setConfirmMessage}
+        editRecipe={editRecipe}
       />
       <Footer />
     </motion.div>

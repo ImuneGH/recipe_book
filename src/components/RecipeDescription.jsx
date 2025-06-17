@@ -1,6 +1,6 @@
 import "../css/recipeDescription.css";
 
-const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID, setConfirmMessage }) => {
+const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID, setConfirmMessage, editRecipe }) => {
   const recipeName = clickedRecipeCard[0].recipeName;
 
   return (
@@ -23,7 +23,9 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
 
       <div className="rightContent">
         <div className="actionButtons">
-          <button className="edit">📝 edit</button>
+          <button onClick={editRecipe} className="edit">
+            📝 edit
+          </button>
           <button
             onClick={() => {
               setConfirmActive(true);
