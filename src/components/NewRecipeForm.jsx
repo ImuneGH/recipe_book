@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../css/newRecipeForm.css";
 
-const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage }) => {
+const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData }) => {
   const [formData, setFormData] = useState({
     recipeName: "",
     ingredients: "",

@@ -67,7 +67,7 @@ function App() {
   };
 
   const editRecipe = () => {
-    setNewRecipeFormActive(true);
+    setEditRecipeFormActive(true);
   };
 
   const closeErrorMessage = (e) => {
@@ -156,8 +156,18 @@ function App() {
     <motion.div className="app" layout>
       {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
       {confirmActive && <ConfirmWindow confirmRef={confirmRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} deleteRecipe={deleteRecipe} />}
-      {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
-      {editRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
+      {newRecipeFormActive && (
+        <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} originalData={null} />
+      )}
+      {editRecipeFormActive && (
+        <NewRecipeForm
+          setNewRecipeFormActive={setNewRecipeFormActive}
+          setErrorActive={setErrorActive}
+          setErrorMessage={setErrorMessage}
+          errorActive={errorActive}
+          originalData={dataToEdit}
+        />
+      )}
       <Header
         activeContent={activeContent}
         activeCategories={activeCategories}
