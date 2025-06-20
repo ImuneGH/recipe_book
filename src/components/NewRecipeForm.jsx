@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../css/newRecipeForm.css";
 
-const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData }) => {
+const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive }) => {
   const [formData, setFormData] = useState({
     recipeName: "",
     ingredients: "",
@@ -102,7 +102,14 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
 
   return (
     <form className="newRecipeForm">
-      <a href="#" onClick={() => setNewRecipeFormActive(false)} className="close"></a>
+      <a
+        href="#"
+        onClick={() => {
+          setNewRecipeFormActive(false);
+          setEditRecipeFormActive(false);
+        }}
+        className="close"
+      ></a>
       <h3>
         <label htmlFor="recipeName">
           <span className="redColor">*</span>Název receptu:

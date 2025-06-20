@@ -47,6 +47,7 @@ function App() {
   const closeActiveForm = (e) => {
     if (e.key === "Escape") {
       setNewRecipeFormActive(false);
+      setEditRecipeFormActive(false);
     }
   };
 
@@ -157,7 +158,14 @@ function App() {
       {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
       {confirmActive && <ConfirmWindow confirmRef={confirmRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} deleteRecipe={deleteRecipe} />}
       {newRecipeFormActive && (
-        <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} originalData={null} />
+        <NewRecipeForm
+          setNewRecipeFormActive={setNewRecipeFormActive}
+          setErrorActive={setErrorActive}
+          setErrorMessage={setErrorMessage}
+          errorActive={errorActive}
+          originalData={null}
+          setEditRecipeFormActive={setEditRecipeFormActive}
+        />
       )}
       {editRecipeFormActive && (
         <NewRecipeForm
@@ -166,6 +174,7 @@ function App() {
           setErrorMessage={setErrorMessage}
           errorActive={errorActive}
           originalData={dataToEdit}
+          setEditRecipeFormActive={setEditRecipeFormActive}
         />
       )}
       <Header
