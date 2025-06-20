@@ -16,6 +16,8 @@ function App() {
   const [searchResult, setSearchResult] = useState("");
   const [randomRecipe, setRandomRecipe] = useState("");
   const [newRecipeFormActive, setNewRecipeFormActive] = useState(false);
+  const [editRecipeFormActive, setEditRecipeFormActive] = useState(false);
+  const [dataToEdit, setDataToEdit] = useState([]);
   const [errorActive, setErrorActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmActive, setConfirmActive] = useState(false);
@@ -155,6 +157,7 @@ function App() {
       {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
       {confirmActive && <ConfirmWindow confirmRef={confirmRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} deleteRecipe={deleteRecipe} />}
       {newRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
+      {editRecipeFormActive && <NewRecipeForm setNewRecipeFormActive={setNewRecipeFormActive} setErrorActive={setErrorActive} setErrorMessage={setErrorMessage} errorActive={errorActive} />}
       <Header
         activeContent={activeContent}
         activeCategories={activeCategories}
@@ -181,6 +184,8 @@ function App() {
         setActualRecipeID={setActualRecipeID}
         setConfirmMessage={setConfirmMessage}
         editRecipe={editRecipe}
+        setDataToEdit={setDataToEdit}
+        dataToEdit={dataToEdit}
       />
       <Footer />
     </motion.div>
