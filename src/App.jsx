@@ -52,6 +52,7 @@ function App() {
       formErrorHandling("Nejprve dokonči tvorbu nového receptu, nebo zavři okno formuláře.");
     }
     editRecipeFormActive ? setEditRecipeFormActive(false) : setEditRecipeFormActive(true);
+    editRecipe();
   };
 
   const formErrorHandling = (message) => {
@@ -180,6 +181,8 @@ function App() {
           errorActive={errorActive}
           originalData={null}
           setEditRecipeFormActive={setEditRecipeFormActive}
+          setOriginalData={setDataToEdit}
+          editRecipeFormActive={editRecipeFormActive}
         />
       )}
       {editRecipeFormActive && (
@@ -190,6 +193,8 @@ function App() {
           errorActive={errorActive}
           originalData={dataToEdit}
           setEditRecipeFormActive={setEditRecipeFormActive}
+          setOriginalData={setDataToEdit}
+          editRecipeFormActive={editRecipeFormActive}
         />
       )}
       <Header
@@ -219,7 +224,6 @@ function App() {
         setConfirmMessage={setConfirmMessage}
         editRecipe={editRecipe}
         setDataToEdit={setDataToEdit}
-        dataToEdit={dataToEdit}
         handleEditFormActive={handleEditFormActive}
       />
       <Footer />

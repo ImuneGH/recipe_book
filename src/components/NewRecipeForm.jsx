@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../css/newRecipeForm.css";
+import { form } from "motion/react-client";
 
-const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive }) => {
+const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive, setOriginalData, editRecipeFormActive }) => {
   const [formData, setFormData] = useState({
     recipeName: "",
     ingredients: "",
@@ -20,6 +21,14 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     category: false,
     cookTime: false,
   });
+
+  useEffect(() => {
+    if (editRecipeFormActive) {
+      const formattedCookTime = Number(originalData.cookTime.slice(0, 2));
+      setFormData(originalData);
+      setFormData({ ...originalData, cookTime: formattedCookTime });
+    }
+  }, []);
 
   const dateFormat = () => {
     const formattedDate = new Date().toISOString().slice(0, 19).replace("T", " ");
