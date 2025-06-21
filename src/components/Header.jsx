@@ -4,7 +4,7 @@ import NewRecipeButton from "./NewRecipeButton";
 import Categories from "./Categories";
 import { motion } from "motion/react";
 
-const Header = ({ activeCategories, setActiveCategories, setRecipes, activeContent, setSearchValue, searchQuery, randomRecipeSearch, handleActiveForm }) => {
+const Header = ({ activeCategories, setActiveCategories, setRecipes, activeContent, setSearchValue, searchQuery, randomRecipeSearch, handleNewFormActive }) => {
   return (
     <header className="header">
       <div className="logoHolder">
@@ -19,7 +19,7 @@ const Header = ({ activeCategories, setActiveCategories, setRecipes, activeConte
         <Categories activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
       </div>
       <div className="mainButtonWrap">
-        <NewRecipeButton handleActiveForm={handleActiveForm} />
+        <NewRecipeButton handleNewFormActive={handleNewFormActive} />
       </div>
     </header>
   );

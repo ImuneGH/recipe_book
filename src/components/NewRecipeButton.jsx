@@ -1,8 +1,8 @@
 import "../css/newRecipeButton.css";
 
-const NewRecipeButton = ({ handleActiveForm }) => {
+const NewRecipeButton = ({ handleNewFormActive }) => {
   return (
-    <button onClick={handleActiveForm}>
+    <button onClick={handleNewFormActive}>
       Přidej nový
       <br /> recept!
     </button>

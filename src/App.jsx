@@ -40,8 +40,23 @@ function App() {
     }
   };
 
-  const handleActiveForm = () => {
+  const handleNewFormActive = () => {
+    if (editRecipeFormActive) {
+      formErrorHandling("Nejprve dokonči editaci receptu, nebo zavři její okno.");
+    }
     newRecipeFormActive ? setNewRecipeFormActive(false) : setNewRecipeFormActive(true);
+  };
+
+  const handleEditFormActive = () => {
+    if (newRecipeFormActive) {
+      formErrorHandling("Nejprve dokonči tvorbu nového receptu, nebo zavři okno formuláře.");
+    }
+    editRecipeFormActive ? setEditRecipeFormActive(false) : setEditRecipeFormActive(true);
+  };
+
+  const formErrorHandling = (message) => {
+    setErrorActive(true);
+    setErrorMessage(message);
   };
 
   const closeActiveForm = (e) => {
@@ -68,7 +83,7 @@ function App() {
   };
 
   const editRecipe = () => {
-    setEditRecipeFormActive(true);
+    // setEditRecipeFormActive(true);
   };
 
   const closeErrorMessage = (e) => {
@@ -185,7 +200,7 @@ function App() {
         setSearchValue={setSearchValue}
         searchQuery={searchQuery}
         randomRecipeSearch={randomRecipeSearch}
-        handleActiveForm={handleActiveForm}
+        handleNewFormActive={handleNewFormActive}
       />
       <Content
         activeContent={activeContent}
@@ -205,6 +220,7 @@ function App() {
         editRecipe={editRecipe}
         setDataToEdit={setDataToEdit}
         dataToEdit={dataToEdit}
+        handleEditFormActive={handleEditFormActive}
       />
       <Footer />
     </motion.div>

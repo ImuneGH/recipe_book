@@ -22,6 +22,7 @@ const Content = ({
   editRecipe,
   setDataToEdit,
   dataToEdit,
+  handleEditFormActive,
 }) => {
   const [clickedRecipeCard, setClickedRecipeCard] = useState([]);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
@@ -53,6 +54,7 @@ const Content = ({
           editRecipe={editRecipe}
           setDataToEdit={setDataToEdit}
           dataToEdit={dataToEdit}
+          handleEditFormActive={handleEditFormActive}
         />
       )}
       {recipesDisplayed
