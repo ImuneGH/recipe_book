@@ -43,6 +43,7 @@ function App() {
   const handleNewFormActive = () => {
     if (editRecipeFormActive) {
       formErrorHandling("Nejprve dokonči editaci receptu, nebo zavři její okno.");
+      return;
     }
     newRecipeFormActive ? setNewRecipeFormActive(false) : setNewRecipeFormActive(true);
   };
