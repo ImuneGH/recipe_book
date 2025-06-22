@@ -220,7 +220,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       </h3>
       <input id="img" type="file" accept="image/jpeg, image/png" name="imgPath" onChange={handleChange} />
       <button onClick={handleSubmit} className="submit">
-        Přidej recept
+        {editRecipeFormActive ? "Uprav recept" : "Přidej recept"}
       </button>
       <small className="smallDescription">* takto označené položky jsou povinné</small>
     </form>
