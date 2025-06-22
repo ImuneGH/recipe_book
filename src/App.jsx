@@ -54,7 +54,6 @@ function App() {
       return;
     }
     editRecipeFormActive ? setEditRecipeFormActive(false) : setEditRecipeFormActive(true);
-    editRecipe();
   };
 
   const formErrorHandling = (message) => {
@@ -83,10 +82,6 @@ function App() {
     } catch (err) {
       console.error("Chyba při odesílání: ", err.message);
     }
-  };
-
-  const editRecipe = () => {
-    // setEditRecipeFormActive(true);
   };
 
   const closeErrorMessage = (e) => {
@@ -224,7 +219,6 @@ function App() {
         setConfirmActive={setConfirmActive}
         setActualRecipeID={setActualRecipeID}
         setConfirmMessage={setConfirmMessage}
-        editRecipe={editRecipe}
         setDataToEdit={setDataToEdit}
         handleEditFormActive={handleEditFormActive}
       />

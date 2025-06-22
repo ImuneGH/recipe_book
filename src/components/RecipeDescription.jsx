@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "../css/recipeDescription.css";
 
-const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID, setConfirmMessage, editRecipe, setDataToEdit, handleEditFormActive }) => {
+const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID, setConfirmMessage, setDataToEdit, handleEditFormActive }) => {
   const recipeName = clickedRecipeCard[0].recipeName;
   useEffect(() => {
     setDataToEdit(clickedRecipeCard[0]);

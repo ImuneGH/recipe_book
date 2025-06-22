@@ -19,7 +19,6 @@ const Content = ({
   setConfirmActive,
   setActualRecipeID,
   setConfirmMessage,
-  editRecipe,
   setDataToEdit,
   handleEditFormActive,
 }) => {
@@ -50,7 +49,6 @@ const Content = ({
           setConfirmActive={setConfirmActive}
           setActualRecipeID={setActualRecipeID}
           setConfirmMessage={setConfirmMessage}
-          editRecipe={editRecipe}
           setDataToEdit={setDataToEdit}
           handleEditFormActive={handleEditFormActive}
         />

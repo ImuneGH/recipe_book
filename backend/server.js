@@ -143,6 +143,8 @@ app.delete("/recipes/:id", async (req, res) => {
   }
 });
 
+// UPDATE requesty
+
 // error handler
 
 app.use((err, req, res, next) => {
