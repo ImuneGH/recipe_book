@@ -83,7 +83,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     dataToSend.append("updatedAt", actualDate);
 
     for (const key in formData) {
-      dataToSend.append("key", formData[key]);
+      dataToSend.append(key, formData[key]);
     }
 
     try {

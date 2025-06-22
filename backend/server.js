@@ -163,6 +163,8 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
   let resizedImgPath = null;
   const recipeID = parseInt(req.params.id, 10);
 
+  console.log(updatedAt, recipeName, ingredients, instructions, category, cookTime);
+
   if (!updatedAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }
