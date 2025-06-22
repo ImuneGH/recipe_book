@@ -77,12 +77,41 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     }
   };
 
+  const handleSubmitEdit = async () => {
+    const dataToSend = new FormData();
+    const actualDate = dateFormat();
+    dataToSend.append("updatedAt", actualDate);
+
+    for (const key in formData) {
+      dataToSend.append("key", formData[key]);
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/recipes", {
+        method: "PUT",
+        body: dataToSend,
+      });
+      const responseFromBE = await response.json();
+      if (!responseFromBE.ok) {
+        throw new Error("Server Vrátil chybu: " + responseFromBE.error);
+      }
+      console.log("Recept úspěšně upraven");
+    } catch (err) {
+      console.error("Chyba při odesílání:" + err.message);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     requirementsCheck();
 
     if (!requirementsCheck()) {
+      return;
+    }
+
+    if (editRecipeFormActive) {
+      handleSubmitEdit();
       return;
     }
 
