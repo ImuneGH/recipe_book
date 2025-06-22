@@ -154,7 +154,7 @@ app.delete("/recipes/:id", async (req, res) => {
 
 // UPDATE requesty
 
-app.put("recipes/:id", upload.single("image"), (req, res) => {
+app.put("/recipes/:id", upload.single("image"), (req, res) => {
   const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
   const recipeID = parseInt(req.params.id, 10);
   const originalImgPath = path.join("uploads", req.finalName);
