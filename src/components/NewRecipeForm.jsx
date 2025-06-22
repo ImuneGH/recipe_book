@@ -80,11 +80,11 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
   const handleSubmitEdit = async () => {
     const dataToSend = new FormData();
     const actualDate = dateFormat();
-    dataToSend.append("updatedAt", actualDate);
 
     for (const key in formData) {
       dataToSend.append(key, formData[key]);
     }
+    dataToSend.set("updatedAt", actualDate);
 
     try {
       const response = await fetch("http://localhost:5000/recipes/" + actualRecipeID, {
@@ -92,7 +92,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
         body: dataToSend,
       });
       const responseFromBE = await response.json();
-      if (!responseFromBE.ok) {
+      if (!response.ok) {
         throw new Error("Server Vrátil chybu: " + responseFromBE.error);
       }
       console.log("Recept úspěšně upraven");

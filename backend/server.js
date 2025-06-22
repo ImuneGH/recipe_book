@@ -159,11 +159,9 @@ app.delete("/recipes/:id", async (req, res) => {
 // UPDATE requesty
 
 app.put("/recipes/:id", upload.single("image"), (req, res) => {
-  const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author, ID } = req.body;
+  const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
   let resizedImgPath = null;
   const recipeID = parseInt(req.params.id, 10);
-
-  console.log(updatedAt, recipeName, ingredients, instructions, category, cookTime);
 
   if (!updatedAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
