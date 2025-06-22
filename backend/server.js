@@ -87,9 +87,6 @@ app.get("/recipes", (req, res) => {
 
 app.post("/recipes", upload.single("image"), async (req, res) => {
   const { createdAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
-  const originalImgPath = path.join("uploads", req.finalName);
-  const resizedImage = "resized_" + req.finalName;
-  const resizedImgPath = path.join("uploads", resizedImage);
 
   if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
@@ -97,9 +94,16 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
 
   const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+  let resizedImgPath = null;
 
-  imgResize(originalImgPath, resizedImgPath);
-  console.log(resizedImgPath);
+  if (req.file) {
+    const originalImgPath = path.join("uploads", req.finalName);
+    const resizedImage = "resized_" + req.finalName;
+    resizedImgPath = path.join("uploads", resizedImage);
+
+    imgResize(originalImgPath, resizedImgPath);
+  }
+
   db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath], function (err) {
     if (err) {
       console.error("Chyba při ukládání dat do DB");
@@ -156,12 +160,10 @@ app.delete("/recipes/:id", async (req, res) => {
 
 app.put("/recipes/:id", upload.single("image"), (req, res) => {
   const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
+  let resizedImgPath = null;
   const recipeID = parseInt(req.params.id, 10);
-  const originalImgPath = path.join("uploads", req.finalName);
-  const resizedImage = "resized_" + req.finalName;
-  const resizedImgPath = path.join("uploads", resizedImage);
 
-  if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
+  if (!updatedAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
     return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
   }
 
@@ -189,7 +191,13 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
   }
 
   const updateRecipe = (imgName) => {
-    imgResize(originalImgPath, resizedImgPath);
+    if (req.file) {
+      const originalImgPath = path.join("uploads", req.finalName);
+      const resizedImage = "resized_" + req.finalName;
+      resizedImgPath = path.join("uploads", resizedImage);
+      imgResize(originalImgPath, resizedImgPath);
+    }
+
     const SQL = `UPDATE recipes SET updatedAt = ?, recipeName = ?, ingredients = ?, instructions = ?, category = ?, cookTime = ?, author = ?, ${imgName ? "imgPath = ?" : ""} 
     WHERE ID = ?`;
   };
