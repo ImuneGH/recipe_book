@@ -159,7 +159,7 @@ app.delete("/recipes/:id", async (req, res) => {
 // UPDATE requesty
 
 app.put("/recipes/:id", upload.single("image"), (req, res) => {
-  const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
+  const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author, ID } = req.body;
   let resizedImgPath = null;
   const recipeID = parseInt(req.params.id, 10);
 
@@ -192,7 +192,7 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
     updateRecipe();
   }
 
-  const updateRecipe = (imgName) => {
+  function updateRecipe(imgName) {
     if (req.file) {
       const originalImgPath = path.join("uploads", req.finalName);
       const resizedImage = "resized_" + req.finalName;
@@ -200,22 +200,21 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
       imgResize(originalImgPath, resizedImgPath);
     }
 
-    const SQL = `UPDATE recipes SET updatedAt = ?, recipeName = ?, ingredients = ?, instructions = ?, category = ?, cookTime = ?, author = ?, ${imgName ? "imgPath = ?" : ""} 
-    WHERE ID = ?`;
-  };
-  const params = imgName
-    ? [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath, ID]
-    : [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, ID];
+    const SQL = `UPDATE recipes SET updatedAt = ?, recipeName = ?, ingredients = ?, instructions = ?, category = ?, cookTime = ?, author = ? ${imgName ? ",imgPath = ?" : ""} WHERE ID = ?`;
 
-  db.run(SQL, params, (err) => {
-    if (err) {
-      return res.status(500).json({ error: "Chyba při ukládání." });
-    }
-    res.status(201).json({
-      message: "Recept upraven 🥳",
-      id: this.lastID,
+    const params = imgName
+      ? [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath, recipeID]
+      : [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, recipeID];
+
+    db.run(SQL, params, (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Chyba při ukládání." + err.message });
+      }
+      res.status(201).json({
+        message: "Recept upraven 🥳",
+      });
     });
-  });
+  }
 });
 
 // error handler
