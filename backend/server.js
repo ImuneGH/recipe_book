@@ -180,11 +180,32 @@ app.put("recipes/:id", upload.single("image"), (req, res) => {
           } else {
             console.log("Původní obrázek úspěšně smazán!");
           }
-          updateRecipe();
         });
       }
+      updateRecipe(newImgName);
     });
+  } else {
+    updateRecipe();
   }
+
+  const updateRecipe = (imgName) => {
+    imgResize(originalImgPath, resizedImgPath);
+    const SQL = `UPDATE recipes SET updatedAt = ?, recipeName = ?, ingredients = ?, instructions = ?, category = ?, cookTime = ?, author = ?, ${imgName ? "imgPath = ?" : ""} 
+    WHERE ID = ?`;
+  };
+  const params = imgName
+    ? [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath, ID]
+    : [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, ID];
+
+  db.run(SQL, params, (err) => {
+    if (err) {
+      return res.status(500).json({ error: "Chyba při ukládání." });
+    }
+    res.status(201).json({
+      message: "Recept upraven 🥳",
+      id: this.lastID,
+    });
+  });
 });
 
 // error handler
