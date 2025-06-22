@@ -180,6 +180,7 @@ function App() {
           setEditRecipeFormActive={setEditRecipeFormActive}
           setOriginalData={setDataToEdit}
           editRecipeFormActive={editRecipeFormActive}
+          actualRecipeID={actualRecipeID}
         />
       )}
       {editRecipeFormActive && (
@@ -192,6 +193,7 @@ function App() {
           setEditRecipeFormActive={setEditRecipeFormActive}
           setOriginalData={setDataToEdit}
           editRecipeFormActive={editRecipeFormActive}
+          actualRecipeID={actualRecipeID}
         />
       )}
       <Header

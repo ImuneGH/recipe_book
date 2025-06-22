@@ -12,7 +12,20 @@ import { error } from "console";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const imgResize = async (originalImgPath, resizedImgPath) => {
+  try {
+    const buffer = await fs.promises.readFile(originalImgPath); // uloží se do proměnné, aby se nemusel používat disk, který obrázek lockne
+    await sharp(buffer).resize(200).toFile(resizedImgPath);
+    await fs.promises.unlink(originalImgPath);
+    return resizedImgPath;
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Chyba při zpracování obrázku" });
+  }
+};
+
 // Middleware
+
 app.use(cors()); // propojení backend, frontend
 app.use(express.json()); // Pro práci s JSON daty (kdyby náhodou)
 app.use(express.urlencoded({ extended: true }));
@@ -49,6 +62,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Připojení k databázi
+
 const db = new sqlite3.Database("./database.db", (err) => {
   if (err) {
     console.error("Chyba připojení k DB:", err.message);
@@ -58,6 +72,7 @@ const db = new sqlite3.Database("./database.db", (err) => {
 });
 
 // GET requesty (z databáze přetvoří tabulku recipes v json)
+
 app.get("/recipes", (req, res) => {
   db.all("SELECT * FROM recipes", [], (err, rows) => {
     if (err) {
@@ -69,6 +84,7 @@ app.get("/recipes", (req, res) => {
 });
 
 // POST requesty (vložení dat do tabulky recipes)
+
 app.post("/recipes", upload.single("image"), async (req, res) => {
   const { createdAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
   const originalImgPath = path.join("uploads", req.finalName);
@@ -82,26 +98,19 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
   const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  try {
-    const buffer = await fs.promises.readFile(originalImgPath); // uloží se do proměnné, aby se nemusel používat disk, který obrázek lockne
-    await sharp(buffer).resize(200).toFile(resizedImgPath);
-    await fs.promises.unlink(originalImgPath);
-
-    db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath], function (err) {
-      if (err) {
-        console.error("Chyba při ukládání dat do DB");
-        res.status(500).json({ error: err.message });
-      }
-      console.log("Recept uložen: " + this.lastID);
-      res.status(201).json({
-        message: "Recept úspěšně uložen 🥳",
-        id: this.lastID,
-      });
+  imgResize(originalImgPath, resizedImgPath);
+  console.log(resizedImgPath);
+  db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath], function (err) {
+    if (err) {
+      console.error("Chyba při ukládání dat do DB");
+      res.status(500).json({ error: err.message });
+    }
+    console.log("Recept uložen: " + this.lastID);
+    res.status(201).json({
+      message: "Recept úspěšně uložen 🥳",
+      id: this.lastID,
     });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Chyba při zpracování obrázku" });
-  }
+  });
 });
 
 // DELETE requesty (smaže záznam receptu z tabulky recipes)
@@ -144,6 +153,39 @@ app.delete("/recipes/:id", async (req, res) => {
 });
 
 // UPDATE requesty
+
+app.put("recipes/:id", upload.single("image"), (req, res) => {
+  const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
+  const recipeID = parseInt(req.params.id, 10);
+  const originalImgPath = path.join("uploads", req.finalName);
+  const resizedImage = "resized_" + req.finalName;
+  const resizedImgPath = path.join("uploads", resizedImage);
+
+  if (!createdAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
+    return res.status(400).json({ error: "Vyplňte všechny povinné pole!" });
+  }
+
+  const newImgName = req.file ? req.file.filename : null;
+
+  if (newImgName) {
+    db.get("SELCET imgPath FROM recipes WHERE ID = ?", [recipeID], (err, row) => {
+      if (err) {
+        return res.status(500).json({ error: "Chyba při načítání původního obrázku" });
+      }
+      if (row?.imgPath) {
+        const oldPath = path.join(__dirname, row.imgPath);
+        fs.unlink(oldPath, () => {
+          if (err) {
+            console.error("Chyba při mazání původního obrázku: ", err.message);
+          } else {
+            console.log("Původní obrázek úspěšně smazán!");
+          }
+          updateRecipe();
+        });
+      }
+    });
+  }
+});
 
 // error handler
 

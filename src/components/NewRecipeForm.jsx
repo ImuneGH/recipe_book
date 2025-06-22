@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../css/newRecipeForm.css";
 import { form } from "motion/react-client";
 
-const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive, setOriginalData, editRecipeFormActive }) => {
+const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive, editRecipeFormActive, actualRecipeID }) => {
   const [formData, setFormData] = useState({
     recipeName: "",
     ingredients: "",
@@ -87,7 +87,7 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
     }
 
     try {
-      const response = await fetch("http://localhost:5000/recipes", {
+      const response = await fetch("http://localhost:5000/recipes/" + actualRecipeID, {
         method: "PUT",
         body: dataToSend,
       });

@@ -5,6 +5,7 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
   const recipeName = clickedRecipeCard[0].recipeName;
   useEffect(() => {
     setDataToEdit(clickedRecipeCard[0]);
+    setActualRecipeID(clickedRecipeCard[0].ID);
   }, []);
 
   return (
@@ -33,7 +34,6 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
           <button
             onClick={() => {
               setConfirmActive(true);
-              setActualRecipeID(clickedRecipeCard[0].ID);
               setConfirmMessage(`Určitě chcete smazat recept ${recipeName}?`);
             }}
             className="delete"
