@@ -7,7 +7,6 @@ import FormError from "./components/FormError";
 import ConfirmWindow from "./components/ConfirmWindow";
 import { motion } from "motion/react";
 import { useEffect, useState, useRef } from "react";
-import FocusTrap from "focus-trap-react";
 
 function App() {
   const [activeCategories, setActiveCategories] = useState([]);
