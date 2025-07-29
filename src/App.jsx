@@ -77,6 +77,8 @@ function App() {
       if (!response.ok) {
         const errorMessage = await response.json();
         throw new Error("Chyba při mazání receptu: " + errorMessage);
+      } else {
+        setRecipes((prev) => prev.filter((recipe) => recipe.id !== actualRecipeID));
       }
       console.log("Recept smazán.");
     } catch (err) {
