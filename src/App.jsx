@@ -40,6 +40,12 @@ function App() {
     }
   };
 
+  const getToHomePage = () => {
+    setActiveContent(false);
+    setActiveCategories([]);
+    setRecipeDetailActive(false);
+  };
+
   const handleNewFormActive = () => {
     if (editRecipeFormActive) {
       formErrorHandling("Nejprve dokonči editaci receptu, nebo zavři její okno.");
@@ -79,6 +85,7 @@ function App() {
         throw new Error("Chyba při mazání receptu: " + errorMessage);
       } else {
         setRecipes((prev) => prev.filter((recipe) => recipe.id !== actualRecipeID));
+        getToHomePage();
       }
       console.log("Recept smazán.");
     } catch (err) {
@@ -207,6 +214,7 @@ function App() {
         searchQuery={searchQuery}
         randomRecipeSearch={randomRecipeSearch}
         handleNewFormActive={handleNewFormActive}
+        searchValue={searchValue}
       />
       <Content
         activeContent={activeContent}
@@ -225,6 +233,7 @@ function App() {
         setConfirmMessage={setConfirmMessage}
         setDataToEdit={setDataToEdit}
         handleEditFormActive={handleEditFormActive}
+        setSearchValue={setSearchValue}
       />
       <Footer />
     </motion.div>

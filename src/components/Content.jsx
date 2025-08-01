@@ -21,6 +21,7 @@ const Content = ({
   setConfirmMessage,
   setDataToEdit,
   handleEditFormActive,
+  setSearchValue,
 }) => {
   const [clickedRecipeCard, setClickedRecipeCard] = useState([]);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
@@ -66,6 +67,7 @@ const Content = ({
               setClickedRecipeCard={setClickedRecipeCard}
               clickedRecipeCard={clickedRecipeCard}
               recipes={recipes}
+              setSearchValue={setSearchValue}
             />
           ))
         : null}

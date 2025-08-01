@@ -4,7 +4,7 @@ import NewRecipeButton from "./NewRecipeButton";
 import Categories from "./Categories";
 import { motion } from "motion/react";
 
-const Header = ({ activeCategories, setActiveCategories, setRecipes, activeContent, setSearchValue, searchQuery, randomRecipeSearch, handleNewFormActive }) => {
+const Header = ({ activeCategories, setActiveCategories, setRecipes, activeContent, setSearchValue, searchQuery, randomRecipeSearch, handleNewFormActive, searchValue }) => {
   return (
     <header className="header">
       <div className="logoHolder">
@@ -15,7 +15,7 @@ const Header = ({ activeCategories, setActiveCategories, setRecipes, activeConte
         )}
       </div>
       <div className="searchCatWrap">
-        <SearchBar setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} />
+        <SearchBar setRecipes={setRecipes} setSearchValue={setSearchValue} searchQuery={searchQuery} randomRecipeSearch={randomRecipeSearch} searchValue={searchValue} />
         <Categories activeCategories={activeCategories} setActiveCategories={setActiveCategories} />
       </div>
       <div className="mainButtonWrap">
