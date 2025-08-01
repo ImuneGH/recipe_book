@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../css/newRecipeForm.css";
 import { form } from "motion/react-client";
 
-const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive, editRecipeFormActive, actualRecipeID }) => {
+const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive, editRecipeFormActive, actualRecipeID, getToHomePage }) => {
   const [formData, setFormData] = useState({
     recipeName: "",
     ingredients: "",
@@ -95,6 +95,8 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       const responseFromBE = await response.json();
       if (!response.ok) {
         throw new Error("Server Vrátil chybu: " + responseFromBE.error);
+      } else {
+        getToHomePage();
       }
       console.log("Recept úspěšně upraven");
     } catch (err) {
@@ -132,6 +134,8 @@ const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage
       const responseFromBE = await response.json();
       if (!response.ok) {
         throw new Error(`Server vrátil chybu: ${responseFromBE.error}`);
+      } else {
+        getToHomePage();
       }
       console.log("Recept uložen:", responseFromBE);
     } catch (err) {

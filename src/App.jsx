@@ -44,6 +44,8 @@ function App() {
     setActiveContent(false);
     setActiveCategories([]);
     setRecipeDetailActive(false);
+    setNewRecipeFormActive(false);
+    setEditRecipeFormActive(false);
   };
 
   const handleNewFormActive = () => {
@@ -84,7 +86,13 @@ function App() {
         const errorMessage = await response.json();
         throw new Error("Chyba při mazání receptu: " + errorMessage);
       } else {
-        setRecipes((prev) => prev.filter((recipe) => recipe.id !== actualRecipeID));
+        setRecipes((prev) =>
+          prev.filter((recipe) => {
+            console.log("recipe.ID:", recipe.ID, typeof recipe.ID);
+            console.log("actualRecipeID:", actualRecipeID, typeof actualRecipeID);
+            return recipe.ID !== actualRecipeID;
+          })
+        );
         getToHomePage();
       }
       console.log("Recept smazán.");
@@ -190,6 +198,7 @@ function App() {
           setOriginalData={setDataToEdit}
           editRecipeFormActive={editRecipeFormActive}
           actualRecipeID={actualRecipeID}
+          getToHomePage={getToHomePage}
         />
       )}
       {editRecipeFormActive && (
@@ -203,6 +212,7 @@ function App() {
           setOriginalData={setDataToEdit}
           editRecipeFormActive={editRecipeFormActive}
           actualRecipeID={actualRecipeID}
+          getToHomePage={getToHomePage}
         />
       )}
       <Header
