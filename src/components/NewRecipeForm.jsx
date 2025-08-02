@@ -12,7 +12,7 @@ const NewRecipeForm = ({
   editRecipeFormActive,
   actualRecipeID,
   getToHomePage,
-  setRecipes,
+  fetchRecipes,
 }) => {
   const [formData, setFormData] = useState({
     recipeName: "",
@@ -146,6 +146,7 @@ const NewRecipeForm = ({
         throw new Error(`Server vrátil chybu: ${responseFromBE.error}`);
       } else {
         getToHomePage();
+        fetchRecipes();
       }
       console.log("Recept uložen:", responseFromBE);
     } catch (err) {

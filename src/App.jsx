@@ -199,7 +199,7 @@ function App() {
           editRecipeFormActive={editRecipeFormActive}
           actualRecipeID={actualRecipeID}
           getToHomePage={getToHomePage}
-          setRecipes={setRecipes}
+          fetchRecipes={fetchRecipes}
         />
       )}
       {editRecipeFormActive && (
@@ -214,6 +214,7 @@ function App() {
           editRecipeFormActive={editRecipeFormActive}
           actualRecipeID={actualRecipeID}
           getToHomePage={getToHomePage}
+          fetchRecipes={fetchRecipes}
         />
       )}
       <Header
