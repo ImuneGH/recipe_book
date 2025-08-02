@@ -1,7 +1,7 @@
 import { FocusTrap } from "focus-trap-react";
 import "../css/confirmWindow.css";
 
-const ConfirmWindow = ({ confirmRef, confirmMessage, setConfirmActive, deleteRecipe }) => {
+const ConfirmWindow = ({ confirmRef, confirmMessage, setConfirmActive, deleteRecipe, handleNotificationWindow }) => {
   return (
     <FocusTrap>
       <div ref={confirmRef} tabIndex={-1} className="confirmWindow">
@@ -10,7 +10,14 @@ const ConfirmWindow = ({ confirmRef, confirmMessage, setConfirmActive, deleteRec
           <p>{confirmMessage}</p>
           <div className="buttons">
             <button onClick={() => setConfirmActive(false)}>Zrušit</button>
-            <button onClick={deleteRecipe}>Smazat</button>
+            <button
+              onClick={() => {
+                deleteRecipe();
+                handleNotificationWindow("Recept byl úspěšně smazán");
+              }}
+            >
+              Smazat
+            </button>
           </div>
         </div>
       </div>

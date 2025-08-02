@@ -13,6 +13,7 @@ const NewRecipeForm = ({
   actualRecipeID,
   getToHomePage,
   fetchRecipes,
+  handleNotificationWindow,
 }) => {
   const [formData, setFormData] = useState({
     recipeName: "",
@@ -108,6 +109,7 @@ const NewRecipeForm = ({
       } else {
         getToHomePage();
         fetchRecipes();
+        handleNotificationWindow("Recept byl úspěšně změněn");
       }
       console.log("Recept úspěšně upraven");
     } catch (err) {
@@ -148,6 +150,7 @@ const NewRecipeForm = ({
       } else {
         getToHomePage();
         fetchRecipes();
+        handleNotificationWindow("Recept byl úspěšně vytvořen");
       }
       console.log("Recept uložen:", responseFromBE);
     } catch (err) {

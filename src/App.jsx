@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import NewRecipeForm from "./components/NewRecipeForm";
 import FormError from "./components/FormError";
 import ConfirmWindow from "./components/ConfirmWindow";
+import NotificationWindow from "./components/NotificationWindow";
 import { motion } from "motion/react";
 import { useEffect, useState, useRef } from "react";
 
@@ -22,10 +23,13 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmActive, setConfirmActive] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
+  const [notificationActive, setNotificationActive] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
   const [actualRecipeID, setActualRecipeID] = useState(null);
   const errorRef = useRef(null);
   const confirmRef = useRef(null);
+  const notificationRef = useRef(null);
 
   const fetchRecipes = async () => {
     try {
@@ -69,6 +73,11 @@ function App() {
     setErrorMessage(message);
   };
 
+  const handleNotificationWindow = (message) => {
+    setNotificationActive(true);
+    setNotificationMessage(message);
+  };
+
   const closeActiveForm = (e) => {
     if (e.key === "Escape") {
       setNewRecipeFormActive(false);
@@ -86,13 +95,7 @@ function App() {
         const errorMessage = await response.json();
         throw new Error("Chyba při mazání receptu: " + errorMessage);
       } else {
-        setRecipes((prev) =>
-          prev.filter((recipe) => {
-            console.log("recipe.ID:", recipe.ID, typeof recipe.ID);
-            console.log("actualRecipeID:", actualRecipeID, typeof actualRecipeID);
-            return recipe.ID !== actualRecipeID;
-          })
-        );
+        setRecipes((prev) => prev.filter((recipe) => recipe.ID !== actualRecipeID));
         getToHomePage();
       }
       console.log("Recept smazán.");
@@ -114,6 +117,12 @@ function App() {
     if (e.key === "Enter") {
       setConfirmActive(false);
       deleteRecipe();
+    }
+  };
+
+  const closeNotificationWindow = (e) => {
+    if (e.key === "Enter") {
+      setNotificationActive(false);
     }
   };
 
@@ -151,11 +160,16 @@ function App() {
       confirmRef.current.focus();
       document.addEventListener("keydown", cancelConfirmWindow);
     }
+    if (notificationActive && notificationRef.current) {
+      notificationRef.current.focus();
+      document.addEventListener("keydown", closeNotificationWindow);
+    }
     return () => {
       document.removeEventListener("keydown", closeErrorMessage);
       document.removeEventListener("keydown", cancelConfirmWindow);
+      document.removeEventListener("keydown", closeNotificationWindow);
     };
-  }, [errorActive, confirmActive]);
+  }, [errorActive, confirmActive, notificationActive]);
 
   useEffect(() => {
     document.addEventListener("keydown", closeActiveForm);
@@ -186,7 +200,16 @@ function App() {
   return (
     <motion.div className="app" layout>
       {errorActive && <FormError errorMessage={errorMessage} setErrorActive={setErrorActive} errorRef={errorRef} />}
-      {confirmActive && <ConfirmWindow confirmRef={confirmRef} confirmMessage={confirmMessage} setConfirmActive={setConfirmActive} deleteRecipe={deleteRecipe} />}
+      {confirmActive && (
+        <ConfirmWindow
+          confirmRef={confirmRef}
+          confirmMessage={confirmMessage}
+          setConfirmActive={setConfirmActive}
+          deleteRecipe={deleteRecipe}
+          handleNotificationWindow={handleNotificationWindow}
+        />
+      )}
+      {notificationActive && <NotificationWindow notificationRef={notificationRef} notificationMessage={notificationMessage} setNotificationActive={setNotificationActive} />}
       {newRecipeFormActive && (
         <NewRecipeForm
           setNewRecipeFormActive={setNewRecipeFormActive}
@@ -200,6 +223,7 @@ function App() {
           actualRecipeID={actualRecipeID}
           getToHomePage={getToHomePage}
           fetchRecipes={fetchRecipes}
+          handleNotificationWindow={handleNotificationWindow}
         />
       )}
       {editRecipeFormActive && (
@@ -215,6 +239,7 @@ function App() {
           actualRecipeID={actualRecipeID}
           getToHomePage={getToHomePage}
           fetchRecipes={fetchRecipes}
+          handleNotificationWindow={handleNotificationWindow}
         />
       )}
       <Header
@@ -246,6 +271,7 @@ function App() {
         setDataToEdit={setDataToEdit}
         handleEditFormActive={handleEditFormActive}
         setSearchValue={setSearchValue}
+        handleNotificationWindow={handleNotificationWindow}
       />
       <Footer />
     </motion.div>

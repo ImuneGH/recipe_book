@@ -1,4 +1,4 @@
-.confirmWindow {
+.notificationWindow {
   display: flex;
   flex-direction: column;
 
@@ -13,11 +13,11 @@
   border: 1px solid var(--accent-color);
 }
 
-.confirmWindow:focus {
+.notificationWindow:focus {
   outline: none;
 }
 
-.confirmWindow h4 {
+.notificationWindow h4 {
   flex: 1;
 
   padding: 0.2rem;
@@ -27,7 +27,7 @@
   background-color: var(--secondary-color-light);
 }
 
-.confirmWindow .confirmMessage {
+.notificationWindow .notificationMessage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,13 +39,13 @@
   background-color: var(--bg-color);
 }
 
-.confirmMessage .buttons {
+.notificationMessage .okButton {
   display: flex;
   gap: 1rem;
 }
 
-.buttons button {
-  padding: 0.4rem 0.6rem;
+.okButton button {
+  padding: 0.4rem 1.5rem;
 
   border: none;
   border-radius: 5px;
@@ -54,19 +54,14 @@
   background-color: var(--secondary-color-light);
 }
 
-.buttons button:last-of-type {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
-}
-
-.buttons button:hover {
+.okButton button:hover {
   box-shadow: 1px 1px 2px var(--accent-color);
 }
 
-.buttons button:active {
+.okButton button:active {
   outline: 1px groove var(--accent-color);
 }
 
-.buttons button:focus-visible {
+.okButton button:focus-visible {
   outline: 2px solid var(--accent-color);
 }
