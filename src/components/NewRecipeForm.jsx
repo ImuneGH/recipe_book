@@ -107,6 +107,7 @@ const NewRecipeForm = ({
         throw new Error("Server Vrátil chybu: " + responseFromBE.error);
       } else {
         getToHomePage();
+        fetchRecipes();
       }
       console.log("Recept úspěšně upraven");
     } catch (err) {

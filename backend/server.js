@@ -170,7 +170,7 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
   const newImgName = req.file ? req.file.filename : null;
 
   if (newImgName) {
-    db.get("SELCET imgPath FROM recipes WHERE ID = ?", [recipeID], (err, row) => {
+    db.get("SELECT imgPath FROM recipes WHERE ID = ?", [recipeID], (err, row) => {
       if (err) {
         return res.status(500).json({ error: "Chyba při načítání původního obrázku" });
       }
