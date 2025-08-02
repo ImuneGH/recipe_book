@@ -199,6 +199,7 @@ function App() {
           editRecipeFormActive={editRecipeFormActive}
           actualRecipeID={actualRecipeID}
           getToHomePage={getToHomePage}
+          setRecipes={setRecipes}
         />
       )}
       {editRecipeFormActive && (

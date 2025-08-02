@@ -3,7 +3,17 @@ import { useEffect, useState } from "react";
 import "../css/newRecipeForm.css";
 import { form } from "motion/react-client";
 
-const NewRecipeForm = ({ setNewRecipeFormActive, setErrorActive, setErrorMessage, originalData, setEditRecipeFormActive, editRecipeFormActive, actualRecipeID, getToHomePage }) => {
+const NewRecipeForm = ({
+  setNewRecipeFormActive,
+  setErrorActive,
+  setErrorMessage,
+  originalData,
+  setEditRecipeFormActive,
+  editRecipeFormActive,
+  actualRecipeID,
+  getToHomePage,
+  setRecipes,
+}) => {
   const [formData, setFormData] = useState({
     recipeName: "",
     ingredients: "",
