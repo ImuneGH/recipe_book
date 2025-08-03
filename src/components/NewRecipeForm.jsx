@@ -77,12 +77,9 @@ const NewRecipeForm = ({
       recipeName: !formData.recipeName,
       ingredients: !formData.ingredients,
       instructions: !formData.instructions,
-      category: formData.category === "Zvol kategorii" ? true : !formData.category,
+      category: !formData.category || formData.category === "Zvol kategorii",
       cookTime: !formData.cookTime,
     };
-
-    console.log(newEmptyInputs);
-    console.log(formData.category);
 
     setRequiredFormData(newEmptyInputs);
 
