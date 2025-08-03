@@ -63,6 +63,10 @@ const NewRecipeForm = ({
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
+    if (e.target.name === "cookTime") {
+      formData.cookTime >= -1 ? setRequiredFormData({ ...requiredFormData, cookTime: false }) : null;
+      return;
+    }
     if (e.target.value !== "") {
       setRequiredFormData({ ...requiredFormData, [e.target.name]: false });
     }
@@ -73,18 +77,27 @@ const NewRecipeForm = ({
       recipeName: !formData.recipeName,
       ingredients: !formData.ingredients,
       instructions: !formData.instructions,
-      category: !formData.category,
+      category: formData.category === "Zvol kategorii" ? true : !formData.category,
       cookTime: !formData.cookTime,
     };
 
+    console.log(newEmptyInputs);
+    console.log(formData.category);
+
     setRequiredFormData(newEmptyInputs);
 
-    if (!formData.recipeName || !formData.ingredients || !formData.instructions || !formData.category || !formData.cookTime) {
+    if (!formData.recipeName || !formData.ingredients || !formData.instructions || !formData.category || !formData.cookTime || formData.category === "Zvol kategorii") {
       setErrorActive(true);
       setErrorMessage("Vyplňte prosím všechna povinná pole");
       return false;
+    }
+
+    if (formData.cookTime < 0) {
+      setErrorActive(true);
+      setErrorMessage("Doba vaření nemůže být záporné číslo");
+      setRequiredFormData({ ...requiredFormData, cookTime: true });
+      return false;
     } else {
-      setErrorActive(false);
       return true;
     }
   };
@@ -231,7 +244,16 @@ const NewRecipeForm = ({
             <span className="redColor">*</span>Délka vaření (min):
           </label>
         </h3>
-        <input className={requiredFormData.cookTime ? "emptyInput" : ""} placeholder="60" id="cookTime" type="number" name="cookTime" value={formData.cookTime} onChange={handleChange} />
+        <input
+          className={requiredFormData.cookTime ? "emptyInput" : ""}
+          placeholder="60"
+          id="cookTime"
+          type="number"
+          name="cookTime"
+          value={formData.cookTime}
+          onChange={handleChange}
+          min="0"
+        />
         <h3>
           <label htmlFor="author">Autor:</label>
         </h3>
