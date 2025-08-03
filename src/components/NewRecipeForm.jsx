@@ -1,7 +1,6 @@
+import "../css/newRecipeForm.css";
 import { FocusTrap } from "focus-trap-react";
 import { useEffect, useState } from "react";
-import "../css/newRecipeForm.css";
-import { form } from "motion/react-client";
 
 const NewRecipeForm = ({
   setNewRecipeFormActive,
