@@ -36,10 +36,31 @@ const Content = ({
     }
   }, [clickedRecipeCard]);
 
+  const parentAnimation = {
+    start: {},
+    end: { transition: { staggerChildren: 0.1 } },
+  };
+
+  const cardAnimation = {
+    start: { opacity: 0, rotateY: -180 },
+    end: { opacity: 1, rotateY: 0, transition: { duration: 0.3 } },
+    exit: { opacity: 0, rotateY: 180 },
+  };
+
+  const hoverAnimation = {
+    scale: 1.03,
+    y: -3,
+    transition: {
+      type: "spring",
+      stiffness: 500,
+      damping: 11,
+    },
+  };
+
   return (
     <main className="content">
       {!activeContent && (
-        <motion.h1 layoutId="logo">
+        <motion.h1 layoutId="logo" style={{ width: "430px", height: "220px" }}>
           <img className="logo" src="/img/flavor_log_logo.png" alt="Logo webu Flavor Log" />
         </motion.h1>
       )}
@@ -54,23 +75,28 @@ const Content = ({
           handleEditFormActive={handleEditFormActive}
         />
       )}
-      {recipesDisplayed
-        ? recipesDisplayed.map((recipeDisplayed) => (
-            <RecipeCard
-              key={recipeDisplayed.ID}
-              recipeDisplayed={recipeDisplayed}
-              setActiveCategories={setActiveCategories}
-              setActiveContent={setActiveContent}
-              setRecipeDetailActive={setRecipeDetailActive}
-              setSearchResult={setSearchResult}
-              setRandomRecipe={setRandomRecipe}
-              setClickedRecipeCard={setClickedRecipeCard}
-              clickedRecipeCard={clickedRecipeCard}
-              recipes={recipes}
-              setSearchValue={setSearchValue}
-            />
-          ))
-        : null}
+      {recipesDisplayed && recipesDisplayed.length > 0 && (
+        <motion.div className="animationContainer" variants={parentAnimation} initial="start" animate="end">
+          {recipesDisplayed &&
+            recipesDisplayed.map((recipeDisplayed) => (
+              <RecipeCard
+                hoverAnimation={hoverAnimation}
+                cardAnimation={cardAnimation}
+                key={recipeDisplayed.ID}
+                recipeDisplayed={recipeDisplayed}
+                setActiveCategories={setActiveCategories}
+                setActiveContent={setActiveContent}
+                setRecipeDetailActive={setRecipeDetailActive}
+                setSearchResult={setSearchResult}
+                setRandomRecipe={setRandomRecipe}
+                setClickedRecipeCard={setClickedRecipeCard}
+                clickedRecipeCard={clickedRecipeCard}
+                recipes={recipes}
+                setSearchValue={setSearchValue}
+              />
+            ))}
+        </motion.div>
+      )}
       {isEmpty && <p>Obsah je prázdný</p>}
     </main>
   );

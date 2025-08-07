@@ -1,7 +1,19 @@
 import "../css/recipeCard.css";
 import { motion } from "motion/react";
 
-const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, setRecipeDetailActive, setSearchResult, setRandomRecipe, setClickedRecipeCard, recipes, setSearchValue }) => {
+const RecipeCard = ({
+  recipeDisplayed,
+  setActiveCategories,
+  setActiveContent,
+  setRecipeDetailActive,
+  setSearchResult,
+  setRandomRecipe,
+  setClickedRecipeCard,
+  recipes,
+  setSearchValue,
+  cardAnimation,
+  hoverAnimation,
+}) => {
   const showRecipeDetail = (e) => {
     // resets
     setActiveCategories([]);
@@ -16,7 +28,11 @@ const RecipeCard = ({ recipeDisplayed, setActiveCategories, setActiveContent, se
   };
 
   return (
+<<<<<<< HEAD
     <motion.div title={recipeDisplayed.recipeName} onClick={showRecipeDetail} className="recipeCard">
+=======
+    <motion.div title={recipeDisplayed.recipeName} onClick={showRecipeDetail} className="recipeCard" variants={cardAnimation} whileHover={hoverAnimation}>
+>>>>>>> animation
       <img src={"backend/" + recipeDisplayed.imgPath} alt="" />
       <div className="recipeInfo">
         <p title="Kategorie">{recipeDisplayed.category}</p>
