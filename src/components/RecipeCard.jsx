@@ -28,11 +28,16 @@ const RecipeCard = ({
   };
 
   return (
-<<<<<<< HEAD
-    <motion.div title={recipeDisplayed.recipeName} onClick={showRecipeDetail} className="recipeCard">
-=======
-    <motion.div title={recipeDisplayed.recipeName} onClick={showRecipeDetail} className="recipeCard" variants={cardAnimation} whileHover={hoverAnimation}>
->>>>>>> animation
+    <motion.div
+      title={recipeDisplayed.recipeName}
+      onClick={showRecipeDetail}
+      className="recipeCard"
+      variants={cardAnimation}
+      whileHover={hoverAnimation}
+      initial="start"
+      animate="end"
+      exit="exit"
+    >
       <img src={"backend/" + recipeDisplayed.imgPath} alt="" />
       <div className="recipeInfo">
         <p title="Kategorie">{recipeDisplayed.category}</p>

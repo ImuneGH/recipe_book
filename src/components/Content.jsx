@@ -1,8 +1,9 @@
 import "../css/content.css";
 import RecipeDescription from "../components/RecipeDescription";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import RecipeCard from "./RecipeCard";
 import { useEffect, useState } from "react";
+import { transform } from "motion";
 
 const Content = ({
   activeContent,
@@ -36,15 +37,10 @@ const Content = ({
     }
   }, [clickedRecipeCard]);
 
-  const parentAnimation = {
-    start: {},
-    end: { transition: { staggerChildren: 0.1 } },
-  };
-
   const cardAnimation = {
     start: { opacity: 0, rotateY: -180 },
     end: { opacity: 1, rotateY: 0, transition: { duration: 0.3 } },
-    exit: { opacity: 0, rotateY: 180 },
+    exit: { opacity: 0, rotateY: 180, transition: { duration: 0.5 } },
   };
 
   const hoverAnimation = {
@@ -75,28 +71,32 @@ const Content = ({
           handleEditFormActive={handleEditFormActive}
         />
       )}
+
       {recipesDisplayed && recipesDisplayed.length > 0 && (
-        <motion.div className="animationContainer" variants={parentAnimation} initial="start" animate="end">
-          {recipesDisplayed &&
-            recipesDisplayed.map((recipeDisplayed) => (
-              <RecipeCard
-                hoverAnimation={hoverAnimation}
-                cardAnimation={cardAnimation}
-                key={recipeDisplayed.ID}
-                recipeDisplayed={recipeDisplayed}
-                setActiveCategories={setActiveCategories}
-                setActiveContent={setActiveContent}
-                setRecipeDetailActive={setRecipeDetailActive}
-                setSearchResult={setSearchResult}
-                setRandomRecipe={setRandomRecipe}
-                setClickedRecipeCard={setClickedRecipeCard}
-                clickedRecipeCard={clickedRecipeCard}
-                recipes={recipes}
-                setSearchValue={setSearchValue}
-              />
-            ))}
-        </motion.div>
+        <div className="animationContainer">
+          <AnimatePresence>
+            {recipesDisplayed &&
+              recipesDisplayed.map((recipeDisplayed) => (
+                <RecipeCard
+                  hoverAnimation={hoverAnimation}
+                  cardAnimation={cardAnimation}
+                  key={recipeDisplayed.ID}
+                  recipeDisplayed={recipeDisplayed}
+                  setActiveCategories={setActiveCategories}
+                  setActiveContent={setActiveContent}
+                  setRecipeDetailActive={setRecipeDetailActive}
+                  setSearchResult={setSearchResult}
+                  setRandomRecipe={setRandomRecipe}
+                  setClickedRecipeCard={setClickedRecipeCard}
+                  clickedRecipeCard={clickedRecipeCard}
+                  recipes={recipes}
+                  setSearchValue={setSearchValue}
+                />
+              ))}
+          </AnimatePresence>
+        </div>
       )}
+
       {isEmpty && <p>Obsah je prázdný</p>}
     </main>
   );
