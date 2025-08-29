@@ -40,7 +40,7 @@ const Content = ({
   const cardAnimation = {
     start: { opacity: 0, rotateY: -180 },
     end: { opacity: 1, rotateY: 0, transition: { duration: 0.3 } },
-    exit: { opacity: 0, rotateY: 180, transition: { duration: 0.5 } },
+    exit: { opacity: 0, rotateY: 180, transition: { duration: 0.3 } },
   };
 
   const hoverAnimation = {
