@@ -23,7 +23,7 @@ const Content = ({
   handleEditFormActive,
   setSearchValue,
 }) => {
-  const [clickedRecipeCard, setClickedRecipeCard] = useState([]);
+  const [clickedRecipeCard, setClickedRecipeCard] = useState(null);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
   const filteredCategory = activeCategories.length && recipes.filter((recipe) => activeCategories.includes(recipe.category));
   const filteredSearch = searchResult !== "" && recipes.filter((recipe) => recipe.recipeName.includes(searchResult));
@@ -31,8 +31,9 @@ const Content = ({
   const isEmpty = recipesDisplayed.length === 0 && activeContent && !recipeDetailActive;
 
   useEffect(() => {
-    if (clickedRecipeCard.length > 0) {
+    if (clickedRecipeCard) {
       setFormatedIngredients(clickedRecipeCard.ingredients.split(", "));
+      console.log(clickedRecipeCard);
     }
   }, [clickedRecipeCard]);
 
