@@ -9,11 +9,9 @@ const RecipeCard = ({
   setSearchResult,
   setRandomRecipe,
   setClickedRecipeCard,
-  recipes,
   setSearchValue,
   cardAnimation,
   hoverAnimation,
-  clickedRecipeCard,
 }) => {
   const showRecipeDetail = (recipeToDisplay) => {
     // resets

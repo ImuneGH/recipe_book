@@ -3,7 +3,6 @@ import RecipeDescription from "../components/RecipeDescription";
 import { motion, AnimatePresence } from "motion/react";
 import RecipeCard from "./RecipeCard";
 import { useEffect, useState } from "react";
-import { transform } from "motion";
 
 const Content = ({
   activeContent,
@@ -88,8 +87,6 @@ const Content = ({
                   setSearchResult={setSearchResult}
                   setRandomRecipe={setRandomRecipe}
                   setClickedRecipeCard={setClickedRecipeCard}
-                  clickedRecipeCard={clickedRecipeCard}
-                  recipes={recipes}
                   setSearchValue={setSearchValue}
                 />
               ))}
