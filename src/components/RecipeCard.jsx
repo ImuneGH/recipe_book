@@ -23,6 +23,7 @@ const RecipeCard = ({
     setRandomRecipe("");
     // sets
     const recipeToDisplayName = e.target.parentElement.children[2].textContent;
+    // console.log(e.target);
     setClickedRecipeCard(recipes.filter((recipeToDisplay) => recipeToDisplay.recipeName.includes(recipeToDisplayName)));
     setRecipeDetailActive(true);
   };

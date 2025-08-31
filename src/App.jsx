@@ -27,6 +27,7 @@ function App() {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [recipeDetailActive, setRecipeDetailActive] = useState(false);
   const [actualRecipeID, setActualRecipeID] = useState(null);
+  const [previousState, setPreviousState] = useState([]);
   const errorRef = useRef(null);
   const confirmRef = useRef(null);
   const notificationRef = useRef(null);
