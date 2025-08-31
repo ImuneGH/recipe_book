@@ -255,6 +255,7 @@ function App() {
         searchValue={searchValue}
       />
       <Content
+        searchValue={searchValue}
         previousState={previousState}
         activeContent={activeContent}
         recipes={recipes}

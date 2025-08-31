@@ -16,20 +16,19 @@ const RecipeCard = ({
   activeCategories,
   searchResult,
   randomRecipe,
-  previousState,
+  searchValue,
 }) => {
   const showRecipeDetail = (recipeToDisplay) => {
+    // sets
+    setPreviousState({ activeCategories, searchResult, randomRecipe, searchValue });
+    setClickedRecipeCard(recipeToDisplay);
+    setRecipeDetailActive(true);
     // resets
     setActiveCategories([]);
     setActiveContent(true);
     setSearchResult("");
-    setSearchValue("");
     setRandomRecipe("");
-    // sets
-    setPreviousState({ activeCategories, searchResult, randomRecipe });
-    console.log(previousState);
-    setClickedRecipeCard(recipeToDisplay);
-    setRecipeDetailActive(true);
+    setSearchValue("");
   };
 
   return (

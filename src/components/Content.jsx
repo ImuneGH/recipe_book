@@ -24,6 +24,7 @@ const Content = ({
   setSearchValue,
   setPreviousState,
   previousState,
+  searchValue,
 }) => {
   const [clickedRecipeCard, setClickedRecipeCard] = useState(null);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
@@ -33,7 +34,11 @@ const Content = ({
   const isEmpty = recipesDisplayed.length === 0 && activeContent && !recipeDetailActive;
 
   const handlePreviousState = () => {
-    console.log("funguju");
+    setRecipeDetailActive(false);
+    setActiveCategories(previousState.activeCategories);
+    setRandomRecipe(previousState.randomRecipe);
+    setSearchResult(previousState.searchResult);
+    setSearchValue(previousState.searchValue);
   };
 
   useEffect(() => {
@@ -84,7 +89,7 @@ const Content = ({
             {recipesDisplayed &&
               recipesDisplayed.map((recipeDisplayed) => (
                 <RecipeCard
-                  previousState={previousState}
+                  searchValue={searchValue}
                   randomRecipe={randomRecipe}
                   searchResult={searchResult}
                   activeCategories={activeCategories}
