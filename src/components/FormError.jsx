@@ -3,7 +3,7 @@ import "../css/formError.css";
 
 const FormError = ({ errorMessage, setErrorActive, errorRef }) => {
   return (
-    <FocusTrap>
+    <FocusTrap focusTrapOptions={{ escapeDeactivates: false }}>
       <div ref={errorRef} tabIndex={-1} className="errorWindow">
         <h4>error</h4>
         <div className="errorMessage">

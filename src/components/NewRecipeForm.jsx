@@ -168,7 +168,7 @@ const NewRecipeForm = ({
   };
 
   return (
-    <FocusTrap>
+    <FocusTrap focusTrapOptions={{ escapeDeactivates: false }}>
       <form className="newRecipeForm">
         <h3>
           <label htmlFor="recipeName">

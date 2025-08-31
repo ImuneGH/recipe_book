@@ -80,6 +80,7 @@ function App() {
   };
 
   const closeActiveForm = (e) => {
+    if (errorActive) return;
     if (e.key === "Escape") {
       setNewRecipeFormActive(false);
       setEditRecipeFormActive(false);
@@ -153,6 +154,9 @@ function App() {
   };
 
   useEffect(() => {
+    if (newRecipeFormActive || editRecipeFormActive) {
+      document.addEventListener("keydown", closeActiveForm);
+    }
     if (errorActive && errorRef.current) {
       errorRef.current.focus();
       document.addEventListener("keydown", closeErrorMessage);
@@ -166,19 +170,12 @@ function App() {
       document.addEventListener("keydown", closeNotificationWindow);
     }
     return () => {
+      document.removeEventListener("keydown", closeActiveForm);
       document.removeEventListener("keydown", closeErrorMessage);
       document.removeEventListener("keydown", cancelConfirmWindow);
       document.removeEventListener("keydown", closeNotificationWindow);
     };
-  }, [errorActive, confirmActive, notificationActive]);
-
-  useEffect(() => {
-    document.addEventListener("keydown", closeActiveForm);
-
-    return () => {
-      document.removeEventListener("keydown", closeActiveForm); // cleanup function
-    };
-  }, []);
+  }, [errorActive, confirmActive, notificationActive, newRecipeFormActive, editRecipeFormActive]);
 
   useEffect(() => {
     fetchRecipes();

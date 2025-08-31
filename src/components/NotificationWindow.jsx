@@ -3,7 +3,7 @@ import { FocusTrap } from "focus-trap-react";
 
 const NotificationWindow = ({ setNotificationActive, notificationRef, notificationMessage }) => {
   return (
-    <FocusTrap>
+    <FocusTrap focusTrapOptions={{ escapeDeactivates: false }}>
       <div ref={notificationRef} tabIndex={-1} className="notificationWindow">
         <h4>Určitě smazat?</h4>
         <div className="notificationMessage">

@@ -3,7 +3,7 @@ import "../css/confirmWindow.css";
 
 const ConfirmWindow = ({ confirmRef, confirmMessage, setConfirmActive, deleteRecipe, handleNotificationWindow }) => {
   return (
-    <FocusTrap>
+    <FocusTrap focusTrapOptions={{ escapeDeactivates: false }}>
       <div ref={confirmRef} tabIndex={-1} className="confirmWindow">
         <h4>Určitě smazat?</h4>
         <div className="confirmMessage">
