@@ -14,7 +14,7 @@ const RecipeCard = ({
   cardAnimation,
   hoverAnimation,
 }) => {
-  const showRecipeDetail = (e) => {
+  const showRecipeDetail = (recipeToDisplayName) => {
     // resets
     setActiveCategories([]);
     setActiveContent(true);
@@ -22,9 +22,7 @@ const RecipeCard = ({
     setSearchValue("");
     setRandomRecipe("");
     // sets
-    const recipeToDisplayName = e.target.parentElement.children[2].textContent;
-    // console.log(e.target);
-    setClickedRecipeCard(recipes.filter((recipeToDisplay) => recipeToDisplay.recipeName.includes(recipeToDisplayName)));
+    setClickedRecipeCard(recipes.filter((recipeToDisplay) => recipeToDisplay.recipeName.includes(recipeToDisplayName.recipeName)));
     setRecipeDetailActive(true);
   };
 
@@ -33,7 +31,9 @@ const RecipeCard = ({
       layout
       transition={{ layout: { duration: 0.2, type: "tween" } }}
       title={recipeDisplayed.recipeName}
-      onClick={showRecipeDetail}
+      onClick={() => {
+        showRecipeDetail(recipeDisplayed);
+      }}
       className="recipeCard"
       variants={cardAnimation}
       whileHover={hoverAnimation}
