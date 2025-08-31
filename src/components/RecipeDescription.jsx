@@ -2,17 +2,17 @@ import { useEffect } from "react";
 import "../css/recipeDescription.css";
 
 const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID, setConfirmMessage, setDataToEdit, handleEditFormActive }) => {
-  const recipeName = clickedRecipeCard[0].recipeName;
+  const recipeName = clickedRecipeCard.recipeName;
   useEffect(() => {
-    setDataToEdit(clickedRecipeCard[0]);
-    setActualRecipeID(clickedRecipeCard[0].ID);
+    setDataToEdit(clickedRecipeCard);
+    setActualRecipeID(clickedRecipeCard.ID);
   }, []);
 
   return (
     <div className="recipeDescription">
       <div className="leftContent">
         <div className="foodPhoto">
-          <img src={"backend/" + clickedRecipeCard[0].imgPath} alt="fotka jídla" />
+          <img src={"backend/" + clickedRecipeCard.imgPath} alt="fotka jídla" />
         </div>
         <div className="ingredients">
           <h3>Ingredience:</h3>
@@ -42,16 +42,16 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
           </button>
         </div>
         <div className="metaData">
-          <h2>{clickedRecipeCard[0].recipeName}</h2>
+          <h2>{clickedRecipeCard.recipeName}</h2>
           <ul className="recipeMetaData">
-            <li className="category">{clickedRecipeCard[0].category}</li>
-            <li className="cookTime">{clickedRecipeCard[0].cookTime}</li>
-            <li className="author">{clickedRecipeCard[0].author}</li>
+            <li className="category">{clickedRecipeCard.category}</li>
+            <li className="cookTime">{clickedRecipeCard.cookTime}</li>
+            <li className="author">{clickedRecipeCard.author}</li>
           </ul>
         </div>
         <div className="recipeInstructions">
           <h3>Postup:</h3>
-          <p>{clickedRecipeCard[0].instructions}</p>
+          <p>{clickedRecipeCard.instructions}</p>
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@ const Content = ({
 
   useEffect(() => {
     if (clickedRecipeCard.length > 0) {
-      setFormatedIngredients(clickedRecipeCard[0].ingredients.split(", "));
+      setFormatedIngredients(clickedRecipeCard.ingredients.split(", "));
     }
   }, [clickedRecipeCard]);
 
