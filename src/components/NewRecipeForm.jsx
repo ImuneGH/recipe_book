@@ -170,14 +170,6 @@ const NewRecipeForm = ({
   return (
     <FocusTrap>
       <form className="newRecipeForm">
-        <a
-          href="#"
-          onClick={() => {
-            setNewRecipeFormActive(false);
-            setEditRecipeFormActive(false);
-          }}
-          className="close"
-        ></a>
         <h3>
           <label htmlFor="recipeName">
             <span className="redColor">*</span>Název receptu:
@@ -262,6 +254,14 @@ const NewRecipeForm = ({
           {editRecipeFormActive ? "Uprav recept" : "Přidej recept"}
         </button>
         <small className="smallDescription">* takto označené položky jsou povinné</small>
+        <a
+          href="#"
+          onClick={() => {
+            setNewRecipeFormActive(false);
+            setEditRecipeFormActive(false);
+          }}
+          className="close"
+        ></a>
       </form>
     </FocusTrap>
   );

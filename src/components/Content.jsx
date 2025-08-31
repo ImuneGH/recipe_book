@@ -41,6 +41,21 @@ const Content = ({
     setSearchValue(previousState.searchValue);
   };
 
+  // const descriptionBackButton = (e) => {
+  //   if (e.key === "Escape") {
+  //     handlePreviousState();
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (recipeDetailActive) {
+  //     document.addEventListener("keydown", descriptionBackButton);
+  //   }
+  //   return () => {
+  //     document.removeEventListener("keydown", descriptionBackButton);
+  //   };
+  // }, [recipeDetailActive]);
+
   useEffect(() => {
     if (clickedRecipeCard) {
       setFormatedIngredients(clickedRecipeCard.ingredients.split(", "));
