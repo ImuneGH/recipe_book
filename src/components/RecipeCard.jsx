@@ -29,6 +29,8 @@ const RecipeCard = ({
 
   return (
     <motion.div
+      layout
+      transition={{ layout: { duration: 0.2, type: "tween" } }}
       title={recipeDisplayed.recipeName}
       onClick={showRecipeDetail}
       className="recipeCard"
