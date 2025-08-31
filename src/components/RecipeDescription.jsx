@@ -11,6 +11,9 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
   return (
     <div className="recipeDescription">
       <div className="leftContent">
+        <div className="backButton">
+          <button>⬅️ Zpět</button>
+        </div>
         <div className="foodPhoto">
           <img src={"backend/" + clickedRecipeCard.imgPath} alt="fotka jídla" />
         </div>
