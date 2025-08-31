@@ -22,22 +22,24 @@
 
 .backButton button {
   padding: 0.5rem 0.7rem 0.5rem 0.6rem;
-  background-color: var(--bg-color);
+  background-color: var(--secondary-color-light);
   border: 2px solid var(--secondary-color-light);
+  border: none;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .backButton button:hover {
   background-color: var(--secondary-color-light);
+  background-color: var(--accent-color);
 }
 
 .backButton button:active {
-  outline: 1px solid var(--secondary-color-light);
+  outline: 1px solid var(--accent-color);
 }
 
 .backButton button:focus-visible {
-  outline: 1px solid var(--secondary-color-light);
+  outline: 1px solid var(--accent-color);
 }
 
 .foodPhoto {

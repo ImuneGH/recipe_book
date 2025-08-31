@@ -255,6 +255,7 @@ function App() {
         searchValue={searchValue}
       />
       <Content
+        previousState={previousState}
         activeContent={activeContent}
         recipes={recipes}
         activeCategories={activeCategories}
@@ -273,6 +274,7 @@ function App() {
         handleEditFormActive={handleEditFormActive}
         setSearchValue={setSearchValue}
         handleNotificationWindow={handleNotificationWindow}
+        setPreviousState={setPreviousState}
       />
       <Footer />
     </motion.div>

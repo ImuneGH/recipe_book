@@ -12,6 +12,11 @@ const RecipeCard = ({
   setSearchValue,
   cardAnimation,
   hoverAnimation,
+  setPreviousState,
+  activeCategories,
+  searchResult,
+  randomRecipe,
+  previousState,
 }) => {
   const showRecipeDetail = (recipeToDisplay) => {
     // resets
@@ -21,6 +26,8 @@ const RecipeCard = ({
     setSearchValue("");
     setRandomRecipe("");
     // sets
+    setPreviousState({ activeCategories, searchResult, randomRecipe });
+    console.log(previousState);
     setClickedRecipeCard(recipeToDisplay);
     setRecipeDetailActive(true);
   };

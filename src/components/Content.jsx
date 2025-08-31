@@ -22,6 +22,8 @@ const Content = ({
   setDataToEdit,
   handleEditFormActive,
   setSearchValue,
+  setPreviousState,
+  previousState,
 }) => {
   const [clickedRecipeCard, setClickedRecipeCard] = useState(null);
   const [formatedIngredients, setFormatedIngredients] = useState([]);
@@ -30,10 +32,13 @@ const Content = ({
   const recipesDisplayed = filteredCategory.length ? filteredCategory : filteredSearch.length ? filteredSearch : randomRecipe ? [randomRecipe] : [];
   const isEmpty = recipesDisplayed.length === 0 && activeContent && !recipeDetailActive;
 
+  const handlePreviousState = () => {
+    console.log("funguju");
+  };
+
   useEffect(() => {
     if (clickedRecipeCard) {
       setFormatedIngredients(clickedRecipeCard.ingredients.split(", "));
-      console.log(clickedRecipeCard);
     }
   }, [clickedRecipeCard]);
 
@@ -62,6 +67,7 @@ const Content = ({
       )}
       {recipeDetailActive && (
         <RecipeDescription
+          handlePreviousState={handlePreviousState}
           clickedRecipeCard={clickedRecipeCard}
           formatedIngredients={formatedIngredients}
           setConfirmActive={setConfirmActive}
@@ -78,6 +84,10 @@ const Content = ({
             {recipesDisplayed &&
               recipesDisplayed.map((recipeDisplayed) => (
                 <RecipeCard
+                  previousState={previousState}
+                  randomRecipe={randomRecipe}
+                  searchResult={searchResult}
+                  activeCategories={activeCategories}
                   hoverAnimation={hoverAnimation}
                   cardAnimation={cardAnimation}
                   key={recipeDisplayed.ID}
@@ -89,6 +99,7 @@ const Content = ({
                   setRandomRecipe={setRandomRecipe}
                   setClickedRecipeCard={setClickedRecipeCard}
                   setSearchValue={setSearchValue}
+                  setPreviousState={setPreviousState}
                 />
               ))}
           </AnimatePresence>
