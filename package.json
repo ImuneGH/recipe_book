@@ -11,7 +11,7 @@
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
-    "electron-start": "electron ."
+    "start": "electron ."
   },
   "dependencies": {
     "focus-trap-react": "^11.0.4",
@@ -39,7 +39,7 @@
     "vite": "^6.0.5"
   },
   "description": "**Recipe Book:**  \r Právě pracuji na novém projektu v JS frameworku React. Měla by to být moje verze receptáře.  \r I am currently working on a new project in JS framework React. It should be my version of recipe book.",
-  "main": "eslint.config.js",
+  "main": "main.js",
   "keywords": [],
   "author": "",
   "license": "ISC"
