@@ -11,7 +11,7 @@
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
-    "start": "electron ."
+    "start": "cross-env START_SERVER=true electron ."
   },
   "dependencies": {
     "focus-trap-react": "^11.0.4",
@@ -28,7 +28,9 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "cross-env": "^10.0.0",
     "electron": "^38.0.0",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-react": "^7.37.4",
@@ -42,5 +44,11 @@
   "main": "main.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "build": {
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    }
+  }
 }

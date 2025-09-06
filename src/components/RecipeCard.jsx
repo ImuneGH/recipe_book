@@ -46,7 +46,7 @@ const RecipeCard = ({
       animate="end"
       exit="exit"
     >
-      <img src={"backend/" + recipeDisplayed.imgPath} alt="" />
+      <img src={recipeDisplayed.imgPath} alt="" />
       <div className="recipeInfo">
         <p title="Kategorie">{recipeDisplayed.category}</p>
         <p title="Doba přípravy">⏳ {recipeDisplayed.cookTime}</p>

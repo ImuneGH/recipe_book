@@ -82,7 +82,7 @@ const Content = ({
     <main className="content">
       {!activeContent && (
         <motion.h1 layoutId="logo" style={{ width: "430px", height: "220px" }}>
-          <img className="logo" src="/img/flavor_log_logo.png" alt="Logo webu Flavor Log" />
+          <img className="logo" src="./img/flavor_log_logo.png" alt="Logo webu Flavor Log" />
         </motion.h1>
       )}
       {recipeDetailActive && (
