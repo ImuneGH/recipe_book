@@ -6,11 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
+    "dist": "electron-builder",
     "preview": "vite preview",
-    "react-start": "react-scripts start",
-    "react-build": "react-scripts build",
-    "react-test": "react-scripts test",
     "start": "cross-env START_SERVER=true electron ."
   },
   "dependencies": {
@@ -46,9 +43,14 @@
   "author": "",
   "license": "ISC",
   "build": {
+    "directories": {
+      "output": "release"
+    },
+    "productName": "Flavor log",
+    "asar": false,
     "win": {
-      "target": "nsis",
-      "icon": "assets/icon.ico"
+      "icon": "assets/icon.ico",
+      "target": "portable"
     }
   }
 }
