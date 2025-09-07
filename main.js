@@ -5,9 +5,11 @@ import { fileURLToPath, pathToFileURL } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+console.log("server starting");
 const serverPath = path.join(__dirname, "backend", "server.js");
 const serverURL = pathToFileURL(serverPath).href;
 await import(serverURL);
+console.log("server import done");
 
 let mainWindow;
 
@@ -20,12 +22,10 @@ function createWindow() {
       contextIsolation: true,
     },
   });
-  mainWindow.loadFile(path.join(__dirname, "dist", "index.html"));
-}
 
-// server.listen(3000, () => {
-//   console.log("API běží na http://localhost:3000");
-// });
+  const indexPath = path.join(__dirname, "dist", "index.html");
+  mainWindow.loadFile(indexPath);
+}
 
 app.whenReady().then(createWindow);
 
