@@ -26,6 +26,9 @@ const imgResize = async (originalImgPath, resizedImgPath) => {
 
 // Middleware
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(cors()); // propojení backend, frontend
 app.use(express.json()); // Pro práci s JSON daty (kdyby náhodou)
 app.use(express.urlencoded({ extended: true }));
@@ -36,9 +39,12 @@ const fileValidation = (file) => {
   return file.length <= MAX_LENGTH && fileCheck.test(file);
 };
 
+const isPackaged = process.resourcesPath !== undefined;
+const uploadsPath = isPackaged ? path.join(process.resourcesPath, "app", "public", "uploads") : path.join(__dirname, "..", "public", "uploads");
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./public/uploads/");
+    cb(null, uploadsPath);
   },
   filename: (req, file, cb) => {
     const nameFromFE = req.body.imgPath;
@@ -62,9 +68,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Připojení k databázi
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const dbPath = path.join(__dirname, "database.db");
 
