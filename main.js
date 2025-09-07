@@ -1,10 +1,13 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
-import { fileURLToPath } from "url";
-import "./backend/server.js";
+import { fileURLToPath, pathToFileURL } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const serverPath = path.join(__dirname, "backend", "server.js");
+const serverURL = pathToFileURL(serverPath).href;
+await import(serverURL);
 
 let mainWindow;
 
