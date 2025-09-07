@@ -6,7 +6,6 @@ import path, { resolve } from "path";
 import sharp from "sharp";
 import fs from "fs";
 import { unlink } from "fs/promises";
-import dotenv from "dotenv";
 import { error } from "console";
 import { fileURLToPath } from "url";
 
@@ -229,10 +228,8 @@ app.use((err, req, res, next) => {
 });
 
 // Spuštění serveru
-if (process.env.START_SERVER === "true") {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server běží na http://localhost:${PORT}`);
-  });
-}
+app.listen(PORT, () => {
+  console.log(`🚀 Server běží na http://localhost:${PORT}`);
+});
 
 export default app;
