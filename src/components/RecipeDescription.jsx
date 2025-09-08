@@ -8,6 +8,8 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
     setActualRecipeID(clickedRecipeCard.ID);
   }, []);
 
+  console.log(clickedRecipeCard);
+
   return (
     <div className="recipeDescription">
       <div className="leftContent">

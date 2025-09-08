@@ -8,6 +8,7 @@ import fs from "fs";
 import { unlink } from "fs/promises";
 import { error } from "console";
 import { fileURLToPath } from "url";
+import { app as electronApp } from "electron";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,8 +40,13 @@ const fileValidation = (file) => {
   return file.length <= MAX_LENGTH && fileCheck.test(file);
 };
 
-const isPackaged = process.resourcesPath !== undefined;
-const uploadsPath = isPackaged ? path.join(process.resourcesPath, "app", "public", "uploads") : path.join(__dirname, "..", "public", "uploads");
+const userDataPath = electronApp.getPath("userData");
+const uploadsPath = path.join(userDataPath, "uploads");
+
+// kontroluje jestli existuje cesta ke složce uploadsPath
+if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath, { recursive: true });
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
