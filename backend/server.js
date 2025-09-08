@@ -21,7 +21,7 @@ const imgResize = async (originalImgPath, resizedImgPath) => {
     return resizedImgPath;
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Chyba při zpracování obrázku" });
+    throw err;
   }
 };
 
@@ -111,11 +111,11 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
   let resizedImgPath = null;
 
   if (req.file) {
-    const originalImgPath = path.join("uploads", req.finalName);
+    const originalImgPath = path.join(uploadsPath, req.finalName);
     const resizedImage = "resized_" + req.finalName;
-    resizedImgPath = path.join("uploads", resizedImage);
+    resizedImgPath = path.join(uploadsPath, resizedImage);
 
-    imgResize(originalImgPath, resizedImgPath);
+    await imgResize(originalImgPath, resizedImgPath);
   }
 
   db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath], function (err) {
@@ -206,9 +206,9 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
 
   function updateRecipe(imgName) {
     if (req.file) {
-      const originalImgPath = path.join("uploads", req.finalName);
+      const originalImgPath = path.join(uploadsPath, req.finalName);
       const resizedImage = "resized_" + req.finalName;
-      resizedImgPath = path.join("uploads", resizedImage);
+      resizedImgPath = path.join(uploadsPath, resizedImage);
       imgResize(originalImgPath, resizedImgPath);
     }
 
