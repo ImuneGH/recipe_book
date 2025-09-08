@@ -5,7 +5,7 @@ const NotificationWindow = ({ setNotificationActive, notificationRef, notificati
   return (
     <FocusTrap focusTrapOptions={{ escapeDeactivates: false }}>
       <div ref={notificationRef} tabIndex={-1} className="notificationWindow">
-        <h4>Určitě smazat?</h4>
+        <h4></h4>
         <div className="notificationMessage">
           <p>{notificationMessage}</p>
           <div className="okButton">
