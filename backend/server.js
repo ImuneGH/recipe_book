@@ -12,6 +12,7 @@ import { app as electronApp } from "electron";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const isDev = !app.isPackaged;
 
 const imgResize = async (originalImgPath, resizedImgPath) => {
   try {
@@ -42,6 +43,8 @@ const fileValidation = (file) => {
 
 const userDataPath = electronApp.getPath("userData");
 const uploadsPath = path.join(userDataPath, "uploads");
+
+// endpoint pro statické soubory
 
 app.use("/uploads", express.static(uploadsPath));
 
@@ -77,7 +80,7 @@ const upload = multer({ storage });
 
 // Připojení k databázi
 
-const dbPath = path.join(__dirname, "database.db");
+const dbPath = path.join(userDataPath, "database.db");
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
