@@ -43,6 +43,8 @@ const fileValidation = (file) => {
 const userDataPath = electronApp.getPath("userData");
 const uploadsPath = path.join(userDataPath, "uploads");
 
+app.use("/uploads", express.static(uploadsPath));
+
 // kontroluje jestli existuje cesta ke složce uploadsPath
 if (!fs.existsSync(uploadsPath)) {
   fs.mkdirSync(uploadsPath, { recursive: true });
@@ -109,16 +111,18 @@ app.post("/recipes", upload.single("image"), async (req, res) => {
   const SQL = `INSERT INTO recipes (createdAt, recipeName, ingredients, instructions, category, cookTime, author, imgPath)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
   let resizedImgPath = null;
+  let resizedImgDBPath = null;
 
   if (req.file) {
     const originalImgPath = path.join(uploadsPath, req.finalName);
     const resizedImage = "resized_" + req.finalName;
+    resizedImgDBPath = "uploads/" + resizedImage;
     resizedImgPath = path.join(uploadsPath, resizedImage);
 
     await imgResize(originalImgPath, resizedImgPath);
   }
 
-  db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath], function (err) {
+  db.run(SQL, [createdAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgDBPath], function (err) {
     if (err) {
       console.error("Chyba při ukládání dat do DB");
       res.status(500).json({ error: err.message });
@@ -175,6 +179,7 @@ app.delete("/recipes/:id", async (req, res) => {
 app.put("/recipes/:id", upload.single("image"), (req, res) => {
   const { updatedAt, recipeName, ingredients, instructions, category, cookTime, author } = req.body;
   let resizedImgPath = null;
+  let resizedImgDBPath = null;
   const recipeID = parseInt(req.params.id, 10);
 
   if (!updatedAt || !recipeName || !ingredients || !instructions || !category || !cookTime) {
@@ -208,6 +213,7 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
     if (req.file) {
       const originalImgPath = path.join(uploadsPath, req.finalName);
       const resizedImage = "resized_" + req.finalName;
+      resizedImgDBPath = "uploads/" + resizedImage;
       resizedImgPath = path.join(uploadsPath, resizedImage);
       imgResize(originalImgPath, resizedImgPath);
     }
@@ -215,7 +221,7 @@ app.put("/recipes/:id", upload.single("image"), (req, res) => {
     const SQL = `UPDATE recipes SET updatedAt = ?, recipeName = ?, ingredients = ?, instructions = ?, category = ?, cookTime = ?, author = ? ${imgName ? ",imgPath = ?" : ""} WHERE ID = ?`;
 
     const params = imgName
-      ? [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgPath, recipeID]
+      ? [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, resizedImgDBPath, recipeID]
       : [updatedAt, recipeName, ingredients, instructions, category, cookTime, author, recipeID];
 
     db.run(SQL, params, (err) => {
