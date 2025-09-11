@@ -14,6 +14,30 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const isDev = !app.isPackaged;
 
+function initializeDatabase() {
+  const createSQLiteTable = `CREATE TABLE IF NOT EXISTS "recipes" (
+	"ID"	integer,
+	"createdAt"	text NOT NULL,
+	"recipeName"	TEXT NOT NULL,
+	"ingredients"	TEXT NOT NULL,
+	"instructions"	TEXT NOT NULL,
+	"category"	TEXT NOT NULL,
+	"cookTime"	TEXT NOT NULL,
+	"author"	TEXT,
+	"imgPath"	TEXT,
+	"updatedAt"	TEXT,
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);`;
+
+  db.run(createSQLiteTable, (err) => {
+    if (err) {
+      console.log("Chyba při tvorbě tabulky: ", err);
+    } else {
+      console.log("Tabulka recipes ok 👌");
+    }
+  });
+}
+
 const imgResize = async (originalImgPath, resizedImgPath) => {
   try {
     const buffer = await fs.promises.readFile(originalImgPath); // uloží se do proměnné, aby se nemusel používat disk, který obrázek lockne
@@ -87,6 +111,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     console.error("Chyba připojení k DB:", err.message);
   } else {
     console.log("✅ Připojeno k databázi SQLite");
+    initializeDatabase();
   }
 });
 
