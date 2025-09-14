@@ -41,6 +41,12 @@ const Content = ({
     setSearchValue(previousState.searchValue);
   };
 
+  const imagePath = (imgPath) => {
+    if (!imgPath) return "";
+    const apiBasePath = "http://localhost:5000/";
+    return apiBasePath + imgPath;
+  };
+
   // const descriptionBackButton = (e) => {
   //   if (e.key === "Escape") {
   //     handlePreviousState();
@@ -95,6 +101,7 @@ const Content = ({
           setConfirmMessage={setConfirmMessage}
           setDataToEdit={setDataToEdit}
           handleEditFormActive={handleEditFormActive}
+          imagePath={imagePath}
         />
       )}
 
@@ -120,6 +127,7 @@ const Content = ({
                   setClickedRecipeCard={setClickedRecipeCard}
                   setSearchValue={setSearchValue}
                   setPreviousState={setPreviousState}
+                  imagePath={imagePath}
                 />
               ))}
           </AnimatePresence>

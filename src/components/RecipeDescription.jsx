@@ -1,7 +1,17 @@
 import { useEffect } from "react";
 import "../css/recipeDescription.css";
 
-const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmActive, setActualRecipeID, setConfirmMessage, setDataToEdit, handleEditFormActive, handlePreviousState }) => {
+const RecipeDescription = ({
+  clickedRecipeCard,
+  formatedIngredients,
+  setConfirmActive,
+  setActualRecipeID,
+  setConfirmMessage,
+  setDataToEdit,
+  handleEditFormActive,
+  handlePreviousState,
+  imagePath,
+}) => {
   const recipeName = clickedRecipeCard.recipeName;
   useEffect(() => {
     setDataToEdit(clickedRecipeCard);
@@ -17,7 +27,7 @@ const RecipeDescription = ({ clickedRecipeCard, formatedIngredients, setConfirmA
           <button onClick={handlePreviousState}>⬅️ Zpět</button>
         </div>
         <div className="foodPhoto">
-          <img src={clickedRecipeCard.imgPath} alt="fotka jídla" />
+          <img src={imagePath(clickedRecipeCard.imgPath)} alt="fotka jídla" />
         </div>
         <div className="ingredients">
           <h3>Ingredience:</h3>
