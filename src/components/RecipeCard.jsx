@@ -17,6 +17,7 @@ const RecipeCard = ({
   searchResult,
   randomRecipe,
   searchValue,
+  imagePath,
 }) => {
   const showRecipeDetail = (recipeToDisplay) => {
     // sets
@@ -46,7 +47,7 @@ const RecipeCard = ({
       animate="end"
       exit="exit"
     >
-      <img src={recipeDisplayed.imgPath} alt="" />
+      <img src={imagePath(recipeDisplayed.imgPath)} alt="" />
       <div className="recipeInfo">
         <p title="Kategorie">{recipeDisplayed.category}</p>
         <p title="Doba přípravy">⏳ {recipeDisplayed.cookTime}</p>

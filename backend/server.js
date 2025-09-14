@@ -12,7 +12,6 @@ import { app as electronApp } from "electron";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const isDev = !app.isPackaged;
 
 function initializeDatabase() {
   const createSQLiteTable = `CREATE TABLE IF NOT EXISTS "recipes" (
