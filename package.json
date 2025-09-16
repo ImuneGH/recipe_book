@@ -59,7 +59,7 @@
     "asar": false,
     "win": {
       "icon": "assets/icon.ico",
-      "target": "nsis"
+      "target": "portable"
     }
   }
 }
