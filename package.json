@@ -9,10 +9,12 @@
     "dev:vite": "vite",
     "dev:electron": "wait-on http://localhost:5173 && electron .",
     "dev:electron-watch": "wait-on http://localhost:5173 && nodemon --exec electron . --watch main.js --watch backend/",
-    "build": "vite build",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
     "dist": "electron-builder",
     "preview": "vite preview",
-    "start": "cross-env START_SERVER=true electron ."
+    "start": "cross-env START_SERVER=true electron .",
+    "electron": "electron ."
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -49,10 +51,13 @@
   },
   "description": "**Recipe Book:**  \r Právě pracuji na novém projektu v JS frameworku React. Měla by to být moje verze receptáře.  \r I am currently working on a new project in JS framework React. It should be my version of recipe book.",
   "main": "main.js",
+  "homepage": "./",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "build": {
+    "appID": "com.flavorlog.app",
+    "productName": "FlavorLog",
     "directories": {
       "output": "release"
     },
@@ -60,6 +65,12 @@
     "win": {
       "icon": "assets/icon.ico",
       "target": "portable"
-    }
+    },
+    "files": [
+      "main.js",
+      "backend/**/*",
+      "dist/**/*",
+      "package.json"
+    ]
   }
 }
