@@ -3,7 +3,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - "v*" # Spustí se při push tagu (v1.0.0, v1.1.0...)
+      - "v*"
 
 jobs:
   build:
@@ -21,10 +21,10 @@ jobs:
         run: npm install
 
       - name: Build React
-        run: npm run build # Tvůj React build script
+        run: npm run build:react
 
       - name: Build Electron
-        run: npm run build:win
+        run: npm run build:electron
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
