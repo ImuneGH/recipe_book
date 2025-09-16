@@ -13,7 +13,6 @@ const ConfirmWindow = ({ confirmRef, confirmMessage, setConfirmActive, deleteRec
             <button
               onClick={() => {
                 deleteRecipe();
-                handleNotificationWindow("Recept byl úspěšně smazán");
               }}
             >
               Smazat

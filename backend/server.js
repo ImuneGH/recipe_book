@@ -182,7 +182,8 @@ app.delete("/recipes/:id", async (req, res) => {
     });
 
     if (imgPath) {
-      await unlink(imgPath);
+      const deleteUploadsPath = uploadsPath.slice(0, -7) + imgPath;
+      await unlink(deleteUploadsPath);
     }
 
     await new Promise((resolve, reject) => {

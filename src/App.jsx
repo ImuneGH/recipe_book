@@ -99,6 +99,7 @@ function App() {
       } else {
         setRecipes((prev) => prev.filter((recipe) => recipe.ID !== actualRecipeID));
         getToHomePage();
+        handleNotificationWindow("Recept byl úspěšně smazán");
       }
       console.log("Recept smazán.");
     } catch (err) {
