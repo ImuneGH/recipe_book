@@ -9,8 +9,8 @@
     "dev:vite": "vite",
     "dev:electron": "wait-on http://localhost:5173 && electron .",
     "dev:electron-watch": "wait-on http://localhost:5173 && nodemon --exec electron . --watch main.js --watch backend/",
-    "build": "electron-builder",
-    "build:win": "electron-builder --win",
+    "build:react": "vite build",
+    "build:electron": "electron-builder --win",
     "dist": "electron-builder",
     "preview": "vite preview",
     "start": "cross-env START_SERVER=true electron .",
@@ -56,7 +56,7 @@
   "author": "",
   "license": "ISC",
   "build": {
-    "appID": "com.flavorlog.app",
+    "appId": "com.flavorlog.app",
     "productName": "FlavorLog",
     "directories": {
       "output": "release"
